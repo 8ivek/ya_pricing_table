@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== Yet another Pricing Table ===
 Contributors: bivek
 Donate link: https://bivek.ca/donate
 Tags: pricing table
