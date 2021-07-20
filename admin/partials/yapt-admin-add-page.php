@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Provide a admin area view for the plugin
+ * Provide a admin area view for adding new pricing table
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
@@ -14,4 +14,4 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
-<div>Hello main pae</div>
+<div>Hello add new page</div>
