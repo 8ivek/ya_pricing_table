@@ -81,7 +81,7 @@ class Yapt_Activator
              `id` INT(11) NOT NULL AUTO_INCREMENT,
              `template_name` VARCHAR(255) NOT NULL,
              `style` VARCHAR(255) NOT NULL,
-             `js` VARCHAR(255) NOT NULL,
+             `html` VARCHAR(255) NOT NULL,
 			 `created_at` DATETIME NOT NULL,
 			 `updated_at` DATETIME NOT NULL,
 			  PRIMARY KEY id (id)

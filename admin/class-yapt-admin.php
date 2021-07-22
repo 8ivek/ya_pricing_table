@@ -112,7 +112,7 @@ class Yapt_Admin
         //Add the menu item to the Main menu
         add_menu_page(
             'YA pricing tables',                      // Page title: The title to be displayed in the browser window for this page.
-            'YA pricing table',                              // Menu title: The text to be used for the menu.
+            'YA Pricing Table',                              // Menu title: The text to be used for the menu.
             'manage_options',                           // Capability: The capability required for this menu to be displayed to the user.
             'yapt-admin',                            // Menu slug: The slug name to refer to this menu by. Should be unique for this menu page.
             [$this, 'renderSettingsPageContent'],  // Callback: The name of the function to call when rendering this menu's page
