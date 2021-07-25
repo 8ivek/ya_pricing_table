@@ -46,7 +46,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
                         function add_feature (column_id) {
                             let computed_feature_id = 2;
                             console.log('add feature clicked for table '+ column_id);
-                            let new_feature_value = "<div id='column"+column_id+"_feature"+computed_feature_id+"'> <input type='checkbox' name='feature"+computed_feature_id+"_checked[]' value='1' /> <input type='text' name='feature"+computed_feature_id+"_text[]' placeholder='Feature "+computed_feature_id+" text ...' value='' /><a href='javascript:;' onclick='delete_feature("+column_id+", "+computed_feature_id+")'>delete</a></div>";
+                            let new_feature_value = "<div id='column"+column_id+"_feature"+computed_feature_id+"'> <input type='checkbox' name='feature"+computed_feature_id+"_checked[]' value='1' /> <input type='text' name='feature"+computed_feature_id+"_text[]' placeholder='Feature "+computed_feature_id+" text ...' value='' /> <a href='javascript:;' onclick='delete_feature("+column_id+", "+computed_feature_id+")'>delete</a></div>";
                             console.log("column"+column_id+"_features");
                             jQuery("#column"+column_id+"_features").append(new_feature_value);
                         }
@@ -82,7 +82,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
                             <td valign="top">Features</td>
                             <td>
                                 <a href="javascript:;" onclick="add_feature(1)">add feature</a>
-                                <div id='column1_features'>
+                                <div id='column1_features' class='feature_column_container'>
                                     <div id='column1_feature1'>
                                         <input type='checkbox' name='feature1_checked[]' value='1' />
                                         <input type='text' name='feature1_text[]' placeholder='Feature 1 text ...' value='' />
