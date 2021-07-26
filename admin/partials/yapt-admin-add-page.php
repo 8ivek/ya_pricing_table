@@ -25,7 +25,8 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
         <table>
             <tr>
                 <td>Select template</td>
-                <td><select name="template">
+                <td><select name="template" required="required">
+                    <option value="0">select a template</option>
                         <?php
                         foreach ($results_templates as $template) {
                             ?>
@@ -43,12 +44,14 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
                          * add feature
                          * @param column_id
                          */
+                        let computed_feature_id;
                         function add_feature (column_id) {
-                            let computed_feature_id = 2;
-                            console.log('add feature clicked for table '+ column_id);
-                            let new_feature_value = "<div id='column"+column_id+"_feature"+computed_feature_id+"'> <input type='checkbox' name='feature"+computed_feature_id+"_checked[]' value='1' /> <input type='text' name='feature"+computed_feature_id+"_text[]' placeholder='Feature "+computed_feature_id+" text ...' value='' /> <a href='javascript:;' onclick='delete_feature("+column_id+", "+computed_feature_id+")'>delete</a></div>";
-                            console.log("column"+column_id+"_features");
+                            computed_feature_id = parseInt(jQuery("#column"+column_id+"_feature_count").val()) +1;
+                            //console.log(computed_feature_id);
+                            //console.log('add feature clicked for table '+ column_id);
+                            let new_feature_value = "<div id='column"+column_id+"_feature"+computed_feature_id+"'> <input type='checkbox' name='feature"+computed_feature_id+"_checked[]' value='1' /> <input type='text' name='feature"+computed_feature_id+"_text[]' placeholder='Feature text content ...' value='' /> <a href='javascript:;' onclick='delete_feature("+column_id+", "+computed_feature_id+")'>delete</a></div>";
                             jQuery("#column"+column_id+"_features").append(new_feature_value);
+                            jQuery("#column"+column_id+"_feature_count").val(computed_feature_id);
                         }
 
                         /**
@@ -58,6 +61,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
                          */
                         function delete_feature(column_id, feature_id) {
                             console.log('delete feature '+ feature_id + ' from table '+ column_id);
+                            jQuery("#column"+column_id+"_feature"+feature_id).remove();
                         }
                     </script>
                     <table>
@@ -82,10 +86,11 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
                             <td valign="top">Features</td>
                             <td>
                                 <a href="javascript:;" onclick="add_feature(1)">add feature</a>
+                                <input type="hidden" name="column1_feature_count" id="column1_feature_count" value="1" />
                                 <div id='column1_features' class='feature_column_container'>
                                     <div id='column1_feature1'>
                                         <input type='checkbox' name='feature1_checked[]' value='1' />
-                                        <input type='text' name='feature1_text[]' placeholder='Feature 1 text ...' value='' />
+                                        <input type='text' name='feature1_text[]' placeholder='Feature text content ...' value='' />
                                         <a href='javascript:;' onclick='delete_feature(1, 1)'>delete</a>
                                     </div>
                                 </div>
