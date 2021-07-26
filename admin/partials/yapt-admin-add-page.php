@@ -38,7 +38,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
             </tr>
             <tr>
                 <td colspan="2">
-                    <script>
+                <script type="text/javascript">
                         var column_id = 1;
                         /**
                          * add feature
@@ -63,7 +63,21 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
                             console.log('delete feature '+ feature_id + ' from table '+ column_id);
                             jQuery("#column"+column_id+"_feature"+feature_id).remove();
                         }
+
+                        function add_column() {
+                            console.log('add column called');
+                            computed_column_id = parseInt(jQuery("#column"+column_id+"_count").val()) +1;
+                            console.log('new column id: '+ computed_column_id);
+
+                            jQuery("#column"+column_id+"_count").val(computed_column_id);
+                        }
                     </script>
+                    <a href="javascript:;" onclick="add_column()">add column</a>
+                    <input type="hidden" name="column1_count" id="column1_count" value="1" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
                     <table>
                         <tbody id="tbl_column1">
                         <tr>
