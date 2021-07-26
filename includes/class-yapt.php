@@ -164,6 +164,8 @@ class Yapt
 
         $this->loader->add_action('admin_menu', $plugin_admin, 'setupSettingsMenu', 10);
 
+        $this->loader->add_action( 'admin_post_yapt_admin_save', $plugin_admin, 'addPricingTableData');
+
     }
 
     /**

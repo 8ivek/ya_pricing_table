@@ -128,9 +128,9 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
             </tr>
             <tr>
                 <td colspan="2">
+                    <input type="hidden" name="action" value="yapt_admin_save" />
                     <?php
-                    settings_fields('yapt-save-settings');
-                    do_settings_sections('yapt-save-settings');
+                    wp_nonce_field( "yapt_nonce" );
                     submit_button();
                     ?>
                 </td>

@@ -122,6 +122,17 @@ class Yapt_Admin
         add_submenu_page('yapt-admin', 'Add new pricing table', 'Add New', 'manage_options', 'yapta-admin-add-page', [$this, 'renderAddPageContent']);
     }
 
+    /**
+     * Save pricing table data
+     * post submission of add/update pricing table
+     */
+    public function addPricingTableData()
+    {
+        print_r($_POST);
+        echo "Add pricing table data";
+        
+    }
+
     public function renderSettingsPageContent(string $activeTab = ''): void
     {
         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/yapt-admin-display.php';
