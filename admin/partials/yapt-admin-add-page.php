@@ -63,8 +63,6 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
 </div>
 
 <script type="text/javascript">
-    var column_id = 1;
-
     let computed_feature_id;
 
     function add_feature(column_id) {
@@ -91,7 +89,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
         let computed_column_id = parseInt(jQuery("#column_count").val());
         console.log('new column id: ' + computed_column_id);
 
-        let new_column_value = "<tbody id='tbl_column" + computed_column_id + "'><tr><td>Name</td><td><input type='text' name='fields[" + computed_column_id + "][tbl_name]'/></td></tr><tr><td>Pricing</td><td><input type='text' name='fields[" + computed_column_id + "][tbl_pricing]'/></td></tr><tr><td>Button face text</td><td><input type='text' name='fields[" + computed_column_id + "][tbl_button_face_text]'/></td></tr><tr><td>Button url</td><td><input type='text' name='fields[" + computed_column_id + "][tbl_button_url]'/></td></tr><tr><td valign='top'>Features</td><td><a href='javascript:;' onclick='add_feature(" + computed_column_id + ")'>add feature</a><input type='hidden' name='column" + computed_column_id + "_feature_count' id='column" + computed_column_id + "_feature_count' value='1' /><div id='column" + computed_column_id + "_features' class='feature_column_container'><div id='column" + computed_column_id + "_feature1'><input type='checkbox' name='fields[" + computed_column_id + "][feature_checked][]' value='1' /><input type='text' name='fields[" + computed_column_id + "][feature_text][]' placeholder='Feature text content ...' value='' /> <a href='javascript:;' onclick='delete_feature(" + computed_column_id + ", 1)'>delete</a></div></div></td></tr><tr><td colspan='2'><a href='javascript:;' onclick='delete_column(" + computed_column_id + ")'>delete column</a></td></tr></tbody>";
+        let new_column_value = "<tbody id='tbl_column" + computed_column_id + "'><tr><td>Name</td><td><input type='text' name='fields[" + computed_column_id + "][tbl_name]'/></td></tr><tr><td>Pricing</td><td><input type='text' name='fields[" + computed_column_id + "][tbl_pricing]'/></td></tr><tr><td>Button face text</td><td><input type='text' name='fields[" + computed_column_id + "][tbl_button_face_text]'/></td></tr><tr><td>Button url</td><td><input type='text' name='fields[" + computed_column_id + "][tbl_button_url]'/></td></tr><tr><td valign='top'>Features</td><td><a href='javascript:;' onclick='add_feature(" + computed_column_id + ")'>add feature</a><input type='hidden' name='column" + computed_column_id + "_feature_count' id='column" + computed_column_id + "_feature_count' value='1' /><div id='column" + computed_column_id + "_features' class='feature_column_container'></div></td></tr><tr><td colspan='2'><a href='javascript:;' onclick='delete_column(" + computed_column_id + ")'>delete column</a></td></tr></tbody>";
         jQuery("#ypt_columns").append(new_column_value);
         console.log(computed_column_id);
         computed_column_id += 1;
@@ -101,4 +99,5 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
 
     // add first column
     add_column();
+    add_feature(0);
 </script>
