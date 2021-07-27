@@ -21,7 +21,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
 ?>
 <div id="wrap">
     <h2 id="add_pricing_table">Add pricing table</h2>
-    <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+    <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
         <table>
             <tr>
                 <td>Select template</td>
@@ -51,9 +51,9 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="hidden" name="action" value="yapt_admin_save" />
+                    <input type="hidden" name="action" value="yapt_admin_save"/>
                     <?php
-                    wp_nonce_field( "yapt_nonce" );
+                    wp_nonce_field("yapt_nonce");
                     submit_button();
                     ?>
                 </td>
@@ -71,7 +71,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
         computed_feature_id = parseInt(jQuery("#column" + column_id + "_feature_count").val()) + 1;
         //console.log(computed_feature_id);
         //console.log('add feature clicked for table '+ column_id);
-        let new_feature_value = "<div id='column" + column_id + "_feature" + computed_feature_id + "'> <input type='checkbox' name='fields["+column_id+"][feature_checked][]' value='1' /> <input type='text' name='fields["+column_id+"][feature_text][]' placeholder='Feature text content ...' value='' /> <a href='javascript:;' onclick='delete_feature(" + column_id + ", " + computed_feature_id + ")'>delete</a></div>";
+        let new_feature_value = "<div id='column" + column_id + "_feature" + computed_feature_id + "'> <input type='checkbox' name='fields[" + column_id + "][feature_checked][]' value='1' /> <input type='text' name='fields[" + column_id + "][feature_text][]' placeholder='Feature text content ...' value='' /> <a href='javascript:;' onclick='delete_feature(" + column_id + ", " + computed_feature_id + ")'>delete</a></div>";
         jQuery("#column" + column_id + "_features").append(new_feature_value);
         jQuery("#column" + column_id + "_feature_count").val(computed_feature_id);
     }
