@@ -58,8 +58,8 @@ class Yapt_Activator
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
         global $wpdb;
-        // ya_pricing_tables
-        $table_name = $wpdb->prefix . 'ya_pricing_tables';
+        // yapt_pricing_tables
+        $table_name = $wpdb->prefix . 'yapt_pricing_tables';
         $charset_collate = $wpdb->get_charset_collate();
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
             $sql = "CREATE TABLE " . $table_name . " (
@@ -73,8 +73,8 @@ class Yapt_Activator
             dbDelta($sql);
         }
 
-        // ya_templates
-        $table_name = $wpdb->prefix . 'ya_templates';
+        // yapt_templates
+        $table_name = $wpdb->prefix . 'yapt_templates';
         $charset_collate = $wpdb->get_charset_collate();
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
             $sql = "CREATE TABLE " . $table_name . " (
@@ -89,8 +89,8 @@ class Yapt_Activator
             dbDelta($sql);
         }
 
-        // ya_columns
-        $table_name = $wpdb->prefix . 'ya_columns';
+        // yapt_columns
+        $table_name = $wpdb->prefix . 'yapt_columns';
         $charset_collate = $wpdb->get_charset_collate();
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
             $sql = "CREATE TABLE " . $table_name . " (
@@ -106,12 +106,13 @@ class Yapt_Activator
             dbDelta($sql);
         }
 
-        // ya_features
-        $table_name = $wpdb->prefix . 'ya_features';
+        // yapt_features
+        $table_name = $wpdb->prefix . 'yapt_features';
         $charset_collate = $wpdb->get_charset_collate();
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
             $sql = "CREATE TABLE " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
+             `column_id` INT(11) NOT NULL,
              `feature_text` VARCHAR(255) NOT NULL,
              `is_set` ENUM('0', '1') NOT NULL DEFAULT '1',
 			 `created_at` DATETIME NOT NULL,

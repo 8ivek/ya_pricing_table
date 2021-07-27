@@ -17,7 +17,7 @@
 <?php
 // 1st Method - Declaring $wpdb as global and using it to execute an SQL query statement that returns a PHP object
 global $wpdb;
-$results_pricing_table = $wpdb->get_results("SELECT pt.*, t.template_name FROM {$wpdb->prefix}ya_pricing_tables pt INNER JOIN {$wpdb->prefix}ya_templates t WHERE pt.template_id = t.id", ARRAY_A);
+$results_pricing_table = $wpdb->get_results("SELECT pt.*, t.template_name FROM {$wpdb->prefix}yapt_pricing_tables pt INNER JOIN {$wpdb->prefix}yapt_templates t WHERE pt.template_id = t.id", ARRAY_A);
 print_r($results_pricing_table);
 ?>
 <div id="wrap">

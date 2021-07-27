@@ -128,8 +128,41 @@ class Yapt_Admin
      */
     public function addPricingTableData()
     {
-        print_r($_POST);
-        echo "Add pricing table data";
+        // print_r($_POST);
+        // echo "Add pricing table data";
+        global $wpdb;
+        $posted_fields = $_POST['fields'] ?? null;
+        if (empty($posted_fields)) {
+            die('missing mandatory fields');
+        }
+
+        $template_id = $_POST['template'] ?? 0;
+
+        foreach ($posted_fields as $column_data) {
+            $tbl_name = $column_data['tbl_name'];
+            $tbl_pricing = $column_data['tbl_pricing'];
+            $tbl_button_face_text = $column_data['tbl_button_face_text'];
+            $tbl_button_url = $column_data['tbl_button_url'];
+
+            // insert into yapt_pricing_tables
+            $wpdb->insert($wpdb->prefix . 'yapt_pricing_tables', ['name' => $tbl_name, 'template_id' => $template_id], ['%s', '%d']);
+
+            $table_id = $wpdb->insert_id;
+
+            // insert into yapt_pricing_tables
+            $wpdb->insert($wpdb->prefix . 'yapt_columns', ['table_id' => $table_id, 'price_text' => $tbl_pricing, 'ctoa_btn_text' => $tbl_button_face_text, 'ctoa_btn_link' => $tbl_button_url], ['%d', '%s', '%s', '%s']);
+
+            $column_id = $wpdb->insert_id;
+
+            foreach ($column_data['feature_text'] as $key => $ft) {
+                $isset = 0;
+                if (isset($column_data['feature_checked'][$key])) {
+                    $isset = 1;
+                }
+                $wpdb->insert($wpdb->prefix . 'yapt_features', ['column_id' => $column_id, 'feature_text' => $ft, 'is_set' => $isset]);
+            }
+        }
+        //TODO redirect to pricing table listing page
 
     }
 
