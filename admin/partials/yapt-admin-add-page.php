@@ -72,16 +72,16 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}ya_templat
 
                         function add_column() {
                             console.log('add column called');
-                            computed_column_id = parseInt(jQuery("#column" + column_id + "_count").val()) + 1;
+                            computed_column_id = parseInt(jQuery("#column_count").val()) + 1;
                             console.log('new column id: ' + computed_column_id);
 
                             let new_column_value = "<tbody id='tbl_column" + computed_column_id + "'><tr><td>Name</td><td><input type='text' name='tbl_name" + computed_column_id + "'/></td></tr><tr><td>Pricing</td><td><input type='text' name='tbl_pricing" + computed_column_id + "'/></td></tr><tr><td>Button face text</td><td><input type='text' name='tbl_button_face_text" + computed_column_id + "'/></td></tr><tr><td>Button url</td><td><input type='text' name='tbl_button_url" + computed_column_id + "'/></td></tr><tr><td valign='top'>Features</td><td><a href='javascript:;' onclick='add_feature(" + computed_column_id + ")'>add feature</a><input type='hidden' name='column" + computed_column_id + "_feature_count' id='column" + computed_column_id + "_feature_count' value='1' /><div id='column" + computed_column_id + "_features' class='feature_column_container'><div id='column" + computed_column_id + "_feature1'><input type='checkbox' name='column" + computed_column_id + "_feature1_checked[]' value='1' /><input type='text' name='column" + computed_column_id + "_feature1_text[]' placeholder='Feature text content ...' value='' /> <a href='javascript:;' onclick='delete_feature(" + computed_column_id + ", 1)'>delete</a></div></div></td></tr><tr><td colspan='2'><a href='javascript:;' onclick='delete_column(" + computed_column_id + ")'>delete column</a></td></tr></tbody>";
                             jQuery("#ypt_columns").append(new_column_value);
-                            jQuery("#column" + column_id + "_count").val(computed_column_id);
+                            jQuery("#column_count").val(computed_column_id);
                         }
                     </script>
                     <a href="javascript:;" onclick="add_column()">add column</a>
-                    <input type="hidden" name="column1_count" id="column1_count" value="1"/>
+                    <input type="hidden" name="column_count" id="column_count" value="1"/>
                 </td>
             </tr>
             <tr>

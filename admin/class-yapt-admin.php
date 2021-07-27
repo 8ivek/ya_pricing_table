@@ -130,7 +130,7 @@ class Yapt_Admin
     {
         print_r($_POST);
         echo "Add pricing table data";
-        
+
     }
 
     public function renderSettingsPageContent(string $activeTab = ''): void
