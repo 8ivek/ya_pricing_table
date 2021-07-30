@@ -144,13 +144,16 @@ class Yapt_Admin
             $tbl_button_face_text = $column_data['tbl_button_face_text'];
             $tbl_button_url = $column_data['tbl_button_url'];
 
+            $now = new DateTime('now', new DateTimeZone('UTC'));
+            $created_at = $updated_at = $now->format('Y-m-d H:i:s');
+
             // insert into yapt_pricing_tables
-            $wpdb->insert($wpdb->prefix . 'yapt_pricing_tables', ['name' => $tbl_name, 'template_id' => $template_id], ['%s', '%d']);
+            $wpdb->insert($wpdb->prefix . 'yapt_pricing_tables', ['name' => $tbl_name, 'template_id' => $template_id, 'created_at' => $created_at, 'updated_at' => $updated_at]);
 
             $table_id = $wpdb->insert_id;
 
             // insert into yapt_pricing_tables
-            $wpdb->insert($wpdb->prefix . 'yapt_columns', ['table_id' => $table_id, 'price_text' => $tbl_pricing, 'ctoa_btn_text' => $tbl_button_face_text, 'ctoa_btn_link' => $tbl_button_url], ['%d', '%s', '%s', '%s']);
+            $wpdb->insert($wpdb->prefix . 'yapt_columns', ['table_id' => $table_id, 'price_text' => $tbl_pricing, 'ctoa_btn_text' => $tbl_button_face_text, 'ctoa_btn_link' => $tbl_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at]);
 
             $column_id = $wpdb->insert_id;
 
@@ -159,10 +162,11 @@ class Yapt_Admin
                 if (isset($column_data['feature_checked'][$key])) {
                     $isset = 1;
                 }
-                $wpdb->insert($wpdb->prefix . 'yapt_features', ['column_id' => $column_id, 'feature_text' => $ft, 'is_set' => $isset]);
+                $wpdb->insert($wpdb->prefix . 'yapt_features', ['column_id' => $column_id, 'feature_text' => $ft, 'is_set' => $isset, 'created_at' => $created_at, 'updated_at' => $updated_at]);
             }
         }
-        //TODO redirect to pricing table listing page
+
+        echo wp_redirect(admin_url('admin.php?page=yapt-admin'));
 
     }
 
