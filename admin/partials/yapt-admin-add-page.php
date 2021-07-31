@@ -24,7 +24,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
     <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
         <table>
             <tr>
-                <td>Select template</td>
+                <td><strong>Select template</strong></td>
                 <td><select name="template" required="required">
                         <option value="0">select a template</option>
                         <?php
@@ -37,20 +37,26 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
                     </select></td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td><strong>Pricing table title</strong></td>
+                <td><input type="text" name="pricing_table_title" value="" placeholder="first/main pricing table..." required="required" /></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>
                     <a href="javascript:;" onclick="add_column()">add column</a>
                     <input type="hidden" name="column_count" id="column_count" value="0"/>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>
                     <table id="ypt_columns">
 
                     </table>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>
                     <input type="hidden" name="action" value="yapt_admin_save"/>
                     <?php
                     wp_nonce_field("yapt_nonce");
@@ -90,13 +96,14 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
         let computed_column_id = parseInt(jQuery("#column_count").val());
         //console.log('new column id: ' + computed_column_id);
 
-        let new_column_value = "<tbody id='tbl_column" + computed_column_id + "'><tr><td>Name</td><td><input type='text' name='fields[" + computed_column_id + "][tbl_name]'/></td></tr><tr><td>Pricing</td><td><input type='text' name='fields[" + computed_column_id + "][tbl_pricing]'/></td></tr><tr><td>Button face text</td><td><input type='text' name='fields[" + computed_column_id + "][tbl_button_face_text]'/></td></tr><tr><td>Button url</td><td><input type='text' name='fields[" + computed_column_id + "][tbl_button_url]'/></td></tr><tr><td valign='top'>Features</td><td><a href='javascript:;' onclick='add_feature(" + computed_column_id + ")'>add feature</a><input type='hidden' name='column" + computed_column_id + "_feature_count' id='column" + computed_column_id + "_feature_count' value='0' /><div id='column" + computed_column_id + "_features' class='feature_column_container'></div></td></tr><tr><td colspan='2'><a href='javascript:;' onclick='delete_column(" + computed_column_id + ")'>delete column</a></td></tr></tbody>";
+        let new_column_value = "<tbody id='tbl_column" + computed_column_id + "'><tr><td>Name</td><td><input type='text' name='fields[" + computed_column_id + "][column_title]'/></td></tr><tr><td>Pricing</td><td><input type='text' name='fields[" + computed_column_id + "][column_price]'/></td></tr><tr><td>Button face text</td><td><input type='text' name='fields[" + computed_column_id + "][col_button_face_text]'/></td></tr><tr><td>Button url</td><td><input type='text' name='fields[" + computed_column_id + "][col_button_url]'/></td></tr><tr><td valign='top'>Features</td><td><a href='javascript:;' onclick='add_feature(" + computed_column_id + ")'>add feature</a><input type='hidden' name='column" + computed_column_id + "_feature_count' id='column" + computed_column_id + "_feature_count' value='0' /><div id='column" + computed_column_id + "_features' class='feature_column_container'></div></td></tr><tr><td colspan='2'><a href='javascript:;' onclick='delete_column(" + computed_column_id + ")'>delete column</a></td></tr></tbody>";
         jQuery("#ypt_columns").append(new_column_value);
+
+        add_feature(computed_column_id); // everytime we call add_column we will be adding 3 empty features to the column.
         computed_column_id += 1;
         jQuery("#column_count").val(computed_column_id);
     }
 
     // add first column
     add_column();
-    add_feature(0);
 </script>

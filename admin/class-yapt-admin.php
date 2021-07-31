@@ -125,35 +125,38 @@ class Yapt_Admin
     /**
      * Save pricing table data
      * post submission of add/update pricing table
+     * @throws Exception
      */
     public function addPricingTableData()
     {
-        // print_r($_POST);
+        // print_r($_POST);die();
         // echo "Add pricing table data";
         global $wpdb;
-        $posted_fields = $_POST['fields'] ?? null;
+        $posted_fields = $_POST['fields'] ?? [];
         if (empty($posted_fields)) {
             die('missing mandatory fields');
         }
 
         $template_id = $_POST['template'] ?? 0;
 
+        $now = new DateTime('now', new DateTimeZone('UTC'));
+        $created_at = $updated_at = $now->format('Y-m-d H:i:s');
+
+        $pricing_table_title = $_POST['pricing_table_title'] ?? '';
+
+        // insert into yapt_pricing_tables
+        $wpdb->insert($wpdb->prefix . 'yapt_pricing_tables', ['pt_title' => $pricing_table_title, 'template_id' => $template_id, 'created_at' => $created_at, 'updated_at' => $updated_at]);
+
+        $table_id = $wpdb->insert_id;
+
         foreach ($posted_fields as $column_data) {
-            $tbl_name = $column_data['tbl_name'];
-            $tbl_pricing = $column_data['tbl_pricing'];
-            $tbl_button_face_text = $column_data['tbl_button_face_text'];
-            $tbl_button_url = $column_data['tbl_button_url'];
-
-            $now = new DateTime('now', new DateTimeZone('UTC'));
-            $created_at = $updated_at = $now->format('Y-m-d H:i:s');
+            $column_title = $column_data['column_title'];
+            $column_price = $column_data['column_price'];
+            $col_button_face_text = $column_data['col_button_face_text'];
+            $col_button_url = $column_data['col_button_url'];
 
             // insert into yapt_pricing_tables
-            $wpdb->insert($wpdb->prefix . 'yapt_pricing_tables', ['name' => $tbl_name, 'template_id' => $template_id, 'created_at' => $created_at, 'updated_at' => $updated_at]);
-
-            $table_id = $wpdb->insert_id;
-
-            // insert into yapt_pricing_tables
-            $wpdb->insert($wpdb->prefix . 'yapt_columns', ['table_id' => $table_id, 'price_text' => $tbl_pricing, 'ctoa_btn_text' => $tbl_button_face_text, 'ctoa_btn_link' => $tbl_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at]);
+            $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $col_button_face_text, 'ctoa_btn_link' => $col_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at]);
 
             $column_id = $wpdb->insert_id;
 

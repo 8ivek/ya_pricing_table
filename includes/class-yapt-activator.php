@@ -64,7 +64,7 @@ class Yapt_Activator
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
             $sql = "CREATE TABLE " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
-             `name` VARCHAR(255) NOT NULL,
+             `pt_title` VARCHAR(255) NOT NULL,
              `template_id` INT(11) NOT NULL,
 			 `created_at` DATETIME NOT NULL,
 			 `updated_at` DATETIME NOT NULL,
@@ -95,6 +95,7 @@ class Yapt_Activator
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
             $sql = "CREATE TABLE " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
+             `column_title` VARCHAR(255) NOT NULL,
              `table_id` VARCHAR(255) NOT NULL,
              `price_text` VARCHAR(255) NOT NULL,
              `ctoa_btn_text` VARCHAR(255) NOT NULL,/** ctoa => call to action */
