@@ -19,7 +19,7 @@
 global $wpdb;
 $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templates", ARRAY_A);
 ?>
-<div id="wrap">
+<div class="wrap">
     <h2 id="add_pricing_table">Add pricing table</h2>
     <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
         <table>
