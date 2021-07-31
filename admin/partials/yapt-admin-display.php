@@ -15,17 +15,33 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <?php
-// 1st Method - Declaring $wpdb as global and using it to execute an SQL query statement that returns a PHP object
-global $wpdb;
-$results_pricing_table = $wpdb->get_results("SELECT pt.*, t.template_name FROM {$wpdb->prefix}yapt_pricing_tables pt INNER JOIN {$wpdb->prefix}yapt_templates t WHERE pt.template_id = t.id", ARRAY_A);
-print_r($results_pricing_table);
+// global $wpdb;
+// $results_pricing_table = $wpdb->get_results("SELECT pt.*, t.template_name FROM {$wpdb->prefix}yapt_pricing_tables pt INNER JOIN {$wpdb->prefix}yapt_templates t WHERE pt.template_id = t.id", ARRAY_A);
+// print_r($results_pricing_table);
+if (!class_exists('WP_List_Table')) {
+    require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
+}
+// Include EPT post list table
+include(plugin_dir_path(__FILE__) . '../../includes/yapt_list.php');
+
+$list_table = new yapt_list();
+
 ?>
-<div id="wrap">
-    <form method="post" action="options.php">
-        <?php
-        settings_fields( 'yapt-save-settings' );
-        do_settings_sections( 'yapt-save-settings' );
-        submit_button();
-        ?>
-    </form>
+<div class="wrap">
+    <h2>YA Price Tables</h2>
+    <div id="poststuff">
+        <div id="post-body" class="metabox-holder columns-2">
+            <div id="post-body-content">
+                <div class="meta-box-sortables ui-sortable">
+                    <form method="post">
+                        <?php
+                        $list_table->prepare_items();
+                        $list_table->display();
+                        ?>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br class="clear">
+    </div>
 </div>

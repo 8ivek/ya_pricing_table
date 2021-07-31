@@ -114,12 +114,12 @@ class Yapt_Admin
             'YA pricing tables',                      // Page title: The title to be displayed in the browser window for this page.
             'YA Pricing Table',                              // Menu title: The text to be used for the menu.
             'manage_options',                           // Capability: The capability required for this menu to be displayed to the user.
-            'yapt-admin',                            // Menu slug: The slug name to refer to this menu by. Should be unique for this menu page.
+            'yapt_admin',                            // Menu slug: The slug name to refer to this menu by. Should be unique for this menu page.
             [$this, 'renderSettingsPageContent'],  // Callback: The name of the function to call when rendering this menu's page
             'dashicons-smiley',                         // Icon
             85                                          // Position: The position in the menu order this item should appear.
         );
-        add_submenu_page('yapt-admin', 'Add new pricing table', 'Add New', 'manage_options', 'yapta-admin-add-page', [$this, 'renderAddPageContent']);
+        add_submenu_page('yapt_admin', 'Add new pricing table', 'Add New', 'manage_options', 'yapta-admin-add-page', [$this, 'renderAddPageContent']);
     }
 
     /**
@@ -169,7 +169,7 @@ class Yapt_Admin
             }
         }
 
-        echo wp_redirect(admin_url('admin.php?page=yapt-admin'));
+        echo wp_redirect(admin_url('admin.php?page=yapt_admin'));
 
     }
 

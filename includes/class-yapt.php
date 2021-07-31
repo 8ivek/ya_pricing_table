@@ -140,11 +140,8 @@ class Yapt
      */
     private function set_locale()
     {
-
         $plugin_i18n = new Yapt_i18n();
-
         $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
-
     }
 
     /**
