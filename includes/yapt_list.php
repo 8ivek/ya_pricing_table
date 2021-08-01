@@ -17,7 +17,7 @@ class yapt_list extends WP_List_Table
      * @param int $page_number
      * @return array|object|null
      */
-    public function get_pricing_tables(int $per_page = 10, int $page_number = 1)
+    public function get_price_tables(int $per_page = 10, int $page_number = 1)
     {
         global $wpdb;
         $sql = "SELECT * FROM {$wpdb->prefix}yapt_pricing_tables";
@@ -31,7 +31,7 @@ class yapt_list extends WP_List_Table
     }
 
     /**
-     * delete pricing table
+     * delete price table
      * @param int $id
      */
     public static function delete_price_table(int $id)
@@ -60,7 +60,7 @@ class yapt_list extends WP_List_Table
      */
     public function no_items()
     {
-        __('No pricing table available.', 'yapt');
+        __('No price tables available.', 'yapt');
     }
 
     /**
@@ -72,6 +72,7 @@ class yapt_list extends WP_List_Table
     public function column_default($item, $column_name)
     {
         switch ($column_name) {
+            case 'pt_title':
             case 'template_id':
             case 'created_at':
             case 'updated_at':
@@ -115,7 +116,7 @@ class yapt_list extends WP_List_Table
     {
         return [
             'cb' => '<input type="checkbox" />', // Render a checkbox instead of text.
-            'pt_title' => __('Pricing table title', 'yapt'),
+            'pt_title' => __('Price table title', 'yapt'),
             'template_id' => __('Template id', 'yapt'),
             'created_at' => __('Created date', 'yapt'),
             'updated_at' => __('Updated date', 'yapt'),
@@ -166,7 +167,7 @@ class yapt_list extends WP_List_Table
             'per_page' => $per_page //WE have to determine how many items to show on a page
         ]);
 
-        $this->items = self::get_pricing_tables($per_page, $current_page);
+        $this->items = self::get_price_tables($per_page, $current_page);
     }
 
     public function process_bulk_action()

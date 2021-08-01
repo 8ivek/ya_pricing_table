@@ -42,6 +42,11 @@ class Yapt_Admin
     private $version;
 
     /**
+     * @var yapt_list
+     */
+    public yapt_list $price_table;
+
+    /**
      * Initialize the class and set its properties.
      *
      * @param string $plugin_name The name of this plugin.
@@ -50,10 +55,16 @@ class Yapt_Admin
      */
     public function __construct($plugin_name, $version)
     {
-
         $this->plugin_name = $plugin_name;
         $this->version = $version;
 
+        // include WP_List_Table and yapt_list here coz we need to create its obj when loading add_menu_page()
+        if (!class_exists('WP_List_Table')) {
+            require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
+        }
+
+        // Include EPT post list table
+        require_once(plugin_dir_path(__FILE__) . '../includes/yapt_list.php');
     }
 
     /**
@@ -110,7 +121,7 @@ class Yapt_Admin
     public function setupSettingsMenu(): void
     {
         //Add the menu item to the Main menu
-        add_menu_page(
+        $hook = add_menu_page(
             'YA pricing tables',                      // Page title: The title to be displayed in the browser window for this page.
             'YA Pricing Table',                              // Menu title: The text to be used for the menu.
             'manage_options',                           // Capability: The capability required for this menu to be displayed to the user.
@@ -120,6 +131,20 @@ class Yapt_Admin
             85                                          // Position: The position in the menu order this item should appear.
         );
         add_submenu_page('yapt_admin', 'Add new pricing table', 'Add New', 'manage_options', 'yapt_admin_add_page', [$this, 'renderAddPageContent']);
+
+        add_action( "load-$hook", [ $this, 'screen_option' ] );
+    }
+
+    public function screen_option()
+    {
+        $option = 'per_page';
+        $args = [
+            'label' => 'Price Table',
+            'default' => 10,
+            'option' => 'tables_per_page'
+        ];
+        add_screen_option($option, $args);
+        $this->price_table = new yapt_list();
     }
 
     /**
@@ -168,9 +193,7 @@ class Yapt_Admin
                 $wpdb->insert($wpdb->prefix . 'yapt_features', ['column_id' => $column_id, 'feature_text' => $ft, 'is_set' => $isset, 'created_at' => $created_at, 'updated_at' => $updated_at]);
             }
         }
-
         echo wp_redirect(admin_url('admin.php?page=yapt_admin'));
-
     }
 
     public function renderSettingsPageContent(string $activeTab = ''): void
