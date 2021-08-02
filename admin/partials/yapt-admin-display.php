@@ -14,3 +14,25 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
+<?php
+// global $wpdb;
+// $results_pricing_table = $wpdb->get_results("SELECT pt.*, t.template_name FROM {$wpdb->prefix}yapt_pricing_tables pt INNER JOIN {$wpdb->prefix}yapt_templates t WHERE pt.template_id = t.id", ARRAY_A);
+// print_r($results_pricing_table);
+?>
+<div class="wrap">
+    <h2>YA Price Tables</h2>
+    <div id="poststuff">
+        <div id="post-body" class="metabox-holder columns-2">
+            <div id="post-body-content">
+                <div class="meta-box-sortables ui-sortable">
+                    <form method="post">
+                        <?php
+                        $this->price_table->display();
+                        ?>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br class="clear">
+    </div>
+</div>

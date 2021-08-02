@@ -58,30 +58,16 @@ class Yapt_Activator
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
         global $wpdb;
-        // ya_pricing_tables
-        $table_name = $wpdb->prefix . 'ya_pricing_tables';
-        $charset_collate = $wpdb->get_charset_collate();
-        if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
-            $sql = "CREATE TABLE " . $table_name . " (
-             `id` INT(11) NOT NULL AUTO_INCREMENT,
-             `name` VARCHAR(255) NOT NULL,
-             `template_id` INT(11) NOT NULL,
-			 `created_at` DATETIME NOT NULL,
-			 `updated_at` DATETIME NOT NULL,
-			  PRIMARY KEY id (id)
-		)$charset_collate;";
-            dbDelta($sql);
-        }
 
-        // ya_templates
-        $table_name = $wpdb->prefix . 'ya_templates';
+        // yapt_templates
+        $table_name = $wpdb->prefix . 'yapt_templates';
         $charset_collate = $wpdb->get_charset_collate();
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
             $sql = "CREATE TABLE " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
              `template_name` VARCHAR(255) NOT NULL,
              `style` VARCHAR(255) NOT NULL,
-             `js` VARCHAR(255) NOT NULL,
+             `html` VARCHAR(255) NOT NULL,
 			 `created_at` DATETIME NOT NULL,
 			 `updated_at` DATETIME NOT NULL,
 			  PRIMARY KEY id (id)
@@ -89,34 +75,59 @@ class Yapt_Activator
             dbDelta($sql);
         }
 
-        // ya_columns
-        $table_name = $wpdb->prefix . 'ya_columns';
+        // yapt_pricing_tables
+        $table_name = $wpdb->prefix . 'yapt_pricing_tables';
         $charset_collate = $wpdb->get_charset_collate();
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
             $sql = "CREATE TABLE " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
-             `table_id` VARCHAR(255) NOT NULL,
+             `pt_title` VARCHAR(255) NOT NULL,
+             `template_id` INT(11) NOT NULL,
+			 `created_at` DATETIME NOT NULL,
+			 `updated_at` DATETIME NOT NULL,
+			  PRIMARY KEY id (id),
+			  FOREIGN KEY(template_id) 
+                REFERENCES ".$wpdb->prefix."yapt_templates (id)
+		)$charset_collate;";
+            dbDelta($sql);
+        }
+
+        // yapt_columns
+        $table_name = $wpdb->prefix . 'yapt_columns';
+        $charset_collate = $wpdb->get_charset_collate();
+        if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
+            $sql = "CREATE TABLE " . $table_name . " (
+             `id` INT(11) NOT NULL AUTO_INCREMENT,
+             `column_title` VARCHAR(255) NOT NULL,
+             `table_id` INT(11) NOT NULL,
              `price_text` VARCHAR(255) NOT NULL,
              `ctoa_btn_text` VARCHAR(255) NOT NULL,/** ctoa => call to action */
              `ctoa_btn_link` VARCHAR(255) NOT NULL,
 			 `created_at` DATETIME NOT NULL,
 			 `updated_at` DATETIME NOT NULL,
-			  PRIMARY KEY id (id)
+			  PRIMARY KEY id (id),
+			  FOREIGN KEY(table_id) 
+                REFERENCES ".$wpdb->prefix."yapt_pricing_tables (id)
+                ON DELETE CASCADE
 		)$charset_collate;";
             dbDelta($sql);
         }
 
-        // ya_features
-        $table_name = $wpdb->prefix . 'ya_features';
+        // yapt_features
+        $table_name = $wpdb->prefix . 'yapt_features';
         $charset_collate = $wpdb->get_charset_collate();
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
             $sql = "CREATE TABLE " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
+             `column_id` INT(11) NOT NULL,
              `feature_text` VARCHAR(255) NOT NULL,
              `is_set` ENUM('0', '1') NOT NULL DEFAULT '1',
 			 `created_at` DATETIME NOT NULL,
 			 `updated_at` DATETIME NOT NULL,
-			  PRIMARY KEY id (id)
+			  PRIMARY KEY id (id),
+			  FOREIGN KEY(column_id) 
+                REFERENCES ".$wpdb->prefix."yapt_columns (id)
+                ON DELETE CASCADE
 		)$charset_collate;";
             dbDelta($sql);
         }

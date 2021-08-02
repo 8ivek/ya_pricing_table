@@ -2,3 +2,15 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+ div.feature_column_container div{
+     margin:5px;
+ }
+
+ table#ypt_columns tbody{
+    border: 2px dashed #ff0000;
+    display:inline-block;
+    margin:5px;
+    padding:5px;
+    vertical-align: top;
+ }

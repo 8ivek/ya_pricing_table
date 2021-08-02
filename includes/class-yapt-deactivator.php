@@ -20,17 +20,19 @@
  * @subpackage Yapt/includes
  * @author     bvk <bivek_j@yahoo.com>
  */
-class Yapt_Deactivator {
+class Yapt_Deactivator
+{
 
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
-	 */
-	public static function deactivate() {
+    /**
+     * Short Description. (use period)
+     *
+     * Long Description.
+     *
+     * @since    1.0.0
+     */
+    public static function deactivate()
+    {
 
-	}
+    }
 
 }
