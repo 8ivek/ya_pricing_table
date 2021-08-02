@@ -87,7 +87,7 @@ class yapt_list extends WP_List_Table
      * @param array $item
      * @return string
      */
-    function column_cb($item): string
+    public function column_cb($item): string
     {
         return sprintf(
             '<input type="checkbox" name="bulk-delete[]" value="%s" />', $item['id']
@@ -95,18 +95,19 @@ class yapt_list extends WP_List_Table
     }
 
     /**
-     * Method for name column
+     * Method for pt_title column
      * @param array $item
      * @return string
      */
-    function column_name(array $item): string
+    public function column_pt_title(array $item): string
     {
         $delete_nonce = wp_create_nonce('ya_delete_price_table');
-        $title = '<strong>' . $item['name'] . '</strong>';
+        $title = '<strong>' . $item['pt_title'] . '</strong>';
         $actions = [
-            'delete' => sprintf('<a href="?page=%s&action=%s&price_table=%s&_wpnonce=%s">Delete</a>', esc_attr($_REQUEST['page']), 'delete', absint($item['ID']), $delete_nonce)
+            'edit' => sprintf('<a href="?page=%s&action=%s&price_table=%s">Edit</a>', esc_attr($_REQUEST['page']), 'edit', absint($item['id'])),
+            'delete' => sprintf('<a href="?page=%s&action=%s&price_table=%s&_wpnonce=%s">Delete</a>', esc_attr($_REQUEST['page']), 'delete', absint($item['id']), $delete_nonce),
         ];
-        return $title . $this->row_actions($actions);
+        return sprintf('%1$s %2$s', $title, $this->row_actions($actions));
     }
 
     /**
