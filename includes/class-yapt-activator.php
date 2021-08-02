@@ -58,20 +58,6 @@ class Yapt_Activator
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
         global $wpdb;
-        // yapt_pricing_tables
-        $table_name = $wpdb->prefix . 'yapt_pricing_tables';
-        $charset_collate = $wpdb->get_charset_collate();
-        if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
-            $sql = "CREATE TABLE " . $table_name . " (
-             `id` INT(11) NOT NULL AUTO_INCREMENT,
-             `pt_title` VARCHAR(255) NOT NULL,
-             `template_id` INT(11) NOT NULL,
-			 `created_at` DATETIME NOT NULL,
-			 `updated_at` DATETIME NOT NULL,
-			  PRIMARY KEY id (id)
-		)$charset_collate;";
-            dbDelta($sql);
-        }
 
         // yapt_templates
         $table_name = $wpdb->prefix . 'yapt_templates';
@@ -89,6 +75,23 @@ class Yapt_Activator
             dbDelta($sql);
         }
 
+        // yapt_pricing_tables
+        $table_name = $wpdb->prefix . 'yapt_pricing_tables';
+        $charset_collate = $wpdb->get_charset_collate();
+        if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
+            $sql = "CREATE TABLE " . $table_name . " (
+             `id` INT(11) NOT NULL AUTO_INCREMENT,
+             `pt_title` VARCHAR(255) NOT NULL,
+             `template_id` INT(11) NOT NULL,
+			 `created_at` DATETIME NOT NULL,
+			 `updated_at` DATETIME NOT NULL,
+			  PRIMARY KEY id (id),
+			  FOREIGN KEY(template_id) 
+                REFERENCES ".$wpdb->prefix."yapt_templates (id)
+		)$charset_collate;";
+            dbDelta($sql);
+        }
+
         // yapt_columns
         $table_name = $wpdb->prefix . 'yapt_columns';
         $charset_collate = $wpdb->get_charset_collate();
@@ -96,13 +99,16 @@ class Yapt_Activator
             $sql = "CREATE TABLE " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
              `column_title` VARCHAR(255) NOT NULL,
-             `table_id` VARCHAR(255) NOT NULL,
+             `table_id` INT(11) NOT NULL,
              `price_text` VARCHAR(255) NOT NULL,
              `ctoa_btn_text` VARCHAR(255) NOT NULL,/** ctoa => call to action */
              `ctoa_btn_link` VARCHAR(255) NOT NULL,
 			 `created_at` DATETIME NOT NULL,
 			 `updated_at` DATETIME NOT NULL,
-			  PRIMARY KEY id (id)
+			  PRIMARY KEY id (id),
+			  FOREIGN KEY(table_id) 
+                REFERENCES ".$wpdb->prefix."yapt_pricing_tables (id)
+                ON DELETE CASCADE
 		)$charset_collate;";
             dbDelta($sql);
         }
@@ -118,7 +124,10 @@ class Yapt_Activator
              `is_set` ENUM('0', '1') NOT NULL DEFAULT '1',
 			 `created_at` DATETIME NOT NULL,
 			 `updated_at` DATETIME NOT NULL,
-			  PRIMARY KEY id (id)
+			  PRIMARY KEY id (id),
+			  FOREIGN KEY(column_id) 
+                REFERENCES ".$wpdb->prefix."yapt_columns (id)
+                ON DELETE CASCADE
 		)$charset_collate;";
             dbDelta($sql);
         }
