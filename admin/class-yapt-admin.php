@@ -145,6 +145,7 @@ class Yapt_Admin
         ];
         add_screen_option($option, $args);
         $this->price_table = new yapt_list();
+        $this->price_table->prepare_items();
     }
 
     /**

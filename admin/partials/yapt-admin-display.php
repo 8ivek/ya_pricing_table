@@ -27,7 +27,6 @@
                 <div class="meta-box-sortables ui-sortable">
                     <form method="post">
                         <?php
-                        $this->price_table->prepare_items();
                         $this->price_table->display();
                         ?>
                     </form>
