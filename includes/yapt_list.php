@@ -185,7 +185,7 @@ class yapt_list extends WP_List_Table
 
                 // esc_url_raw() is used to prevent converting ampersand in url to "#038;"
                 // add_query_arg() return the current url
-                wp_redirect(esc_url_raw(add_query_arg()));
+                wp_redirect(esc_url_raw(remove_query_arg(['_wpnonce', 'action', 'price_table'])));
                 exit;
             }
         }

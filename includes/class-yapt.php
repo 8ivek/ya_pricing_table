@@ -225,5 +225,4 @@ class Yapt
     {
         return $this->version;
     }
-
 }
