@@ -132,7 +132,7 @@ class Yapt_Admin
         );
         add_submenu_page('yapt_admin', 'Add new pricing table', 'Add New', 'manage_options', 'yapt_admin_add_page', [$this, 'renderAddPageContent']);
 
-        add_action( "load-$hook", [ $this, 'screen_option' ] );
+        add_action("load-$hook", [$this, 'screen_option']);
     }
 
     public function screen_option()
@@ -145,7 +145,14 @@ class Yapt_Admin
         ];
         add_screen_option($option, $args);
         $this->price_table = new yapt_list();
-        $this->price_table->prepare_items();
+
+        if (!empty($_GET['action']) && $_GET['action'] === 'edit') {
+            // show edit form
+            $this->price_table->prepare_item();
+        } else {
+            // show wp_list_table
+            $this->price_table->prepare_items();
+        }
     }
 
     /**
@@ -199,7 +206,13 @@ class Yapt_Admin
 
     public function renderSettingsPageContent(string $activeTab = ''): void
     {
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/yapt-admin-display.php';
+        if (!empty($_GET['action']) && $_GET['action'] === 'edit') {
+            // show edit form
+            require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/yapt-admin-edit.php';
+        } else {
+            // show wp_list_table
+            require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/yapt-admin-display.php';
+        }
     }
 
     public function renderAddPageContent(string $activeTab = ''): void

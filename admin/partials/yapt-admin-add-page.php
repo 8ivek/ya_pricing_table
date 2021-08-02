@@ -21,51 +21,58 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
 ?>
 <div class="wrap">
     <h2 id="add_pricing_table">Add pricing table</h2>
-    <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
-        <table>
-            <tr>
-                <td><strong>Select template</strong></td>
-                <td><select name="template" required="required">
-                        <option value="0">select a template</option>
-                        <?php
-                        foreach ($results_templates as $template) {
-                            ?>
-                            <option value="<?php echo $template['id'] ?>"><?php echo $template['template_name']; ?></option>
-                            <?php
-                        }
-                        ?>
-                    </select></td>
-            </tr>
-            <tr>
-                <td><strong>Pricing table title</strong></td>
-                <td><input type="text" name="pricing_table_title" value="" placeholder="first/main pricing table..." required="required" /></td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td>
-                    <a href="javascript:;" onclick="add_column()">add column</a>
-                    <input type="hidden" name="column_count" id="column_count" value="0"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <table id="ypt_columns">
-
+    <div id="poststuff">
+        <div id="post-body" class="metabox-holder">
+            <div id="post-body-content">
+                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+                    <table>
+                        <tr>
+                            <td><strong>Select template</strong></td>
+                            <td><select name="template" required="required">
+                                    <option value="0">select a template</option>
+                                    <?php
+                                    foreach ($results_templates as $template) {
+                                        ?>
+                                        <option value="<?php echo $template['id'] ?>"><?php echo $template['template_name']; ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pricing table title</strong></td>
+                            <td><input type="text" name="pricing_table_title" value="" placeholder="first/main pricing table..." required="required" /></td>
+                        </tr>
                     </table>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="hidden" name="action" value="yapt_admin_save"/>
-                    <?php
-                    wp_nonce_field("yapt_nonce");
-                    submit_button();
-                    ?>
-                </td>
-            </tr>
-        </table>
-    </form>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="javascript:;" onclick="add_column()">add column</a>
+                                <input type="hidden" name="column_count" id="column_count" value="0"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table id="ypt_columns">
+
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="hidden" name="action" value="yapt_admin_save"/>
+                                <?php
+                                wp_nonce_field("yapt_nonce");
+                                submit_button();
+                                ?>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <br class="clear">
+    </div>
 </div>
 
 <script type="text/javascript">
