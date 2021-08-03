@@ -132,20 +132,27 @@ class Yapt_Admin
         );
         add_submenu_page('yapt_admin', 'Add new pricing table', 'Add New', 'manage_options', 'yapt_admin_add_page', [$this, 'renderAddPageContent']);
 
-        add_action( "load-$hook", [ $this, 'screen_option' ] );
+        add_action("load-$hook", [$this, 'screen_option']);
     }
 
     public function screen_option()
     {
-        $option = 'per_page';
-        $args = [
-            'label' => 'Price Table',
-            'default' => 10,
-            'option' => 'tables_per_page'
-        ];
-        add_screen_option($option, $args);
         $this->price_table = new yapt_list();
-        $this->price_table->prepare_items();
+
+        if (!empty($_GET['action']) && $_GET['action'] === 'edit') {
+            // show edit form
+            $this->price_table->prepare_item();
+        } else {
+            $option = 'per_page';
+            $args = [
+                'label' => 'Price Table',
+                'default' => 10,
+                'option' => 'tables_per_page'
+            ];
+            add_screen_option($option, $args);
+            // show wp_list_table
+            $this->price_table->prepare_items();
+        }
     }
 
     /**
@@ -197,9 +204,85 @@ class Yapt_Admin
         echo wp_redirect(admin_url('admin.php?page=yapt_admin'));
     }
 
+    public function updatePricingTableData()
+    {
+        // print_r($_POST);die();
+        // echo "Update pricing table data";
+        global $wpdb;
+        $posted_fields = $_POST['fields'] ?? [];
+        if (empty($posted_fields) || empty($_POST['pt_id'])) {
+            die('missing mandatory fields');
+        }
+
+        $template_id = $_POST['template'] ?? 0;
+
+        $now = new DateTime('now', new DateTimeZone('UTC'));
+        $created_at = $updated_at = $now->format('Y-m-d H:i:s');
+
+        $pricing_table_title = $_POST['pricing_table_title'] ?? '';
+
+        $table_id = $_POST['pt_id'] ?? '';
+
+        // insert into yapt_pricing_tables
+        $wpdb->update($wpdb->prefix . 'yapt_pricing_tables', ['pt_title' => $pricing_table_title, 'template_id' => $template_id, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $table_id]);
+
+        $column_ids = [];
+        foreach ($posted_fields as $column_data) {
+            $column_id = $column_data['column_id'];
+            $column_title = $column_data['column_title'];
+            $column_price = $column_data['column_price'];
+            $col_button_face_text = $column_data['col_button_face_text'];
+            $col_button_url = $column_data['col_button_url'];
+
+            // insert into yapt_pricing_tables
+            if(empty($column_id)) {
+                $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $col_button_face_text, 'ctoa_btn_link' => $col_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at]);
+                $column_id = $wpdb->insert_id;
+            } else {
+                $wpdb->update($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $col_button_face_text, 'ctoa_btn_link' => $col_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $column_id]);
+            }
+
+            $feature_ids = [];
+            foreach ($column_data['feature_text'] as $key => $ft) {
+                $feature_id = $column_data['fid'][$key];
+                $isset = 0;
+                if (!empty($column_data['feature_checked'][$key])) {
+                    $isset = 1;
+                }
+
+                if(empty($feature_id)) {
+                    $wpdb->insert($wpdb->prefix . 'yapt_features', ['column_id' => $column_id, 'feature_text' => $ft, 'is_set' => $isset, 'created_at' => $created_at, 'updated_at' => $updated_at]);
+                } else {
+                    $wpdb->update($wpdb->prefix . 'yapt_features', ['column_id' => $column_id, 'feature_text' => $ft, 'is_set' => $isset, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $feature_id]);
+                }
+                $feature_ids[] = $feature_id;
+            }//foreach feature_text ends
+
+            if (is_array($feature_ids) && count($feature_ids) > 0) {
+                $sql_delete_features = "DELETE FROM `" . $wpdb->prefix . "yapt_features` WHERE `column_id` = '" . $column_id . "' AND `id` NOT IN (" . implode(', ', $feature_ids) . ")";
+            } else if (count($feature_ids) === 0) {
+                $sql_delete_features = "DELETE FROM `" . $wpdb->prefix . "yapt_features` WHERE `column_id` = '" . $column_id . "'";
+            }
+            $wpdb->query($sql_delete_features);
+
+            $column_ids[] = $column_id;
+        }//foreach column ends
+
+        $sql_delete_columns = "DELETE FROM `" . $wpdb->prefix . "yapt_columns` WHERE `table_id` = '" . $table_id . "' AND `id` NOT IN (" . implode(', ', $column_ids) . ")";
+        $wpdb->query($sql_delete_columns);
+
+        echo wp_redirect(admin_url('admin.php?page=yapt_admin'));
+    }
+
     public function renderSettingsPageContent(string $activeTab = ''): void
     {
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/yapt-admin-display.php';
+        if (!empty($_GET['action']) && $_GET['action'] === 'edit') {
+            // show edit form
+            require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/yapt-admin-edit.php';
+        } else {
+            // show wp_list_table
+            require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/yapt-admin-display.php';
+        }
     }
 
     public function renderAddPageContent(string $activeTab = ''): void

@@ -2,6 +2,12 @@
 
 class yapt_list extends WP_List_Table
 {
+
+    /**
+     * @var array
+     */
+    public array $item;
+
     public function __construct()
     {
         // Set parent defaults.
@@ -87,7 +93,7 @@ class yapt_list extends WP_List_Table
      * @param array $item
      * @return string
      */
-    function column_cb($item): string
+    public function column_cb($item): string
     {
         return sprintf(
             '<input type="checkbox" name="bulk-delete[]" value="%s" />', $item['id']
@@ -95,18 +101,19 @@ class yapt_list extends WP_List_Table
     }
 
     /**
-     * Method for name column
+     * Method for pt_title column
      * @param array $item
      * @return string
      */
-    function column_name(array $item): string
+    public function column_pt_title(array $item): string
     {
         $delete_nonce = wp_create_nonce('ya_delete_price_table');
-        $title = '<strong>' . $item['name'] . '</strong>';
+        $title = '<strong>' . $item['pt_title'] . '</strong>';
         $actions = [
-            'delete' => sprintf('<a href="?page=%s&action=%s&price_table=%s&_wpnonce=%s">Delete</a>', esc_attr($_REQUEST['page']), 'delete', absint($item['ID']), $delete_nonce)
+            'edit' => sprintf('<a href="?page=%s&action=%s&price_table=%s">Edit</a>', esc_attr($_REQUEST['page']), 'edit', absint($item['id'])),
+            'delete' => sprintf('<a href="?page=%s&action=%s&price_table=%s&_wpnonce=%s">Delete</a>', esc_attr($_REQUEST['page']), 'delete', absint($item['id']), $delete_nonce),
         ];
-        return $title . $this->row_actions($actions);
+        return sprintf('%1$s %2$s', $title, $this->row_actions($actions));
     }
 
     /**
@@ -184,7 +191,7 @@ class yapt_list extends WP_List_Table
 
                 // esc_url_raw() is used to prevent converting ampersand in url to "#038;"
                 // add_query_arg() return the current url
-                wp_redirect(esc_url_raw(add_query_arg()));
+                wp_redirect(esc_url_raw(remove_query_arg(['_wpnonce', 'action', 'price_table'])));
                 exit;
             }
         }
@@ -203,5 +210,37 @@ class yapt_list extends WP_List_Table
             wp_redirect(esc_url_raw(add_query_arg([])));
             exit;
         }
+    }
+
+    /**
+     * Prepare item
+     */
+    public function prepare_item()
+    {
+        $price_table_id = trim($_GET['price_table']);
+        if (empty($price_table_id) || !is_numeric($price_table_id) || $price_table_id <= 0) {
+            //we must have value for price_table, redirect to listing page
+            wp_redirect(esc_url_raw(remove_query_arg(['action', 'price_table'])));
+        }
+        global $wpdb;
+        $price_table_row = $wpdb->get_row("SELECT pt.*, t.template_name FROM {$wpdb->prefix}yapt_pricing_tables pt INNER JOIN {$wpdb->prefix}yapt_templates t WHERE pt.template_id = t.id AND pt.id={$price_table_id}", ARRAY_A);
+
+        if(empty($price_table_row)) {
+            wp_redirect(esc_url_raw(remove_query_arg(['action', 'price_table'])));
+        }
+        $this->item = $price_table_row;
+
+        // get columns
+        $columns = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_columns WHERE `table_id` = '" . $price_table_row['id'] . "'", ARRAY_A);
+
+        $formatted_column = [];
+        foreach ($columns as $col) {
+            $features = $wpdb->get_results("SELECT * FROM  {$wpdb->prefix}yapt_features WHERE `column_id` = '" . $col['id'] . "'", ARRAY_A);
+            $col_temp = $col;
+            $col_temp['features'] = $features;
+            $formatted_column[] = $col_temp;
+        }
+
+        $this->item['columns'] = $formatted_column;
     }
 }

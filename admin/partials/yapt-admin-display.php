@@ -20,9 +20,9 @@
 // print_r($results_pricing_table);
 ?>
 <div class="wrap">
-    <h2>YA Price Tables</h2>
+    <h2>YA price tables</h2>
     <div id="poststuff">
-        <div id="post-body" class="metabox-holder columns-2">
+        <div id="post-body" class="metabox-holder">
             <div id="post-body-content">
                 <div class="meta-box-sortables ui-sortable">
                     <form method="post">
