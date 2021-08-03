@@ -137,19 +137,19 @@ class Yapt_Admin
 
     public function screen_option()
     {
-        $option = 'per_page';
-        $args = [
-            'label' => 'Price Table',
-            'default' => 10,
-            'option' => 'tables_per_page'
-        ];
-        add_screen_option($option, $args);
         $this->price_table = new yapt_list();
 
         if (!empty($_GET['action']) && $_GET['action'] === 'edit') {
             // show edit form
             $this->price_table->prepare_item();
         } else {
+            $option = 'per_page';
+            $args = [
+                'label' => 'Price Table',
+                'default' => 10,
+                'option' => 'tables_per_page'
+            ];
+            add_screen_option($option, $args);
             // show wp_list_table
             $this->price_table->prepare_items();
         }

@@ -242,7 +242,5 @@ class yapt_list extends WP_List_Table
         }
 
         $this->item['columns'] = $formatted_column;
-
-        print_r($this->item);
     }
 }

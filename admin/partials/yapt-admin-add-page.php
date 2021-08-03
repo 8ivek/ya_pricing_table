@@ -11,11 +11,7 @@
  * @package    Yapt
  * @subpackage Yapt/admin/partials
  */
-?>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
-<?php
-// 1st Method - Declaring $wpdb as global and using it to execute an SQL query statement that returns a PHP object
 global $wpdb;
 $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templates", ARRAY_A);
 ?>
