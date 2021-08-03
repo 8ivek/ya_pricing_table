@@ -258,7 +258,11 @@ class Yapt_Admin
                 $feature_ids[] = $feature_id;
             }//foreach feature_text ends
 
-            $sql_delete_features = "DELETE FROM `" . $wpdb->prefix . "yapt_features` WHERE `column_id` = '" . $column_id . "' AND `id` NOT IN (" . implode(', ', $feature_ids) . ")";
+            if (is_array($feature_ids) && count($feature_ids) > 0) {
+                $sql_delete_features = "DELETE FROM `" . $wpdb->prefix . "yapt_features` WHERE `column_id` = '" . $column_id . "' AND `id` NOT IN (" . implode(', ', $feature_ids) . ")";
+            } else if (count($feature_ids) === 0) {
+                $sql_delete_features = "DELETE FROM `" . $wpdb->prefix . "yapt_features` WHERE `column_id` = '" . $column_id . "'";
+            }
             $wpdb->query($sql_delete_features);
 
             $column_ids[] = $column_id;
