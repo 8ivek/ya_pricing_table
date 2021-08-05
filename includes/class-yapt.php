@@ -175,12 +175,26 @@ class Yapt
      */
     private function define_public_hooks()
     {
-
         $plugin_public = new Yapt_Public($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+        add_shortcode('yapt', [$this, 'yapt_callback_function']);
+    }
 
+    public function yapt_callback_function($atts = [])
+    {
+        // set up default parameters
+        extract(shortcode_atts([
+            'ptid' => '0'
+        ], $atts));
+
+        echo "yeta pugyo" . $ptid;
+        // todo: query db and get price table details info in $data_from_db variable
+        // todo: replace variables in default.html with variables from $data_from_db
+        // todo: get content from default.html template
+        // todo: get content from default.css
+        // render css and echo html
     }
 
     /**
