@@ -80,7 +80,6 @@ class Yapt
         $this->set_locale();
         $this->define_admin_hooks();
         $this->define_public_hooks();
-
     }
 
     /**
@@ -101,6 +100,11 @@ class Yapt
      */
     private function load_dependencies()
     {
+
+        /**
+         * load db_data class for querying db.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/db_data.php';
 
         /**
          * The class responsible for orchestrating the actions and filters of the
@@ -179,22 +183,7 @@ class Yapt
 
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
-        add_shortcode('yapt', [$this, 'yapt_callback_function']);
-    }
-
-    public function yapt_callback_function($atts = [])
-    {
-        // set up default parameters
-        extract(shortcode_atts([
-            'ptid' => '0'
-        ], $atts));
-
-        echo "yeta pugyo" . $ptid;
-        // todo: query db and get price table details info in $data_from_db variable
-        // todo: replace variables in default.html with variables from $data_from_db
-        // todo: get content from default.html template
-        // todo: get content from default.css
-        // render css and echo html
+        add_shortcode('yapt', [$plugin_public, 'yapt_callback_function']);
     }
 
     /**

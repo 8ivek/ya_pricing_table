@@ -141,7 +141,8 @@ class Yapt_Admin
 
         if (!empty($_GET['action']) && $_GET['action'] === 'edit') {
             // show edit form
-            $this->price_table->prepare_item();
+            $price_table_id = trim($_GET['price_table']);
+            $this->price_table->prepare_item($price_table_id);
         } else {
             $option = 'per_page';
             $args = [

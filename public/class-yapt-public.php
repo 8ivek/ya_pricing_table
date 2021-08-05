@@ -102,4 +102,27 @@ class Yapt_Public
 
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/yapt-public.js', array('jquery'), $this->version, false);
     }
+
+    /**
+     * @param array $atts
+     */
+    public function yapt_callback_function(array $atts = [])
+    {
+        // set up default parameters
+        extract(shortcode_atts([
+            'ptid' => '0'
+        ], $atts));
+
+        // echo "yeta pugyo" . $ptid;
+        $db_data_obj = new db_data();
+        $item_detail = $db_data_obj->getData($ptid);
+
+
+        // todo: query db and get price table details info in $item_detail variable - done
+        // todo: get content from default.html template
+        // todo: get content from default.css
+        // todo: replace variables in default.html with variables from $item_detail
+        // render css and echo html
+    }
+
 }
