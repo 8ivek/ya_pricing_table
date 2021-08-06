@@ -52,6 +52,7 @@ class Yapt_Activator
 
     /**
      * Create tables when activating plugin
+     * @throws Exception
      */
     private function create_tables()
     {
@@ -73,6 +74,12 @@ class Yapt_Activator
 			  PRIMARY KEY id (id)
 		)$charset_collate;";
             dbDelta($sql);
+
+            // insert_query
+            $table_name = $wpdb->prefix . 'yapt_templates';
+            $datetime = new DateTime( 'now', new DateTimeZone( 'UTC' ) );
+            $now =  $datetime->format('Y-m-d H:i:s');
+            $wpdb->insert($table_name, ['template_name' => 'default', 'style' => 'default.css', 'html' => 'default.html', 'created_at' => $now, 'updated_at' => $now]);
         }
 
         // yapt_pricing_tables
