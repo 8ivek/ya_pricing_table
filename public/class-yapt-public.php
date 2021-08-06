@@ -119,13 +119,13 @@ class Yapt_Public
         // print_r($item_detail);
 
         if (!is_array($item_detail) || count($item_detail) < 1) {
-            echo "<p>not available</p>";
-            return;
+            return "<p>not available</p>";
         }
 
         $pt_column_content = $this->readHtmlFile($item_detail['html']);
 
-        $pt_html = "<main class='yapt_pricing_table'>";
+        $pt_html = "<link rel='stylesheet' href='".YAPT_PLUGIN_URL."templates/" . $item_detail['template_name'] . "/" . $item_detail['style']."' />
+        <main class='yapt_pricing_table'>";
 
         $col_html = '';
 
@@ -151,10 +151,8 @@ class Yapt_Public
         }
 
         $pt_html .= $col_html . "</main>";
-        ?>
-        <link rel="stylesheet" href="<?php echo YAPT_PLUGIN_URL . 'templates/' . $item_detail['template_name'] . '/' . $item_detail['style']; ?>"/>
-        <?php
-        echo $pt_html;
+
+        return $pt_html;
     }
 
     /**
