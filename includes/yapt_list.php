@@ -215,32 +215,18 @@ class yapt_list extends WP_List_Table
     /**
      * Prepare item
      */
-    public function prepare_item()
+    public function prepare_item($price_table_id)
     {
-        $price_table_id = trim($_GET['price_table']);
         if (empty($price_table_id) || !is_numeric($price_table_id) || $price_table_id <= 0) {
             //we must have value for price_table, redirect to listing page
             wp_redirect(esc_url_raw(remove_query_arg(['action', 'price_table'])));
         }
-        global $wpdb;
-        $price_table_row = $wpdb->get_row("SELECT pt.*, t.template_name FROM {$wpdb->prefix}yapt_pricing_tables pt INNER JOIN {$wpdb->prefix}yapt_templates t WHERE pt.template_id = t.id AND pt.id={$price_table_id}", ARRAY_A);
 
-        if(empty($price_table_row)) {
+        $db_data_obj = new db_data();
+        $item = $db_data_obj->getData($price_table_id);
+        if(empty($item)) {
             wp_redirect(esc_url_raw(remove_query_arg(['action', 'price_table'])));
         }
-        $this->item = $price_table_row;
-
-        // get columns
-        $columns = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_columns WHERE `table_id` = '" . $price_table_row['id'] . "'", ARRAY_A);
-
-        $formatted_column = [];
-        foreach ($columns as $col) {
-            $features = $wpdb->get_results("SELECT * FROM  {$wpdb->prefix}yapt_features WHERE `column_id` = '" . $col['id'] . "'", ARRAY_A);
-            $col_temp = $col;
-            $col_temp['features'] = $features;
-            $formatted_column[] = $col_temp;
-        }
-
-        $this->item['columns'] = $formatted_column;
+        $this->item = $item;
     }
 }

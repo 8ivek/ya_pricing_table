@@ -52,6 +52,7 @@ class Yapt_Activator
 
     /**
      * Create tables when activating plugin
+     * @throws Exception
      */
     private function create_tables()
     {
@@ -63,7 +64,7 @@ class Yapt_Activator
         $table_name = $wpdb->prefix . 'yapt_templates';
         $charset_collate = $wpdb->get_charset_collate();
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
-            $sql = "CREATE TABLE " . $table_name . " (
+            $sql = "CREATE TABLE IF NOT EXISTS " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
              `template_name` VARCHAR(255) NOT NULL,
              `style` VARCHAR(255) NOT NULL,
@@ -73,13 +74,19 @@ class Yapt_Activator
 			  PRIMARY KEY id (id)
 		)$charset_collate;";
             dbDelta($sql);
+
+            // insert_query
+            $table_name = $wpdb->prefix . 'yapt_templates';
+            $datetime = new DateTime( 'now', new DateTimeZone( 'UTC' ) );
+            $now =  $datetime->format('Y-m-d H:i:s');
+            $wpdb->insert($table_name, ['template_name' => 'default', 'style' => 'default.css', 'html' => 'default.html', 'created_at' => $now, 'updated_at' => $now]);
         }
 
         // yapt_pricing_tables
         $table_name = $wpdb->prefix . 'yapt_pricing_tables';
         $charset_collate = $wpdb->get_charset_collate();
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
-            $sql = "CREATE TABLE " . $table_name . " (
+            $sql = "CREATE TABLE IF NOT EXISTS " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
              `pt_title` VARCHAR(255) NOT NULL,
              `template_id` INT(11) NOT NULL,
@@ -96,7 +103,7 @@ class Yapt_Activator
         $table_name = $wpdb->prefix . 'yapt_columns';
         $charset_collate = $wpdb->get_charset_collate();
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
-            $sql = "CREATE TABLE " . $table_name . " (
+            $sql = "CREATE TABLE IF NOT EXISTS " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
              `column_title` VARCHAR(255) NOT NULL,
              `table_id` INT(11) NOT NULL,
@@ -117,7 +124,7 @@ class Yapt_Activator
         $table_name = $wpdb->prefix . 'yapt_features';
         $charset_collate = $wpdb->get_charset_collate();
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
-            $sql = "CREATE TABLE " . $table_name . " (
+            $sql = "CREATE TABLE IF NOT EXISTS " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
              `column_id` INT(11) NOT NULL,
              `feature_text` VARCHAR(255) NOT NULL,
