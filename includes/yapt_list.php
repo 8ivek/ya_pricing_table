@@ -223,6 +223,10 @@ class yapt_list extends WP_List_Table
         }
 
         $db_data_obj = new db_data();
-        $this->item = $db_data_obj->getData($price_table_id);
+        $item = $db_data_obj->getData($price_table_id);
+        if(empty($item)) {
+            wp_redirect(esc_url_raw(remove_query_arg(['action', 'price_table'])));
+        }
+        $this->item = $item;
     }
 }

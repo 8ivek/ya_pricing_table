@@ -50,10 +50,9 @@ class Yapt_Public
      */
     public function __construct($plugin_name, $version)
     {
-
         $this->plugin_name = $plugin_name;
         $this->version = $version;
-
+        add_shortcode('yapt', [$this, 'yapt_shortcode_callback']);
     }
 
     /**
@@ -107,7 +106,7 @@ class Yapt_Public
      * show html table data
      * @param array $atts
      */
-    public function yapt_callback_function(array $atts = [])
+    public function yapt_shortcode_callback(array $atts = [])
     {
         // set up default parameters
         extract(shortcode_atts([
@@ -117,7 +116,12 @@ class Yapt_Public
         // echo "yeta pugyo" . $ptid;
         $db_data_obj = new db_data();
         $item_detail = $db_data_obj->getData($ptid);
-        //print_r($item_detail);
+        // print_r($item_detail);
+
+        if (!is_array($item_detail) || count($item_detail) < 1) {
+            echo "<p>not available</p>";
+            return;
+        }
 
         $pt_column_content = $this->readHtmlFile($item_detail['html']);
 
