@@ -83,6 +83,8 @@ class yapt_list extends WP_List_Table
             case 'created_at':
             case 'updated_at':
                 return $item[$column_name];
+            case 'shortcode':
+                return "<input type='text' onClick='this.select();' readonly='readonly' value='" . $item[$column_name] . "' />";
             default:
                 return print_r($item, true); //Show the whole array for troubleshooting purposes
         }
@@ -124,8 +126,9 @@ class yapt_list extends WP_List_Table
         return [
             'cb' => '<input type="checkbox" />', // Render a checkbox instead of text.
             'pt_title' => __('Price table title', 'yapt'),
-            'template_id' => __('Template id', 'yapt'),
-            'created_at' => __('Created date', 'yapt'),
+            'shortcode' => __('Shortcode', 'yapt'),
+            // 'template_id' => __('Template id', 'yapt'),
+            // 'created_at' => __('Created date', 'yapt'),
             'updated_at' => __('Updated date', 'yapt'),
         ];
     }
@@ -138,7 +141,7 @@ class yapt_list extends WP_List_Table
     {
         return [
             'pt_title' => ['pt_title', true],
-            'created_at' => ['created_at', true],
+            //'created_at' => ['created_at', true],
             'updated_at' => ['updated_at', true]
         ];
     }
@@ -174,7 +177,14 @@ class yapt_list extends WP_List_Table
             'per_page' => $per_page //WE have to determine how many items to show on a page
         ]);
 
-        $this->items = self::get_price_tables($per_page, $current_page);
+        $results = self::get_price_tables($per_page, $current_page);
+        $modified_result = [];
+        foreach($results as $res) {
+            $temp_result = $res;
+            $temp_result['shortcode'] = '[yapt ptid=' . $res['id'] . ']';
+            $modified_result[] = $temp_result;
+        }
+        $this->items = $modified_result;
     }
 
     public function process_bulk_action()
