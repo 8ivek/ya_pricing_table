@@ -37,6 +37,12 @@ if (!defined('WPINC')) {
  */
 define('YAPT_VERSION', '1.0.0');
 
+$url = plugin_dir_url(__FILE__);
+define('YAPT_PLUGIN_URL', $url);
+
+$dir_path = plugin_dir_path(__FILE__);
+define('YAPT_PLUGIN_DIR_PATH', $dir_path);
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-yapt-activator.php
@@ -77,10 +83,8 @@ require plugin_dir_path(__FILE__) . 'includes/class-yapt.php';
  */
 function run_yapt()
 {
-
     $plugin = new Yapt();
     $plugin->run();
-
 }
 
 run_yapt();

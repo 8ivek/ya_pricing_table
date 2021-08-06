@@ -104,6 +104,7 @@ class Yapt_Public
     }
 
     /**
+     * show html table data
      * @param array $atts
      */
     public function yapt_callback_function(array $atts = [])
@@ -116,13 +117,49 @@ class Yapt_Public
         // echo "yeta pugyo" . $ptid;
         $db_data_obj = new db_data();
         $item_detail = $db_data_obj->getData($ptid);
+        //print_r($item_detail);
 
+        $pt_column_content = $this->readHtmlFile($item_detail['html']);
 
-        // todo: query db and get price table details info in $item_detail variable - done
-        // todo: get content from default.html template
-        // todo: get content from default.css
-        // todo: replace variables in default.html with variables from $item_detail
-        // render css and echo html
+        $pt_html = "<main class='yapt_pricing_table'>";
+
+        $col_html = '';
+
+        foreach ($item_detail['columns'] as $col) {
+
+            //feature task
+            $feature_list = '';
+            foreach ($col['features'] as $feats) {
+                $feature_class = 'unchecked';
+                if ($feats['is_set'] == '1') {
+                    $feature_class = 'checked';
+                }
+                $feature_list .= "<li class='" . $feature_class . "'>" . $feats['feature_text'] . "</li>";
+            }
+
+            $temp_col = str_replace('##col_title##', $col['column_title'], $pt_column_content);
+            $temp_col = str_replace('##col_price##', $col['price_text'], $temp_col);
+            $temp_col = str_replace('##col_cta_btn_lnk##', $col['ctoa_btn_link'], $temp_col);
+            $temp_col = str_replace('##col_cta_btn_text##', $col['ctoa_btn_text'], $temp_col);
+            $temp_col = str_replace('##col_feature_list##', $feature_list, $temp_col);
+
+            $col_html .= $temp_col;
+        }
+
+        $pt_html .= $col_html . "</main>";
+        ?>
+        <link rel="stylesheet" href="<?php echo YAPT_PLUGIN_URL . 'templates/' . $item_detail['template_name'] . '/' . $item_detail['style']; ?>"/>
+        <?php
+        echo $pt_html;
     }
 
+    /**
+     * Read html file
+     * @param $html_file
+     * @return false|string
+     */
+    public function readHtmlFile($html_file)
+    {
+        return file_get_contents(YAPT_PLUGIN_DIR_PATH . '/templates/default/' . $html_file, true);
+    }
 }
