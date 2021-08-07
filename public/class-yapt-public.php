@@ -74,7 +74,6 @@ class Yapt_Public
          * between the defined hooks and the functions defined in this
          * class.
          */
-
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/yapt-public.css', array(), $this->version, 'all');
 
     }
@@ -125,7 +124,7 @@ class Yapt_Public
         $pt_column_content = $this->readHtmlFile($item_detail['html']);
 
         $pt_html = "<link rel='stylesheet' href='".YAPT_PLUGIN_URL."templates/" . $item_detail['template_name'] . "/" . $item_detail['style']."' />
-        <main class='yapt_pricing_table'>";
+        <div class='yapt_pricing_table clearfix'>";
 
         $col_html = '';
 
@@ -150,7 +149,7 @@ class Yapt_Public
             $col_html .= $temp_col;
         }
 
-        $pt_html .= $col_html . "</main>";
+        $pt_html .= $col_html . "</div>";
 
         return $pt_html;
     }

@@ -2,3 +2,7 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+.yapt_pricing_table {
+    max-width:100%!important;
+}
