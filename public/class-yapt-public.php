@@ -135,6 +135,11 @@ class Yapt_Public
 
         foreach ($item_detail['columns'] as $col) {
 
+            $highlighted = '';
+            if ($col['highlighted'] == 1) {
+                $highlighted = 'highlighted';
+            }
+
             //feature task
             $feature_list = '';
             foreach ($col['features'] as $feats) {
@@ -145,7 +150,8 @@ class Yapt_Public
                 $feature_list .= "<li class='" . $feature_class . "'>" . $feats['feature_text'] . "</li>";
             }
 
-            $temp_col = str_replace('##col_title##', $col['column_title'], $pt_column_content);
+            $temp_col = str_replace('##is_highlighted##', $highlighted, $pt_column_content);
+            $temp_col = str_replace('##col_title##', $col['column_title'], $temp_col);
             $temp_col = str_replace('##col_price##', $col['price_text'], $temp_col);
             $temp_col = str_replace('##col_cta_btn_lnk##', $col['ctoa_btn_link'], $temp_col);
             $temp_col = str_replace('##col_cta_btn_text##', $col['ctoa_btn_text'], $temp_col);

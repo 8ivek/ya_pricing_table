@@ -85,7 +85,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
 
                 <div id="custom_styles" class="tabcontent">
                     <h3>Custom styles</h3>
-                    <textarea>/* styles here */</textarea>
+                    <textarea name="custom_styles">/* styles here */</textarea>
                 </div><!-- #Styles .tabcontent ends -->
             </div>
             <!--.yapt_wrap ends -->
@@ -151,7 +151,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
             "_feature_count' id='column" + computed_column_id +
             "_feature_count' value='0' /><div class='yapt_table_row yapt_table_row_features' id='column" +
             computed_column_id +
-            "_features' class='feature_column_container'></div><div class='yapt_table_row clearfix'><div class='switch_featured'> <label class='switch'><input type='radio' name='highlight' value='1' /><span class='slider round'></span></label> Highlight</div><a title='Delete column' class='delete_column' href='javascript:;' onclick='delete_column(" +
+            "_features' class='feature_column_container'></div><div class='yapt_table_row clearfix'><div class='switch_featured'> <label class='switch'><input type='radio' name='highlighted' value='" + computed_column_id + "' /><span class='slider round'></span></label> Highlight</div><a title='Delete column' class='delete_column' href='javascript:;' onclick='delete_column(" +
             computed_column_id + ")'><span class='dashicons dashicons-trash'></span></a></div></div>";
         jQuery("#ypt_columns").append(new_column_value);
 
@@ -164,8 +164,6 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
     add_column();
 
     jQuery(window).load(function () {
-        // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
     });
-
 </script>

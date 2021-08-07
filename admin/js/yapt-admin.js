@@ -30,7 +30,8 @@
      */
 })(jQuery);
 
-function yapt_admin_tab(evt, cityName) {
+function yapt_admin_tab(evt, tabId) {
+    evt.preventDefault();
     // Declare all variables
     var i, tabcontent, tablinks;
 
@@ -47,6 +48,6 @@ function yapt_admin_tab(evt, cityName) {
     }
 
     // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(cityName).style.display = "block";
+    document.getElementById(tabId).style.display = "block";
     evt.currentTarget.className += " active";
 }

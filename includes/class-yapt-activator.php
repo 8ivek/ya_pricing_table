@@ -90,6 +90,7 @@ class Yapt_Activator
             $sql = "CREATE TABLE IF NOT EXISTS " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
              `pt_title` VARCHAR(255) NOT NULL,
+             `custom_styles` TEXT NULL,
              `template_id` INT(11) NOT NULL,
 			 `created_at` DATETIME NOT NULL,
 			 `updated_at` DATETIME NOT NULL,
@@ -107,6 +108,7 @@ class Yapt_Activator
             $sql = "CREATE TABLE IF NOT EXISTS " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
              `column_title` VARCHAR(255) NOT NULL,
+             `highlighted` ENUM('0', '1') NOT NULL DEFAULT '0',
              `table_id` INT(11) NOT NULL,
              `price_text` VARCHAR(255) NOT NULL,
              `ctoa_btn_text` VARCHAR(255) NOT NULL,/** ctoa => call to action */
