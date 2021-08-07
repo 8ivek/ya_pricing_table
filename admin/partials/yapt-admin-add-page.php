@@ -16,32 +16,38 @@ global $wpdb;
 $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templates", ARRAY_A);
 ?>
 <div class="wrap">
-    <h2 id="add_pricing_table">Add pricing table</h2>
+    <h1 class="wp-heading-inline">Add pricing table</h1>
     <div id="poststuff">
-        <div id="post-body" class="metabox-holder">
-            <div id="post-body-content">
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
-                    <table>
-                        <tr>
-                            <td><strong>Select template</strong></td>
-                            <td><select name="template" required="required">
-                                    <option value="0">select a template</option>
-                                    <?php
-                                    foreach ($results_templates as $template) {
-                                        ?>
-                                    <option value="<?php echo $template['id'] ?>">
-                                        <?php echo $template['template_name']; ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Pricing table title</strong></td>
-                            <td><input type="text" name="pricing_table_title" value=""
-                                    placeholder="first/main pricing table..." required="required" /></td>
-                        </tr>
-                    </table>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+
+            <div class="yapt_add_title">
+                <input class="yapt_pricing_table_title" type="text" name="pricing_table_title" value=""
+                    placeholder="Add pricing table title" required="required" />
+            </div>
+            <div class="yapt_wrap">
+                <!-- Tab links -->
+                <div class="tab">
+                    <button class="tablinks" onclick="yapt_admin_tab(event, 'Add_table')" id="defaultOpen">
+                        <span class="dashicons dashicons-editor-table"></span>
+                        Add Pricing Table
+                    </button>
+                    <button class="tablinks" onclick="yapt_admin_tab(event, 'Theme')">
+                        <span class="dashicons dashicons-format-image"></span>
+                        Select Theme
+                    </button>
+                    <button class="tablinks" onclick="yapt_admin_tab(event, 'Config')">
+                        <span class="dashicons dashicons-admin-generic"></span>
+                        Config
+                    </button>
+                    <button class="tablinks" onclick="yapt_admin_tab(event, 'Styles')">
+                        <span class="dashicons dashicons-admin-customizer"></span>
+                        Styles
+                    </button>
+                </div>
+
+                <!-- Tab content -->
+                <div id="Add_table" class="tabcontent">
+                    <h2 id="add_pricing_table">Add pricing table</h2>
                     <table>
                         <tr>
                             <td>
@@ -56,121 +62,53 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
                                 </table>
                             </td>
                         </tr>
+                    </table>
+                </div>
+
+                <div id="Theme" class="tabcontent">
+                    <h3>Select Theme</h3>
+                    <table>
                         <tr>
-                            <td>
-                                <input type="hidden" name="action" value="yapt_admin_save" />
-                                <?php
-                                wp_nonce_field("yapt_nonce");
-                                submit_button();
+                            <td><strong>Select template</strong></td>
+                            <td><select name="template" required="required">
+                                    <option value="0">select a template</option>
+                                    <?php
+                                foreach ($results_templates as $template) {
+                                    ?>
+                                    <option value="<?php echo $template['id'] ?>">
+                                        <?php echo $template['template_name']; ?></option>
+                                    <?php
+                                }
                                 ?>
-                            </td>
+                                </select></td>
                         </tr>
                     </table>
-                </form>
+                </div>
+
+                <div id="Config" class="tabcontent">
+                    <h3>Config</h3>
+                    <p>Tokyo is the capital of Japan.</p>
+                </div>
+
+                <div id="Styles" class="tabcontent">
+                    <h3>Styles</h3>
+                    <p>Tokyo is the capital of Japan.</p>
+                </div>
             </div>
-        </div>
+            <!--.yapt_wrap ends -->
+
+            <div class="yapt_save_options">
+                <input type="hidden" name="action" value="yapt_admin_save" />
+                <?php
+                            wp_nonce_field("yapt_nonce");
+                            submit_button();
+                            ?>
+            </div>
+
+        </form>
         <br class="clear">
     </div>
 </div>
-
-
-<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
-
-    <div class="yapt_add_title">
-        <input class="yapt_pricing_table_title" type="text" name="pricing_table_title" value="" placeholder="Add Title"
-            required="required" />
-    </div>
-    <div class="yapt_wrap">
-        <!-- Tab links -->
-        <div class="tab">
-            <button class="tablinks" onclick="yapt_admin_tab(event, 'Add_table')" id="defaultOpen">
-                <span class="dashicons dashicons-editor-table"></span>
-                Add Pricing Table
-            </button>
-            <button class="tablinks" onclick="yapt_admin_tab(event, 'Theme')">
-                <span class="dashicons dashicons-format-image"></span>
-                Select Theme
-            </button>
-            <button class="tablinks" onclick="yapt_admin_tab(event, 'Config')">
-                <span class="dashicons dashicons-admin-generic"></span>
-                Config
-            </button>
-            <button class="tablinks" onclick="yapt_admin_tab(event, 'Styles')">
-                <span class="dashicons dashicons-admin-customizer"></span>
-                Styles
-            </button>
-        </div>
-
-        <!-- Tab content -->
-        <div id="Add_table" class="tabcontent">
-            <h2 id="add_pricing_table">Add pricing table</h2>
-
-
-
-            <table>
-                <tr>
-                    <td>
-                        <a href="javascript:;" onclick="add_column()">add column</a>
-                        <input type="hidden" name="column_count" id="column_count" value="0" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <table id="ypt_columns">
-
-                        </table>
-                    </td>
-                </tr>
-
-            </table>
-
-
-
-
-        </div>
-
-        <div id="Theme" class="tabcontent">
-            <h3>Select Theme</h3>
-            <table>
-
-                <tr>
-                    <td><strong>Select template</strong></td>
-                    <td><select name="template" required="required">
-                            <option value="0">select a template</option>
-                            <?php
-                                    foreach ($results_templates as $template) {
-                                        ?>
-                            <option value="<?php echo $template['id'] ?>">
-                                <?php echo $template['template_name']; ?></option>
-                            <?php
-                                    }
-                                    ?>
-                        </select></td>
-                </tr>
-            </table>
-        </div>
-
-        <div id="Config" class="tabcontent">
-            <h3>Config</h3>
-            <p>Tokyo is the capital of Japan.</p>
-        </div>
-
-        <div id="Styles" class="tabcontent">
-            <h3>Styles</h3>
-            <p>Tokyo is the capital of Japan.</p>
-        </div>
-    </div>
-    <!--.yapt_wrap ends -->
-
-    <div class="yapt_save_options">
-        <input type="hidden" name="action" value="yapt_admin_save" />
-        <?php
-                                wp_nonce_field("yapt_nonce");
-                                submit_button();
-                                ?>
-    </div>
-
-</form>
 
 <script type="text/javascript">
 let computed_feature_id;
