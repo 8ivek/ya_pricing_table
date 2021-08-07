@@ -1,3 +1,8 @@
+
+.yapt_pricing_table {
+    display: flex;
+    justify-content: center;
+}
 .yapt_table_col-title {
     text-transform: uppercase;
     font-weight: 700;
@@ -30,7 +35,6 @@
     margin: 0 10px;
     text-align: center;
     width: 300px;
-    float: left;
     -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
     -webkit-transition: all 0.25s ease;
@@ -168,6 +172,7 @@
 /** ================
 * Responsive
 ===================*/
+
 @media only screen and (min-width: 768px) and (max-width: 959px) {
     .yapt_pricing_table {
         width: 768px;
@@ -185,13 +190,13 @@
 
 @media only screen and (max-width: 767px) {
     .yapt_pricing_table {
-        width: 420px;
+        flex-direction: column;
     }
 
     .yapt_table_col {
         display: block;
         float: none;
-        margin: 0 0 20px 0;
+        margin: 40px 0 40px 0;
         width: 100%;
     }
 }

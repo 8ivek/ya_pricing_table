@@ -124,7 +124,7 @@ class Yapt_Public
         $pt_column_content = $this->readHtmlFile($item_detail['html']);
 
         $pt_html = "<link rel='stylesheet' href='".YAPT_PLUGIN_URL."templates/" . $item_detail['template_name'] . "/" . $item_detail['style']."' />
-        <div class='yapt_pricing_table clearfix'>";
+        <div class='yapt_pricing_table'>";
 
         $col_html = '';
 
