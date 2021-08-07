@@ -188,10 +188,11 @@ class Yapt_Admin
 
         $table_id = $wpdb->insert_id;
 
-        foreach ($posted_fields as $key => $column_data) {
+        foreach ($posted_fields as $keye => $column_data) {
             $column_title = $column_data['column_title'];
+
             $is_highlighted = '0';
-            if ($key === $highlighted) {
+            if ($keye == $highlighted) {
                 $is_highlighted = '1';
             }
             $column_price = $column_data['column_price'];
@@ -243,6 +244,7 @@ class Yapt_Admin
         foreach ($posted_fields as $keye => $column_data) {
             $column_id = $column_data['column_id'];
             $column_title = $column_data['column_title'];
+
             $is_highlighted = '0';
             if ($keye == $highlighted) {
                 $is_highlighted = '1';
