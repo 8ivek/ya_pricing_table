@@ -123,10 +123,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
 
                 <div id="Styles" class="tabcontent">
                     <h3>Styles</h3>
-                    <textarea>
-                        /* Styles here */
-
-                    </textarea>
+                    <textarea>/* Styles here */</textarea>
                 </div><!-- #Styles .tabcontent ends -->
             </div>
             <!--.yapt_wrap ends -->
