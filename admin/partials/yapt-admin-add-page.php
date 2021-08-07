@@ -72,7 +72,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
                     </table>
                 </div>
 
-                <div id="Theme" class="tabcontent">
+                <div id="Theme" class="tabcontent theme">
                     <h3>Select Theme</h3>
                     <table>
                         <tr>
@@ -88,19 +88,46 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
                                 }
                                 ?>
                                 </select></td>
+
+
+
                         </tr>
                     </table>
-                </div>
 
-                <div id="Config" class="tabcontent">
+                    <div class="yapt_template_list">
+                        <div class="yapt_template_item">
+                            <label>
+                                <input type="radio" name="template" value="<?php echo $template['id'] ?>" checked>
+                                <img src="http://placehold.it/400x400/ccc/fff&text=theme01">
+                            </label>
+                        </div><!-- .yapt_template_item ends -->
+
+                        <div class="yapt_template_item">
+                            <label>
+                                <input type="radio" name="template" value="<?php echo $template['id'] ?>" checked>
+                                <img src="http://placehold.it/400x400/ccc/fff&text=theme02">
+                            </label>
+                        </div><!-- .yapt_template_item ends -->
+
+
+
+                    </div><!-- .yapt_template_list ends -->
+
+
+                </div><!-- #Theme .tabcontent ends -->
+
+                <div id="Config" class="tabcontent config">
                     <h3>Config</h3>
                     <p>Tokyo is the capital of Japan.</p>
-                </div>
+                </div><!-- #Config .tabcontent ends -->
 
                 <div id="Styles" class="tabcontent">
                     <h3>Styles</h3>
-                    <p>Tokyo is the capital of Japan.</p>
-                </div>
+                    <textarea>
+                        /* Styles here */
+
+                    </textarea>
+                </div><!-- #Styles .tabcontent ends -->
             </div>
             <!--.yapt_wrap ends -->
 
@@ -125,9 +152,11 @@ function add_feature(column_id) {
     //console.log(computed_feature_id);
     //console.log('add feature clicked for table '+ column_id);
     let new_feature_value = "<div id='column" + column_id + "_feature" + computed_feature_id +
-        "'> <input type='checkbox' name='fields[" + column_id + "][feature_checked][" + computed_feature_id +
-        "]' value='1' /> <input type='text' name='fields[" + column_id + "][feature_text][" + computed_feature_id +
-        "]' placeholder='Feature text content ...' value='' /> <a class='delete_feature' href='javascript:;' onclick='delete_feature(" +
+        "'><label class='yapt_label_con'><input type='checkbox' name='fields[" + column_id + "][feature_checked][" +
+        computed_feature_id +
+        "]' value='1' /> <span class='checkmark'></span></label> <input type='text' name='fields[" + column_id +
+        "][feature_text][" + computed_feature_id +
+        "]' placeholder='Feature text content ...' value='' /> <a title='Delete Feature' class='delete_feature' href='javascript:;' onclick='delete_feature(" +
         column_id + ", " + computed_feature_id + ")'><span class='dashicons dashicons-dismiss'></span></a></div>";
     jQuery("#column" + column_id + "_features").append(new_feature_value);
     computed_feature_id += 1;
@@ -164,7 +193,7 @@ function add_column() {
         "_feature_count' id='column" + computed_column_id +
         "_feature_count' value='0' /><div class='yapt_table_row yapt_table_row_features' id='column" +
         computed_column_id +
-        "_features' class='feature_column_container'></div><div class='yapt_table_row clearfix'><a class='delete_column' href='javascript:;' onclick='delete_column(" +
+        "_features' class='feature_column_container'></div><div class='yapt_table_row clearfix'><div class='switch_featured'> <label class='switch'><input type='checkbox'><span class='slider round'></span></label> Highlight</div><a title='Delete Column' class='delete_column' href='javascript:;' onclick='delete_column(" +
         computed_column_id + ")'><span class='dashicons dashicons-trash'></span></a></div></div>";
     jQuery("#ypt_columns").append(new_column_value);
 
