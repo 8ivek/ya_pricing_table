@@ -69,6 +69,7 @@ class Yapt_Activator
              `template_name` VARCHAR(255) NOT NULL,
              `style` VARCHAR(255) NOT NULL,
              `html` VARCHAR(255) NOT NULL,
+             `image` VARCHAR(255) NOT NULL,
 			 `created_at` DATETIME NOT NULL,
 			 `updated_at` DATETIME NOT NULL,
 			  PRIMARY KEY id (id)
@@ -79,7 +80,7 @@ class Yapt_Activator
             $table_name = $wpdb->prefix . 'yapt_templates';
             $datetime = new DateTime( 'now', new DateTimeZone( 'UTC' ) );
             $now =  $datetime->format('Y-m-d H:i:s');
-            $wpdb->insert($table_name, ['template_name' => 'default', 'style' => 'default.css', 'html' => 'default.html', 'created_at' => $now, 'updated_at' => $now]);
+            $wpdb->insert($table_name, ['template_name' => 'default', 'style' => 'default.css', 'html' => 'default.html', 'image' => 'default.png', 'created_at' => $now, 'updated_at' => $now]);
         }
 
         // yapt_pricing_tables
@@ -89,6 +90,7 @@ class Yapt_Activator
             $sql = "CREATE TABLE IF NOT EXISTS " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
              `pt_title` VARCHAR(255) NOT NULL,
+             `custom_styles` TEXT NULL,
              `template_id` INT(11) NOT NULL,
 			 `created_at` DATETIME NOT NULL,
 			 `updated_at` DATETIME NOT NULL,
@@ -106,6 +108,7 @@ class Yapt_Activator
             $sql = "CREATE TABLE IF NOT EXISTS " . $table_name . " (
              `id` INT(11) NOT NULL AUTO_INCREMENT,
              `column_title` VARCHAR(255) NOT NULL,
+             `highlighted` ENUM('0', '1') NOT NULL DEFAULT '0',
              `table_id` INT(11) NOT NULL,
              `price_text` VARCHAR(255) NOT NULL,
              `ctoa_btn_text` VARCHAR(255) NOT NULL,/** ctoa => call to action */

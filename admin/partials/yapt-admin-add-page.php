@@ -16,57 +16,88 @@ global $wpdb;
 $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templates", ARRAY_A);
 ?>
 <div class="wrap">
-    <h2 id="add_pricing_table">Add pricing table</h2>
+    <h1 class="wp-heading-inline">Add pricing table</h1>
     <div id="poststuff">
-        <div id="post-body" class="metabox-holder">
-            <div id="post-body-content">
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
-                    <table>
-                        <tr>
-                            <td><strong>Select template</strong></td>
-                            <td><select name="template" required="required">
-                                    <option value="0">select a template</option>
-                                    <?php
-                                    foreach ($results_templates as $template) {
-                                        ?>
-                                        <option value="<?php echo $template['id'] ?>"><?php echo $template['template_name']; ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Pricing table title</strong></td>
-                            <td><input type="text" name="pricing_table_title" value="" placeholder="first/main pricing table..." required="required" /></td>
-                        </tr>
-                    </table>
-                    <table>
+        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+            <div class="yapt_add_title">
+                <input class="yapt_pricing_table_title" type="text" name="pricing_table_title" value=""
+                       placeholder="Add pricing table title" required="required"/>
+            </div>
+            <div class="yapt_wrap">
+                <!-- Tab links -->
+                <div class="tab">
+                    <button class="tablinks" onclick="yapt_admin_tab(event, 'Add_table')" id="defaultOpen">
+                        <span class="dashicons dashicons-editor-table"></span>
+                        Add Pricing Table
+                    </button>
+                    <button class="tablinks" onclick="yapt_admin_tab(event, 'Theme')">
+                        <span class="dashicons dashicons-format-image"></span>
+                        Select theme
+                    </button>
+                    <button class="tablinks" onclick="yapt_admin_tab(event, 'custom_styles')">
+                        <span class="dashicons dashicons-admin-customizer"></span>
+                        Styles
+                    </button>
+                </div>
+
+                <!-- Tab content -->
+                <div id="Add_table" class="tabcontent">
+                    <table width="100%">
                         <tr>
                             <td>
-                                <a href="javascript:;" onclick="add_column()">add column</a>
+                                <h3>Click on 'add column' to add a new price table</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="yapt_add_column" href="javascript:;" onclick="add_column()">
+                                    <span class="dashicons dashicons-plus"></span>
+                                    add column
+                                </a>
                                 <input type="hidden" name="column_count" id="column_count" value="0"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <table id="ypt_columns">
-
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="hidden" name="action" value="yapt_admin_save"/>
-                                <?php
-                                wp_nonce_field("yapt_nonce");
-                                submit_button();
-                                ?>
+                                <div id="ypt_columns" class="ypt_columns_wrap">
+                                </div>
                             </td>
                         </tr>
                     </table>
-                </form>
+                </div>
+                <div id="Theme" class="tabcontent theme">
+                    <h3>Select theme</h3>
+                    <div class="yapt_template_list">
+                        <?php
+                        foreach ($results_templates as $template) {
+                            ?>
+                            <div class="yapt_template_item">
+                                <label>
+                                    <input type="radio" name="template" value="<?php echo $template['id'] ?>" checked="checked" />
+                                    <img src="<?php echo YAPT_PLUGIN_URL . 'templates/' . $template['template_name'] . '/' . $template['image']; ?>" />
+                                </label>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div><!-- .yapt_template_list ends -->
+                </div><!-- #Theme .tabcontent ends -->
+
+                <div id="custom_styles" class="tabcontent">
+                    <h3>Custom styles</h3>
+                    <textarea name="custom_styles">/* styles here */</textarea>
+                </div><!-- #Styles .tabcontent ends -->
             </div>
-        </div>
+            <!--.yapt_wrap ends -->
+
+            <div class="yapt_save_options">
+                <input type="hidden" name="action" value="yapt_admin_save"/>
+                <?php
+                wp_nonce_field("yapt_nonce");
+                submit_button();
+                ?>
+            </div>
+        </form>
         <br class="clear">
     </div>
 </div>
@@ -78,7 +109,13 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
         computed_feature_id = parseInt(jQuery("#column" + column_id + "_feature_count").val());
         //console.log(computed_feature_id);
         //console.log('add feature clicked for table '+ column_id);
-        let new_feature_value = "<div id='column" + column_id + "_feature" + computed_feature_id + "'> <input type='checkbox' name='fields[" + column_id + "][feature_checked][" + computed_feature_id + "]' value='1' /> <input type='text' name='fields[" + column_id + "][feature_text][" + computed_feature_id + "]' placeholder='Feature text content ...' value='' /> <a href='javascript:;' onclick='delete_feature(" + column_id + ", " + computed_feature_id + ")'>delete</a></div>";
+        let new_feature_value = "<div id='column" + column_id + "_feature" + computed_feature_id +
+            "'><label class='yapt_label_con'><input type='checkbox' name='fields[" + column_id + "][feature_checked][" +
+            computed_feature_id +
+            "]' value='1' /> <span class='checkmark'></span></label> <input type='text' name='fields[" + column_id +
+            "][feature_text][" + computed_feature_id +
+            "]' placeholder='Feature text content ...' value='' /> <a title='Delete feature' class='delete_feature' href='javascript:;' onclick='delete_feature(" +
+            column_id + ", " + computed_feature_id + ")'><span class='dashicons dashicons-dismiss'></span></a></div>";
         jQuery("#column" + column_id + "_features").append(new_feature_value);
         computed_feature_id += 1;
         jQuery("#column" + column_id + "_feature_count").val(computed_feature_id);
@@ -99,7 +136,23 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
         let computed_column_id = parseInt(jQuery("#column_count").val());
         //console.log('new column id: ' + computed_column_id);
 
-        let new_column_value = "<tbody id='tbl_column" + computed_column_id + "'><tr><td>Name</td><td><input type='text' name='fields[" + computed_column_id + "][column_title]'/></td></tr><tr><td>Pricing</td><td><input type='text' name='fields[" + computed_column_id + "][column_price]'/></td></tr><tr><td>Button face text</td><td><input type='text' name='fields[" + computed_column_id + "][col_button_face_text]'/></td></tr><tr><td>Button url</td><td><input type='text' name='fields[" + computed_column_id + "][col_button_url]'/></td></tr><tr><td valign='top'>Features</td><td><a href='javascript:;' onclick='add_feature(" + computed_column_id + ")'>add feature</a><input type='hidden' name='column" + computed_column_id + "_feature_count' id='column" + computed_column_id + "_feature_count' value='0' /><div id='column" + computed_column_id + "_features' class='feature_column_container'></div></td></tr><tr><td colspan='2'><a href='javascript:;' onclick='delete_column(" + computed_column_id + ")'>delete column</a></td></tr></tbody>";
+        let new_column_value = "<div class='yapt_table_column' id='tbl_column" + computed_column_id +
+            "'><div class='yapt_table_row'><label>Name</label><input type='text' name='fields[" + computed_column_id +
+            "][column_title]'/></div><div class='yapt_table_row'><label>Pricing</label><input type='text' name='fields[" +
+            computed_column_id +
+            "][column_price]'/></div><div class='yapt_table_row'><label>Button face text</label><input type='text' name='fields[" +
+            computed_column_id +
+            "][col_button_face_text]'/></div><div class='yapt_table_row'><label>Button url</label><input type='text' name='fields[" +
+            computed_column_id +
+            "][col_button_url]'/></div><div class='yapt_table_row yapt_table_row_features_head'><span class='features_title'>Features</span><a class='add_feature' href='javascript:;' onclick='add_feature(" +
+            computed_column_id +
+            ")'><span class='dashicons dashicons-plus-alt'></span>add feature</a></div><input type='hidden' name='column" +
+            computed_column_id +
+            "_feature_count' id='column" + computed_column_id +
+            "_feature_count' value='0' /><div class='yapt_table_row yapt_table_row_features' id='column" +
+            computed_column_id +
+            "_features' class='feature_column_container'></div><div class='yapt_table_row clearfix'><div class='switch_featured'> <label class='switch'><input type='radio' name='highlighted' value='" + computed_column_id + "' /><span class='slider round'></span></label> Highlight</div><a title='Delete column' class='delete_column' href='javascript:;' onclick='delete_column(" +
+            computed_column_id + ")'><span class='dashicons dashicons-trash'></span></a></div></div>";
         jQuery("#ypt_columns").append(new_column_value);
 
         add_feature(computed_column_id); // everytime we call add_column we will be adding 3 empty features to the column.
@@ -109,4 +162,8 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
 
     // add first column
     add_column();
+
+    jQuery(window).load(function () {
+        document.getElementById("defaultOpen").click();
+    });
 </script>
