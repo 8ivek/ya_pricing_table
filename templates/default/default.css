@@ -90,21 +90,27 @@
 }
 
 .table-list li {
-    font-size: 1.4em;
-    font-weight: 700;
+    font-size: 1em;
+    font-weight: bold;
     padding: 12px 8px;
+    text-transform: capitalize;
 }
 
 .table-list li:before {
-    content: "\f00c";
     font-family: 'Font Awesome 5 Free';
-    color: #3fab91;
     display: inline-block;
     position: relative;
-    right: 5px;
-    font-size: 16px;
+    right: 8px;
+    font-size: 20px;
 }
-
+.table-list li.checked:before {
+    content: "\f058";
+    color: #11b141;
+}
+.table-list li.unchecked:before {
+    content: "\f057";
+    color: #da2727;
+}
 .table-list li span {
     font-weight: 400;
 }
@@ -127,6 +133,7 @@
 
 .col_cta {
     background: #FFF;
+    border-top: 1px solid #F0F0F0;
     padding: 15px;
     text-align: left;
     overflow: hidden;
@@ -148,7 +155,7 @@
 .col_cta .btn_cta {
     float: right;
     color: #FFF;
-    background: #e95846;
+    background: #e96f5f;
     padding: 10px 16px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -159,10 +166,12 @@
     -webkit-transition: all 0.25s ease;
     -o-transition: all 0.25s ease;
     transition: all 0.25s ease;
+    text-decoration: none;
+    text-transform: capitalize;
 }
 
 .col_cta .btn_cta:hover {
-    background: #cf4f3e;
+    background: #ce3c29;
 }
 
 .recommended .col_cta .btn_cta:hover {
