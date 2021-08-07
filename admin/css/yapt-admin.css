@@ -15,10 +15,17 @@
     vertical-align: top;
  }
 
-
+ .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
   /**************************************** 
   Style the tab 
   ************************************************/
+  .yapt_add_title{
+      margin-bottom: 20px;
+  }
   .yapt_pricing_table_title{
     padding: 3px 8px;
     font-size: 1.7em;
@@ -78,11 +85,34 @@
     display: none;
     padding: 20px;
     border-left: none;
-    width: 70%;
+    width: 84%;
     border: 1px solid #ccc;
     border-left: none;
   } 
 
+  .yapt_add_column{
+    background: #1d2327;
+    display: block;
+    color: #fff;
+    text-decoration: navajowhite;
+    text-align: center;
+    padding: 20px;
+    text-transform: capitalize;
+    font-size: 18px;
+    width: 85px;
+    transition: 0.3s;
+  }
+  .yapt_add_column:hover{
+    background: #555;
+      color: #fff;
+  }
+  .yapt_add_column span{
+    display: block;
+    width: 30px;
+    font-size: 30px;
+    margin: 0px auto 15px;
+    
+  }
   .tabcontent {
     animation: fadeEffect 1s; /* Fading effect takes 1 second */
   }
@@ -93,4 +123,82 @@
     to {opacity: 1;}
   }
 
+/**************************************** 
+  Style the table - Add Column 
+  ************************************************/
+.ypt_columns_wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+.yapt_table_column{
+    width: 27%;
+    padding: 65px 20px 20px;
+    background: #f3f3f3;
+    margin: 20px 1% 20px 0;
+    position: relative;
+}
+.yapt_table_row{
+    padding: 4px 0;
+}
+.yapt_table_row label{
+    display: block;
+}
+.yapt_table_row input[type="text"]{
+    width: 100%;
+    padding: 3px 8px;
+    border: 1px solid #ddd;
+    margin-top: 3px;
+}
+.yapt_table_row_features.yapt_table_row input[type="text"]{
+    width: 75%;
+}
+.delete_column{
+    color: rgb(204, 5, 5);
+    text-decoration: none;
+    margin: 20px 0 10px;
+    display: block;
+    width: 30px;
+    height: 20px;
+    position: absolute;
+    right: 20px;
+    top: 0;
+}
+.delete_column:hover{
+    color: rgb(247, 112, 112);
+}
+.delete_column span{
+    font-size: 30px;
+}
+.yapt_table_row_features_head{
+    padding: 20px 0 12px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+.features_title{
+    font-size: 20px;
+    font-weight: bold;
+}
+.add_feature{
+    text-decoration: none;
+    text-align: right;
+    text-transform: capitalize;
+    float: right;
+}
+.add_feature .dashicons {
+    padding-right: 3px;
+}
 
+.delete_feature{
+    text-decoration: none;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+}
+.delete_feature .dashicons{
+    color:rgb(204, 5, 5);
+    font-size: 30px;
+}
+.delete_feature:hover .dashicons{
+    color:rgb(233, 67, 67);
+}
