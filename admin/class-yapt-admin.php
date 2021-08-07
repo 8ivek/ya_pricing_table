@@ -88,7 +88,7 @@ class Yapt_Admin
          */
 
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/yapt-admin.css', array(), $this->version, 'all');
-
+        wp_enqueue_style($this->plugin_name, "https://pro.fontawesome.com/releases/v5.10.0/css/all.css", array(), $this->version, 'all');
     }
 
     /**
@@ -112,6 +112,9 @@ class Yapt_Admin
          */
 
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/yapt-admin.js', array('jquery'), $this->version, false);
+
+        //wp_enqueue_script($this->plugin_name, "", ['jquery'], $this->version, false);
+
     }
 
 

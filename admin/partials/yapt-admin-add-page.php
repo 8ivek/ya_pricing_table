@@ -29,22 +29,24 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
                                     <?php
                                     foreach ($results_templates as $template) {
                                         ?>
-                                        <option value="<?php echo $template['id'] ?>"><?php echo $template['template_name']; ?></option>
-                                        <?php
+                                    <option value="<?php echo $template['id'] ?>">
+                                        <?php echo $template['template_name']; ?></option>
+                                    <?php
                                     }
                                     ?>
                                 </select></td>
                         </tr>
                         <tr>
                             <td><strong>Pricing table title</strong></td>
-                            <td><input type="text" name="pricing_table_title" value="" placeholder="first/main pricing table..." required="required" /></td>
+                            <td><input type="text" name="pricing_table_title" value=""
+                                    placeholder="first/main pricing table..." required="required" /></td>
                         </tr>
                     </table>
                     <table>
                         <tr>
                             <td>
                                 <a href="javascript:;" onclick="add_column()">add column</a>
-                                <input type="hidden" name="column_count" id="column_count" value="0"/>
+                                <input type="hidden" name="column_count" id="column_count" value="0" />
                             </td>
                         </tr>
                         <tr>
@@ -56,7 +58,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
                         </tr>
                         <tr>
                             <td>
-                                <input type="hidden" name="action" value="yapt_admin_save"/>
+                                <input type="hidden" name="action" value="yapt_admin_save" />
                                 <?php
                                 wp_nonce_field("yapt_nonce");
                                 submit_button();
@@ -71,42 +73,157 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
     </div>
 </div>
 
+
+<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+
+    <div class="yapt_add_title">
+        <input class="yapt_pricing_table_title" type="text" name="pricing_table_title" value="" placeholder="Add Title"
+            required="required" />
+    </div>
+    <div class="yapt_wrap">
+        <!-- Tab links -->
+        <div class="tab">
+            <button class="tablinks" onclick="yapt_admin_tab(event, 'Add_table')" id="defaultOpen">
+                <span class="dashicons dashicons-editor-table"></span>
+                Add Pricing Table
+            </button>
+            <button class="tablinks" onclick="yapt_admin_tab(event, 'Theme')">
+                <span class="dashicons dashicons-format-image"></span>
+                Select Theme
+            </button>
+            <button class="tablinks" onclick="yapt_admin_tab(event, 'Config')">
+                <span class="dashicons dashicons-admin-generic"></span>
+                Config
+            </button>
+            <button class="tablinks" onclick="yapt_admin_tab(event, 'Styles')">
+                <span class="dashicons dashicons-admin-customizer"></span>
+                Styles
+            </button>
+        </div>
+
+        <!-- Tab content -->
+        <div id="Add_table" class="tabcontent">
+            <h2 id="add_pricing_table">Add pricing table</h2>
+
+
+
+            <table>
+                <tr>
+                    <td>
+                        <a href="javascript:;" onclick="add_column()">add column</a>
+                        <input type="hidden" name="column_count" id="column_count" value="0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table id="ypt_columns">
+
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+
+
+
+
+        </div>
+
+        <div id="Theme" class="tabcontent">
+            <h3>Select Theme</h3>
+            <table>
+
+                <tr>
+                    <td><strong>Select template</strong></td>
+                    <td><select name="template" required="required">
+                            <option value="0">select a template</option>
+                            <?php
+                                    foreach ($results_templates as $template) {
+                                        ?>
+                            <option value="<?php echo $template['id'] ?>">
+                                <?php echo $template['template_name']; ?></option>
+                            <?php
+                                    }
+                                    ?>
+                        </select></td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="Config" class="tabcontent">
+            <h3>Config</h3>
+            <p>Tokyo is the capital of Japan.</p>
+        </div>
+
+        <div id="Styles" class="tabcontent">
+            <h3>Styles</h3>
+            <p>Tokyo is the capital of Japan.</p>
+        </div>
+    </div>
+    <!--.yapt_wrap ends -->
+
+    <div class="yapt_save_options">
+        <input type="hidden" name="action" value="yapt_admin_save" />
+        <?php
+                                wp_nonce_field("yapt_nonce");
+                                submit_button();
+                                ?>
+    </div>
+
+</form>
+
 <script type="text/javascript">
-    let computed_feature_id;
+let computed_feature_id;
 
-    function add_feature(column_id) {
-        computed_feature_id = parseInt(jQuery("#column" + column_id + "_feature_count").val());
-        //console.log(computed_feature_id);
-        //console.log('add feature clicked for table '+ column_id);
-        let new_feature_value = "<div id='column" + column_id + "_feature" + computed_feature_id + "'> <input type='checkbox' name='fields[" + column_id + "][feature_checked][" + computed_feature_id + "]' value='1' /> <input type='text' name='fields[" + column_id + "][feature_text][" + computed_feature_id + "]' placeholder='Feature text content ...' value='' /> <a href='javascript:;' onclick='delete_feature(" + column_id + ", " + computed_feature_id + ")'>delete</a></div>";
-        jQuery("#column" + column_id + "_features").append(new_feature_value);
-        computed_feature_id += 1;
-        jQuery("#column" + column_id + "_feature_count").val(computed_feature_id);
-    }
+function add_feature(column_id) {
+    computed_feature_id = parseInt(jQuery("#column" + column_id + "_feature_count").val());
+    //console.log(computed_feature_id);
+    //console.log('add feature clicked for table '+ column_id);
+    let new_feature_value = "<div id='column" + column_id + "_feature" + computed_feature_id +
+        "'> <input type='checkbox' name='fields[" + column_id + "][feature_checked][" + computed_feature_id +
+        "]' value='1' /> <input type='text' name='fields[" + column_id + "][feature_text][" + computed_feature_id +
+        "]' placeholder='Feature text content ...' value='' /> <a href='javascript:;' onclick='delete_feature(" +
+        column_id + ", " + computed_feature_id + ")'>delete</a></div>";
+    jQuery("#column" + column_id + "_features").append(new_feature_value);
+    computed_feature_id += 1;
+    jQuery("#column" + column_id + "_feature_count").val(computed_feature_id);
+}
 
-    function delete_feature(column_id, feature_id) {
-        console.log('delete feature ' + feature_id + ' from table ' + column_id);
-        jQuery("#column" + column_id + "_feature" + feature_id).remove();
-    }
+function delete_feature(column_id, feature_id) {
+    console.log('delete feature ' + feature_id + ' from table ' + column_id);
+    jQuery("#column" + column_id + "_feature" + feature_id).remove();
+}
 
-    function delete_column(column_id) {
-        console.log('delete column ' + column_id);
-        jQuery('#tbl_column' + column_id).remove();
-    }
+function delete_column(column_id) {
+    console.log('delete column ' + column_id);
+    jQuery('#tbl_column' + column_id).remove();
+}
 
-    function add_column() {
-        //console.log('add column called');
-        let computed_column_id = parseInt(jQuery("#column_count").val());
-        //console.log('new column id: ' + computed_column_id);
+function add_column() {
+    //console.log('add column called');
+    let computed_column_id = parseInt(jQuery("#column_count").val());
+    //console.log('new column id: ' + computed_column_id);
 
-        let new_column_value = "<tbody id='tbl_column" + computed_column_id + "'><tr><td>Name</td><td><input type='text' name='fields[" + computed_column_id + "][column_title]'/></td></tr><tr><td>Pricing</td><td><input type='text' name='fields[" + computed_column_id + "][column_price]'/></td></tr><tr><td>Button face text</td><td><input type='text' name='fields[" + computed_column_id + "][col_button_face_text]'/></td></tr><tr><td>Button url</td><td><input type='text' name='fields[" + computed_column_id + "][col_button_url]'/></td></tr><tr><td valign='top'>Features</td><td><a href='javascript:;' onclick='add_feature(" + computed_column_id + ")'>add feature</a><input type='hidden' name='column" + computed_column_id + "_feature_count' id='column" + computed_column_id + "_feature_count' value='0' /><div id='column" + computed_column_id + "_features' class='feature_column_container'></div></td></tr><tr><td colspan='2'><a href='javascript:;' onclick='delete_column(" + computed_column_id + ")'>delete column</a></td></tr></tbody>";
-        jQuery("#ypt_columns").append(new_column_value);
+    let new_column_value = "<tbody id='tbl_column" + computed_column_id +
+        "'><tr><td>Name</td><td><input type='text' name='fields[" + computed_column_id +
+        "][column_title]'/></td></tr><tr><td>Pricing</td><td><input type='text' name='fields[" + computed_column_id +
+        "][column_price]'/></td></tr><tr><td>Button face text</td><td><input type='text' name='fields[" +
+        computed_column_id +
+        "][col_button_face_text]'/></td></tr><tr><td>Button url</td><td><input type='text' name='fields[" +
+        computed_column_id +
+        "][col_button_url]'/></td></tr><tr><td valign='top'>Features</td><td><a href='javascript:;' onclick='add_feature(" +
+        computed_column_id + ")'>add feature</a><input type='hidden' name='column" + computed_column_id +
+        "_feature_count' id='column" + computed_column_id + "_feature_count' value='0' /><div id='column" +
+        computed_column_id +
+        "_features' class='feature_column_container'></div></td></tr><tr><td colspan='2'><a href='javascript:;' onclick='delete_column(" +
+        computed_column_id + ")'>delete column</a></td></tr></tbody>";
+    jQuery("#ypt_columns").append(new_column_value);
 
-        add_feature(computed_column_id); // everytime we call add_column we will be adding 3 empty features to the column.
-        computed_column_id += 1;
-        jQuery("#column_count").val(computed_column_id);
-    }
+    add_feature(computed_column_id); // everytime we call add_column we will be adding 3 empty features to the column.
+    computed_column_id += 1;
+    jQuery("#column_count").val(computed_column_id);
+}
 
-    // add first column
-    add_column();
+// add first column
+add_column();
 </script>
