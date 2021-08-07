@@ -76,6 +76,10 @@ class Yapt_Public
          */
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/yapt-public.css', array(), $this->version, 'all');
 
+        if (!wp_style_is( 'fontawesome', 'enqueued' )) {
+            wp_register_style( 'fontawesome', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', false, '5.15.4' );
+            wp_enqueue_style( 'fontawesome' );
+        }
     }
 
     /**
@@ -104,6 +108,7 @@ class Yapt_Public
     /**
      * show html table data
      * @param array $atts
+     * @return string
      */
     public function yapt_shortcode_callback(array $atts = [])
     {
