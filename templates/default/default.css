@@ -42,7 +42,7 @@
     transition: all 0.25s ease;
 }
 
-.yapt_table_col.highlighted{
+.yapt_table_col.highlighted {
     -webkit-transform: scale(1.06);
     -ms-transform: scale(1.06);
     -o-transform: scale(1.06);
@@ -57,7 +57,7 @@
     font-size: 1.3em;
     text-transform: uppercase;
     border-bottom: 1px solid #eee;
-   
+
 }
 
 .yapt_table_col.recommended .col_title {
