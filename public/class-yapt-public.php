@@ -76,9 +76,9 @@ class Yapt_Public
          */
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/yapt-public.css', array(), $this->version, 'all');
 
-        if (!wp_style_is( 'fontawesome', 'enqueued' )) {
-            wp_register_style( 'fontawesome', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', false, '5.15.4' );
-            wp_enqueue_style( 'fontawesome' );
+        if (!wp_style_is('fontawesome', 'enqueued')) {
+            wp_register_style('fontawesome', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', false, '5.15.4');
+            wp_enqueue_style('fontawesome');
         }
     }
 
@@ -128,7 +128,7 @@ class Yapt_Public
 
         $pt_column_content = $this->readHtmlFile($item_detail['html']);
 
-        $pt_html = "<link rel='stylesheet' href='".YAPT_PLUGIN_URL."templates/" . $item_detail['template_name'] . "/" . $item_detail['style']."' />
+        $pt_html = "<link rel='stylesheet' href='" . YAPT_PLUGIN_URL . "templates/" . $item_detail['template_name'] . "/" . $item_detail['style'] . "' />
         <div class='yapt_pricing_table'>";
 
         $col_html = '';
