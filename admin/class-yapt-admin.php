@@ -254,8 +254,8 @@ class Yapt_Admin
             $col_button_url = $column_data['col_button_url'];
 
             // insert into yapt_pricing_tables
-            if(empty($column_id)) {
-                $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'highlighted' => $is_highlighted,  'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $col_button_face_text, 'ctoa_btn_link' => $col_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at]);
+            if (empty($column_id)) {
+                $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $col_button_face_text, 'ctoa_btn_link' => $col_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at]);
                 $column_id = $wpdb->insert_id;
             } else {
                 $wpdb->update($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $col_button_face_text, 'ctoa_btn_link' => $col_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $column_id]);
@@ -269,7 +269,7 @@ class Yapt_Admin
                     $isset = 1;
                 }
 
-                if(empty($feature_id)) {
+                if (empty($feature_id)) {
                     $wpdb->insert($wpdb->prefix . 'yapt_features', ['column_id' => $column_id, 'feature_text' => $ft, 'is_set' => $isset, 'created_at' => $created_at, 'updated_at' => $updated_at]);
                 } else {
                     $wpdb->update($wpdb->prefix . 'yapt_features', ['column_id' => $column_id, 'feature_text' => $ft, 'is_set' => $isset, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $feature_id]);

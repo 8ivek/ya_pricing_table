@@ -179,7 +179,7 @@ class yapt_list extends WP_List_Table
 
         $results = self::get_price_tables($per_page, $current_page);
         $modified_result = [];
-        foreach($results as $res) {
+        foreach ($results as $res) {
             $temp_result = $res;
             $temp_result['shortcode'] = '[yapt ptid=' . $res['id'] . ']';
             $modified_result[] = $temp_result;
@@ -234,7 +234,7 @@ class yapt_list extends WP_List_Table
 
         $db_data_obj = new db_data();
         $item = $db_data_obj->getData($price_table_id);
-        if(empty($item)) {
+        if (empty($item)) {
             wp_redirect(esc_url_raw(remove_query_arg(['action', 'price_table'])));
         }
         $this->item = $item;
