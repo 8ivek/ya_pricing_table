@@ -113,12 +113,18 @@
 
 .table-list li.checked:before {
     content: "\f058";
-    color: #11b141;
+    color: #2db3cb;
+}
+.highlighted .table-list li.checked:before{
+    font-weight: bold;
 }
 
 .table-list li.unchecked:before {
     content: "\f057";
     color: #ccc;
+}
+.highlighted .table-list li.unchecked:before {
+    font-weight: bold;
 }
 .table-list li.unchecked{
     color: #ccc;
@@ -181,8 +187,11 @@
     background: #2db3cb;
     color: #fff;
 }
-
-.recommended .col_cta .btn_cta:hover {
+.highlighted .col_cta .btn_cta{
+    background: #2db3cb;
+    color: #fff;
+}
+.highlighted .col_cta .btn_cta:hover {
     background: #228799;
 }
 
