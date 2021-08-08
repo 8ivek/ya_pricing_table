@@ -126,7 +126,7 @@ class Yapt_Public
             return "<p>not available</p>";
         }
 
-        $pt_column_content = $this->readHtmlFile($item_detail['html']);
+        $pt_column_content = $this->readHtmlFile($item_detail['template_name'] ?? '', $item_detail['html'] ?? '');
 
         $pt_html = "<link rel='stylesheet' href='" . YAPT_PLUGIN_URL . "templates/" . $item_detail['template_name'] . "/" . $item_detail['style'] . "' />
         <div class='yapt_pricing_table'>";
@@ -167,11 +167,18 @@ class Yapt_Public
 
     /**
      * Read html file
+     * @param $folder_name
      * @param $html_file
      * @return false|string
      */
-    public function readHtmlFile($html_file)
+    public function readHtmlFile($folder_name, $html_file)
     {
-        return file_get_contents(YAPT_PLUGIN_DIR_PATH . '/templates/default/' . $html_file, true);
+        if (empty($folder_name)) {
+            $folder_name = 'default';
+        }
+        if (empty($html_file)) {
+            $html_file = 'default';
+        }
+        return file_get_contents(YAPT_PLUGIN_DIR_PATH . '/templates/' . $folder_name . '/' . $html_file, true);
     }
 }
