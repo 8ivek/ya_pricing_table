@@ -25,6 +25,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
                        value="<?php echo $this->price_table->item['pt_title']; ?>" placeholder="Add pricing table title"
                        required="required"/>
             </div>
+
             <div class="yapt_wrap">
                 <!-- Tab links -->
                 <div class="tab">
@@ -67,6 +68,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
                         </tr>
                     </table>
                 </div>
+
                 <div id="Theme" class="tabcontent theme">
                     <h3>Select theme</h3>
                     <div class="yapt_template_list">
@@ -148,7 +150,8 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
         let new_column_value = "<div class='yapt_table_column' id='tbl_column" + computed_column_id +
             "'><div class='yapt_table_row'><label>Name</label><input type='hidden' name='fields[" + computed_column_id +
             "][column_id]' /><input type='text' name='fields[" + computed_column_id +
-            "][column_title]'/></div><div class='yapt_table_row'><label>Pricing</label><input type='text' name='fields[" +
+            "][column_title]'/></div><div class='yapt_table_row'><label>Short description</label><textarea class='short_description' name='fields[" + computed_column_id +
+            "][description]'></textarea></div><div class='yapt_table_row'><label>Pricing</label><input type='text' name='fields[" +
             computed_column_id +
             "][column_price]'/></div><div class='yapt_table_row'><label>Button face text</label><input type='text' name='fields[" +
             computed_column_id +
@@ -179,6 +182,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
     column_id_value = computed_column_id - 1;
     jQuery("input[name='fields[" + column_id_value + "][column_id]']").val('<?php echo $col['id']?>');
     jQuery("input[name='fields[" + column_id_value + "][column_title]']").val('<?php echo $col['column_title']?>');
+    jQuery("textarea[name='fields[" + column_id_value + "][description]']").val('<?php echo $col['description']?>');
     jQuery("input[name='fields[" + column_id_value + "][column_price]']").val('<?php echo $col['price_text']?>');
     jQuery("input[name='fields[" + column_id_value + "][col_button_face_text]']").val('<?php echo $col['ctoa_btn_text']?>');
     jQuery("input[name='fields[" + column_id_value + "][col_button_url]']").val('<?php echo $col['ctoa_btn_link']?>');

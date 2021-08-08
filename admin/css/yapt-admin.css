@@ -429,3 +429,7 @@ Theme Tab
     width: 100%;
     min-height: 300px;
 }
+
+.tabcontent textarea.short_description {
+    min-height: 100px;
+}
