@@ -93,11 +93,12 @@
 
 .table-list li {
     font-size: 1em;
-    font-weight: bold;
     padding: 12px 8px;
     text-transform: capitalize;
 }
-
+.table-list li.unchecked{
+    color: #777;
+}
 .table-list li:before {
     font-family: 'Font Awesome 5 Free';
     display: inline-block;
@@ -133,14 +134,14 @@
 
 
 .table-list li:nth-child(2n) {
-    background: #F0F0F0;
+    background: #f4f4f4;
 }
 
 .col_cta {
     background: #FFF;
     border-top: 1px solid #F0F0F0;
-    padding: 15px;
-    text-align: left;
+    padding: 25px;
+    text-align: center;
     overflow: hidden;
 }
 
@@ -158,7 +159,6 @@
 }
 
 .col_cta .btn_cta {
-    float: right;
     color: #FFF;
     background: #333;
     padding: 10px 16px;
@@ -173,6 +173,7 @@
     transition: all 0.25s ease;
     text-decoration: none;
     text-transform: capitalize;
+    display: inline-block;
 }
 
 .col_cta .btn_cta:hover {
@@ -196,9 +197,6 @@
         width: 236px;
     }
 
-    .table-list li {
-        font-size: 1.3em;
-    }
 
 }
 
