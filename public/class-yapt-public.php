@@ -122,17 +122,22 @@ class Yapt_Public
         $item_detail = $db_data_obj->getData($ptid);
         // print_r($item_detail);
 
+        $custom_styles = '';
+        if (!empty($item_detail['custom_styles'])) {
+            $custom_styles = '<style>'.$item_detail['custom_styles'].'</style>';
+        }
+
         if (!is_array($item_detail) || count($item_detail) < 1) {
             return "<p>not available</p>";
         }
 
         $pt_column_content = $this->readHtmlFile($item_detail['template_name'] ?? '', $item_detail['html'] ?? '');
 
-        $pt_html = "<link rel='stylesheet' href='" . YAPT_PLUGIN_URL . "templates/" . $item_detail['template_name'] . "/" . $item_detail['style'] . "' />
-        <div class='yapt_pricing_table'>";
+        $pt_html = "<link rel='stylesheet' href='" . YAPT_PLUGIN_URL . "templates/" . $item_detail['template_name'] . "/" . $item_detail['style'] . "' />";
+        $pt_html .= $custom_styles;
+        $pt_html .= "<div class='yapt_pricing_table'>";
 
         $col_html = '';
-
         foreach ($item_detail['columns'] as $col) {
 
             $highlighted = '';
@@ -151,11 +156,15 @@ class Yapt_Public
             }
 
             $temp_col = str_replace('##is_highlighted##', $highlighted, $pt_column_content);
+            $temp_col = str_replace('##description##', $col['description'], $temp_col);
             $temp_col = str_replace('##col_title##', $col['column_title'], $temp_col);
             $temp_col = str_replace('##col_price##', $col['price_text'], $temp_col);
             $temp_col = str_replace('##col_cta_btn_lnk##', $col['ctoa_btn_link'], $temp_col);
             $temp_col = str_replace('##col_cta_btn_text##', $col['ctoa_btn_text'], $temp_col);
             $temp_col = str_replace('##col_feature_list##', $feature_list, $temp_col);
+
+            // remove any ##.*?## available
+            $temp_col = preg_replace('/##.*?##/', '', $temp_col);
 
             $col_html .= $temp_col;
         }

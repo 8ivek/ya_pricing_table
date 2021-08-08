@@ -65,6 +65,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
                         </tr>
                     </table>
                 </div>
+
                 <div id="Theme" class="tabcontent theme">
                     <h3>Select theme</h3>
                     <div class="yapt_template_list">
@@ -138,7 +139,8 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
 
         let new_column_value = "<div class='yapt_table_column' id='tbl_column" + computed_column_id +
             "'><div class='yapt_table_row'><label>Name</label><input type='text' name='fields[" + computed_column_id +
-            "][column_title]'/></div><div class='yapt_table_row'><label>Pricing</label><input type='text' name='fields[" +
+            "][column_title]'/></div><div class='yapt_table_row'><label>Short description</label><textarea class='short_description' name='fields[" + computed_column_id +
+            "][description]'></textarea></div><div class='yapt_table_row'><label>Pricing</label><input type='text' name='fields[" +
             computed_column_id +
             "][column_price]'/></div><div class='yapt_table_row'><label>Button face text</label><input type='text' name='fields[" +
             computed_column_id +

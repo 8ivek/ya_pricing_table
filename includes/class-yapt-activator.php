@@ -110,6 +110,7 @@ class Yapt_Activator
              `id` INT(11) NOT NULL AUTO_INCREMENT,
              `column_title` VARCHAR(255) NOT NULL,
              `highlighted` ENUM('0', '1') NOT NULL DEFAULT '0',
+             `description` TEXT NULL,
              `table_id` INT(11) NOT NULL,
              `price_text` VARCHAR(255) NOT NULL,
              `ctoa_btn_text` VARCHAR(255) NOT NULL,/** ctoa => call to action */
