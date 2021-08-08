@@ -81,6 +81,7 @@ class Yapt_Activator
             $datetime = new DateTime('now', new DateTimeZone('UTC'));
             $now = $datetime->format('Y-m-d H:i:s');
             $wpdb->insert($table_name, ['template_name' => 'default', 'style' => 'default.css', 'html' => 'default.html', 'image' => 'default.jpeg', 'created_at' => $now, 'updated_at' => $now]);
+            $wpdb->insert($table_name, ['template_name' => 'yapt2021', 'style' => 'yapt2021.css', 'html' => 'yapt2021.html', 'image' => 'yapt2021.png', 'created_at' => $now, 'updated_at' => $now]);
         }
 
         // yapt_pricing_tables

@@ -35,29 +35,27 @@
     margin: 0 10px;
     text-align: center;
     width: 300px;
-    -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
     -webkit-transition: all 0.25s ease;
     -o-transition: all 0.25s ease;
     transition: all 0.25s ease;
 }
 
-.yapt_table_col.highlighted {
+.yapt_table_col.highlighted, .yapt_table_col:hover {
     -webkit-transform: scale(1.06);
     -ms-transform: scale(1.06);
     -o-transform: scale(1.06);
     transform: scale(1.06);
-    border-top: 4px solid #333;
 }
 
 .col_title {
-    color: #333;
-    background: #fff;
+    color: #FFF;
+    background: #e95846;
     padding: 20px 0;
-    font-size: 1.3em;
+    font-size: 2em;
     text-transform: uppercase;
-    border-bottom: 1px solid #eee;
-
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
 }
 
 .yapt_table_col.recommended .col_title {
@@ -69,12 +67,12 @@
 }
 
 .yapt_table_col .col_price {
-    background: #fff;
-    font-size: 2.5em;
-    font-weight: bold;
+    background: #403e3d;
+    font-size: 3.4em;
+    font-weight: 700;
     padding: 20px 0;
-    color: #333;
-    border-bottom: 1px solid #eee;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+    color: #ffffff;
 }
 
 .yapt_table_col .col_price sup {
@@ -160,13 +158,13 @@
 .col_cta .btn_cta {
     float: right;
     color: #FFF;
-    background: #333;
+    background: #e96f5f;
     padding: 10px 16px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
     font-weight: 700;
-    font-size: 1em;
+    font-size: 1.4em;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
     -webkit-transition: all 0.25s ease;
     -o-transition: all 0.25s ease;
@@ -176,7 +174,7 @@
 }
 
 .col_cta .btn_cta:hover {
-    background: #777;
+    background: #ce3c29;
 }
 
 .recommended .col_cta .btn_cta:hover {
