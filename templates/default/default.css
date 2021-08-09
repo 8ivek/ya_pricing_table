@@ -159,15 +159,14 @@
 }
 
 .col_cta .btn_cta {
-    color: #FFF;
-    background: #333;
+    color: #333;
+    border: 1px solid #333;
     padding: 10px 16px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
     font-weight: 700;
     font-size: 1em;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
     -webkit-transition: all 0.25s ease;
     -o-transition: all 0.25s ease;
     transition: all 0.25s ease;
@@ -177,11 +176,16 @@
 }
 
 .col_cta .btn_cta:hover {
-    background: #777;
+    background: #333;
+    color: #fff;
 }
-
-.recommended .col_cta .btn_cta:hover {
-    background: #228799;
+.highlighted .col_cta .btn_cta{
+    color: #fff;
+    background: #333;
+    border: none;
+}
+.highlighted .col_cta .btn_cta:hover {
+    background: #777;
 }
 
 /** ================
