@@ -36,11 +36,14 @@ This plugin does not store any personal data.
 
 == Screenshots ==
 
-1. This screenshot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screenshot
+1. Install plugin and activate using general wordpress plugin installation and activation process.
+2. Add pricing table screen
+3. Select plugin theme screen
+4. Custom style screen
+5. Pricing table listing page, where you can select shortcode and copy for using it in pages or posts
+6. Add shortcode in post or page and update/publish
+7. Price table theme 1 (yapt2021)
+8. Price table theme 2 (default)
 
 == Changelog ==
 
