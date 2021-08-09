@@ -251,7 +251,7 @@ class Yapt_Admin
                 $is_highlighted = '1';
             }
 
-            $description = $_POST['description'] ?? '';
+            $description = $column_data['description'] ?? '';
             $column_price = $column_data['column_price'];
             $col_button_face_text = $column_data['col_button_face_text'];
             $col_button_url = $column_data['col_button_url'];
@@ -261,7 +261,7 @@ class Yapt_Admin
                 $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'description' => $description, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $col_button_face_text, 'ctoa_btn_link' => $col_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at]);
                 $column_id = $wpdb->insert_id;
             } else {
-                $wpdb->update($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $col_button_face_text, 'ctoa_btn_link' => $col_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $column_id]);
+                $wpdb->update($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'description' => $description, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $col_button_face_text, 'ctoa_btn_link' => $col_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $column_id]);
             }
 
             $feature_ids = [];
