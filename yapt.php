@@ -8,17 +8,17 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://bivek.ca
+ * @link              https://github.com/8ivek/yapt
  * @since             1.0.0
  * @package           Yapt
  *
  * @wordpress-plugin
  * Plugin Name:       YA Pricing Table
- * Plugin URI:        https://bivek.ca/yapt
+ * Plugin URI:        https://github.com/8ivek/yapt
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
  * Version:           1.0.0
  * Author:            bvk
- * Author URI:        https://bivek.ca
+ * Author URI:        https://github.com/8ivek
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       yapt

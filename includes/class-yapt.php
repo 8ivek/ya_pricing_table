@@ -6,7 +6,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       https://bivek.ca
+ * @link       https://github.com/8ivek/yapt
  * @since      1.0.0
  *
  * @package    Yapt
@@ -25,7 +25,6 @@
  * @since      1.0.0
  * @package    Yapt
  * @subpackage Yapt/includes
- * @author     bvk <bivek_j@yahoo.com>
  */
 class Yapt
 {

@@ -5,7 +5,7 @@
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
- * @link       https://bivek.ca
+ * @link       https://github.com/8ivek/yapt
  * @since      1.0.0
  *
  * @package    Yapt

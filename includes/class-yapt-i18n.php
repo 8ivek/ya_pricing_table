@@ -6,7 +6,7 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       https://bivek.ca
+ * @link       https://github.com/8ivek/yapt
  * @since      1.0.0
  *
  * @package    Yapt
@@ -22,7 +22,6 @@
  * @since      1.0.0
  * @package    Yapt
  * @subpackage Yapt/includes
- * @author     bvk <bivek_j@yahoo.com>
  */
 class Yapt_i18n
 {

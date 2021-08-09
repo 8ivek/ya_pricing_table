@@ -5,7 +5,7 @@
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
- * @link       https://bivek.ca
+ * @link       https://github.com/8ivek/yapt
  * @since      1.0.0
  *
  * @package    Yapt
@@ -14,11 +14,6 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
-<?php
-// global $wpdb;
-// $results_pricing_table = $wpdb->get_results("SELECT pt.*, t.template_name FROM {$wpdb->prefix}yapt_pricing_tables pt INNER JOIN {$wpdb->prefix}yapt_templates t WHERE pt.template_id = t.id", ARRAY_A);
-// print_r($results_pricing_table);
-?>
 <div class="wrap">
     <h2>YA price tables</h2>
     <div id="poststuff">
