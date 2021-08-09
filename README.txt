@@ -1,102 +1,51 @@
-=== Yet another Pricing Table ===
-Contributors: bivek
-Donate link: https://bivek.ca/donate
-Tags: pricing table
-Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 4.3
+=== Yet another pricing table Plugin ===
+Contributors: bivek, bcripts
+Donate link: http://paypal.me/8ivek
+Tags: pricing table, price, pricing, table, price table, dynamic pricing table
+Requires at least: 5.0
+Tested up to: 5.8
+Stable tag: 5.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Simple WordPress plugin to create pricing tables in post or pages easily with no programming knowledge.
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
-
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
-
-A few notes about the sections above:
-
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
-
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
-
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+Simple WordPress plugin to create pricing tables in post or pages easily with no programming knowledge. With this plugin you can also create or update templates located inside **templates** folder of the plugin directory (if you know how to edit html and css). We are continuously planning to improve our plugin and make it one of the best pricing table plugins.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload `yapt.php` to the `/wp-content/plugins/` directory
+1. Upload `yapt.zip` from 'Add Plugins' area in 'Add new' plugin menu from wordpress admin area or upload `yapt` folder to `/wp-content/plugins/` directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Start creating pricing tables from "YA Pricing Table" -> "Add New"
+1. Copy shortcode
+1. Use it in page or post you are looking to display the pricing table.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= Can we use YA Pricing Tables with all the available themes? =
+Yes, YA Pricing tables are supposed to be compatible with all the available themes, if you find any incompatibility issues please throw us a support message.
 
-An answer to that question.
+= How long do I have to wait until I get reply for my support question?  =
+We will reply support message within 24 hours.
 
-= What about foo bar? =
+== Privacy Disclosure ==
 
-Answer to foo bar dilemma.
+This plugin does not store any personal data.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Install plugin and activate using general wordpress plugin installation and activation process.
+2. Add pricing table screen
+3. Select plugin theme screen
+4. Custom style screen
+5. Pricing table listing page, where you can select shortcode and copy for using it in pages or posts
+6. Add shortcode in post or page and update/publish
+7. Price table theme 1 (yapt2021)
+8. Price table theme 2 (default)
 
 == Changelog ==
 
 = 1.0.0 =
-* First version
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+* First version of YA Pricing Tables

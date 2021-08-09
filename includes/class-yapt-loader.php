@@ -3,7 +3,7 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://bivek.ca
+ * @link       https://github.com/8ivek/yapt
  * @since      1.0.0
  *
  * @package    Yapt
@@ -19,7 +19,6 @@
  *
  * @package    Yapt
  * @subpackage Yapt/includes
- * @author     bvk <bivek_j@yahoo.com>
  */
 class Yapt_Loader
 {
