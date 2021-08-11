@@ -12,8 +12,8 @@ class yapt_list extends WP_List_Table
     {
         // Set parent defaults.
         parent::__construct([
-            'singular' => __('Pricing Table', 'yapt'),
-            'plural' => __('Pricing Tables', 'yapt'),
+            'singular' => __('Pricing Table', 'ya-pricing-table'),
+            'plural' => __('Pricing Tables', 'ya-pricing-table'),
             'ajax' => false,
         ]);
     }
@@ -66,7 +66,7 @@ class yapt_list extends WP_List_Table
      */
     public function no_items()
     {
-        echo __('No price tables available.', 'yapt');
+        echo __('No price tables available.', 'ya-pricing-table');
     }
 
     /**
@@ -125,11 +125,11 @@ class yapt_list extends WP_List_Table
     {
         return [
             'cb' => '<input type="checkbox" />', // Render a checkbox instead of text.
-            'pt_title' => __('Price table title', 'yapt'),
-            'shortcode' => __('Shortcode', 'yapt'),
-            // 'template_id' => __('Template id', 'yapt'),
-            // 'created_at' => __('Created date', 'yapt'),
-            'updated_at' => __('Updated date', 'yapt'),
+            'pt_title' => __('Price table title', 'ya-pricing-table'),
+            'shortcode' => __('Shortcode', 'ya-pricing-table'),
+            // 'template_id' => __('Template id', 'ya-pricing-table'),
+            // 'created_at' => __('Created date', 'ya-pricing-table'),
+            'updated_at' => __('Updated date', 'ya-pricing-table'),
         ];
     }
 
