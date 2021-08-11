@@ -142,7 +142,11 @@ class Yapt_Admin
 
         if (!empty($_GET['action']) && $_GET['action'] === 'edit') {
             // show edit form
-            $price_table_id = trim($_GET['price_table']);
+            $price_table_id = 0;
+            if (!empty($_GET['price_table']) && is_int($_GET['price_table'])) {
+                $price_table_id = $_GET['price_table'];
+            }
+
             $this->price_table->prepare_item($price_table_id);
         } else {
             $option = 'per_page';
@@ -172,15 +176,15 @@ class Yapt_Admin
             die('missing mandatory fields');
         }
 
-        $template_id = $_POST['template'] ?? 0;
+        $template_id = (int) sanitize_text_field($_POST['template']) ?? 0;
 
         $now = new DateTime('now', new DateTimeZone('UTC'));
         $created_at = $updated_at = $now->format('Y-m-d H:i:s');
 
-        $pricing_table_title = $_POST['pricing_table_title'] ?? '';
-        $custom_styles = str_replace("/* styles here */", '', $_POST['custom_styles']) ?? '';
+        $pricing_table_title = sanitize_text_field($_POST['pricing_table_title']) ?? '';
+        $custom_styles = str_replace("/* styles here */", '', sanitize_text_field($_POST['custom_styles'])) ?? '';
 
-        $highlighted = $_POST['highlighted'] ?? '';
+        $highlighted = sanitize_text_field($_POST['highlighted']) ?? '';
 
         // insert into yapt_pricing_tables
         $wpdb->insert($wpdb->prefix . 'yapt_pricing_tables', ['pt_title' => $pricing_table_title, 'custom_styles' => $custom_styles, 'template_id' => $template_id, 'created_at' => $created_at, 'updated_at' => $updated_at]);
@@ -225,17 +229,17 @@ class Yapt_Admin
             die('missing mandatory fields');
         }
 
-        $template_id = $_POST['template'] ?? 0;
+        $template_id = (int) sanitize_text_field($_POST['template']) ?? 0;
 
         $now = new DateTime('now', new DateTimeZone('UTC'));
         $created_at = $updated_at = $now->format('Y-m-d H:i:s');
 
-        $pricing_table_title = $_POST['pricing_table_title'] ?? '';
-        $custom_styles = str_replace("/* styles here */", '', $_POST['custom_styles']) ?? '';
+        $pricing_table_title = sanitize_text_field($_POST['pricing_table_title']) ?? '';
+        $custom_styles = str_replace("/* styles here */", '', sanitize_text_field($_POST['custom_styles'])) ?? '';
 
-        $highlighted = $_POST['highlighted'] ?? '';
+        $highlighted = sanitize_text_field($_POST['highlighted']) ?? '';
 
-        $table_id = $_POST['pt_id'] ?? '';
+        $table_id = (int) sanitize_text_field($_POST['pt_id']) ?? 0;
 
         // insert into yapt_pricing_tables
         $wpdb->update($wpdb->prefix . 'yapt_pricing_tables', ['pt_title' => $pricing_table_title, 'custom_styles' => $custom_styles, 'template_id' => $template_id, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $table_id]);
