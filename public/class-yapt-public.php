@@ -130,10 +130,11 @@ class Yapt_Public
             return "<p>not available</p>";
         }
 
+        wp_enqueue_style('custom-style-' . $item_detail['template_name'], YAPT_PLUGIN_URL . "templates/" . $item_detail['template_name'] . "/" . $item_detail['style'], [], '1.0.0');
+
         $pt_column_content = $this->readHtmlFile($item_detail['template_name'] ?? '', $item_detail['html'] ?? '');
 
-        $pt_html = "<link rel='stylesheet' href='" . YAPT_PLUGIN_URL . "templates/" . $item_detail['template_name'] . "/" . $item_detail['style'] . "' />";
-        $pt_html .= $custom_styles;
+        $pt_html = $custom_styles;
         $pt_html .= "<div class='yapt_pricing_table'>";
 
         $col_html = '';
