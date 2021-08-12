@@ -31,9 +31,11 @@ class Column extends Type
     }
 
     /**
-     * @throws \Exception
+     * @param array $column_data_array
+     * @return Column
+     * @throws Exception
      */
-    public static function createFormArray($column_data_array): Column
+    public static function createFormArray(array $column_data_array): Column
     {
         if (empty($column_data_array['column_title'])) {
             throw new \Exception('missing mandatory field column title');

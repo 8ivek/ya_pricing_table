@@ -11,7 +11,7 @@ class Feature extends Type
      * @param int $feature_checked
      * @param int|null $fid
      */
-    public function __construct(string $feature_text, int $feature_checked = 0, $fid = null)
+    public function __construct(string $feature_text, int $feature_checked = 0, int $fid = null)
     {
         $this->feature_text = $feature_text;
         $this->feature_checked = $feature_checked;
@@ -19,11 +19,11 @@ class Feature extends Type
     }
 
     /**
-     * @param $feature_data_array
+     * @param array $feature_data_array
      * @return Feature
      * @throws Exception
      */
-    public static function createFromArray($feature_data_array): Feature
+    public static function createFromArray(array $feature_data_array): Feature
     {
         if (empty($feature_data_array['feature_text'])) {
             throw new Exception('missing mandatory field feature_text');
