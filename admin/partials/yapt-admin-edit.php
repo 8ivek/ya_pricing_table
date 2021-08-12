@@ -20,7 +20,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
     <div id="poststuff">
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
             <div class="yapt_add_title">
-                <input type="hidden" name="pt_id" value="<?php echo $this->price_table->item['id']; ?>"/>
+                <input type="hidden" name="price_table_id" value="<?php echo $this->price_table->item['id']; ?>"/>
                 <input class="yapt_pricing_table_title" type="text" name="pricing_table_title"
                        value="<?php echo $this->price_table->item['pt_title']; ?>" placeholder="Add pricing table title"
                        required="required"/>
@@ -77,7 +77,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
                             ?>
                             <div class="yapt_template_item">
                                 <label>
-                                    <input type="radio" name="template" value="<?php echo $template['id'] ?>" <?php
+                                    <input type="radio" name="template_id" value="<?php echo $template['id'] ?>" <?php
                                     if ($template['id'] === $this->price_table->item['template_id']) {
                                         echo "checked='checked'";
                                     }
@@ -155,9 +155,9 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
             computed_column_id +
             "][column_price]'/></div><div class='yapt_table_row'><label>Button face text</label><input type='text' name='fields[" +
             computed_column_id +
-            "][col_button_face_text]'/></div><div class='yapt_table_row'><label>Button url</label><input type='text' name='fields[" +
+            "][column_button_face_text]'/></div><div class='yapt_table_row'><label>Button url</label><input type='text' name='fields[" +
             computed_column_id +
-            "][col_button_url]'/></div><div class='yapt_table_row yapt_table_row_features_head'><span class='features_title'>Features</span><a href='javascript:;' class='add_feature' onclick='add_feature(" +
+            "][column_button_url]'/></div><div class='yapt_table_row yapt_table_row_features_head'><span class='features_title'>Features</span><a href='javascript:;' class='add_feature' onclick='add_feature(" +
             computed_column_id +
             ")'><span class='dashicons dashicons-plus-alt'></span>add feature</a></div><input type='hidden' name='column" +
             computed_column_id + "_feature_count' id='column" + computed_column_id +
@@ -184,8 +184,8 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
     jQuery("input[name='fields[" + column_id_value + "][column_title]']").val('<?php echo $col['column_title']?>');
     jQuery("textarea[name='fields[" + column_id_value + "][description]']").val('<?php echo $col['description']?>');
     jQuery("input[name='fields[" + column_id_value + "][column_price]']").val('<?php echo $col['price_text']?>');
-    jQuery("input[name='fields[" + column_id_value + "][col_button_face_text]']").val('<?php echo $col['ctoa_btn_text']?>');
-    jQuery("input[name='fields[" + column_id_value + "][col_button_url]']").val('<?php echo $col['ctoa_btn_link']?>');
+    jQuery("input[name='fields[" + column_id_value + "][column_button_face_text]']").val('<?php echo $col['ctoa_btn_text']?>');
+    jQuery("input[name='fields[" + column_id_value + "][column_button_url]']").val('<?php echo $col['ctoa_btn_link']?>');
     <?php
     if($col['highlighted'] == '1') {
     ?>

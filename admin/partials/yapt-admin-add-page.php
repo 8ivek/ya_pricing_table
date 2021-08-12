@@ -74,7 +74,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
                             ?>
                             <div class="yapt_template_item">
                                 <label>
-                                    <input type="radio" name="template" value="<?php echo $template['id'] ?>" checked="checked"/>
+                                    <input type="radio" name="template_id" value="<?php echo $template['id'] ?>" checked="checked"/>
                                     <img src="<?php echo YAPT_PLUGIN_URL . 'templates/' . $template['template_name'] . '/' . $template['image']; ?>"/>
                                 </label>
                             </div>
@@ -144,9 +144,9 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
             computed_column_id +
             "][column_price]'/></div><div class='yapt_table_row'><label>Button face text</label><input type='text' name='fields[" +
             computed_column_id +
-            "][col_button_face_text]'/></div><div class='yapt_table_row'><label>Button url</label><input type='text' name='fields[" +
+            "][column_button_face_text]'/></div><div class='yapt_table_row'><label>Button url</label><input type='text' name='fields[" +
             computed_column_id +
-            "][col_button_url]'/></div><div class='yapt_table_row yapt_table_row_features_head'><span class='features_title'>Features</span><a class='add_feature' href='javascript:;' onclick='add_feature(" +
+            "][column_button_url]'/></div><div class='yapt_table_row yapt_table_row_features_head'><span class='features_title'>Features</span><a class='add_feature' href='javascript:;' onclick='add_feature(" +
             computed_column_id +
             ")'><span class='dashicons dashicons-plus-alt'></span>add feature</a></div><input type='hidden' name='column" +
             computed_column_id +

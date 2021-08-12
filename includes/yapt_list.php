@@ -227,7 +227,7 @@ class yapt_list extends WP_List_Table
      */
     public function prepare_item($price_table_id)
     {
-        if (empty($price_table_id) || !is_numeric($price_table_id) || $price_table_id <= 0) {
+        if (empty($price_table_id) || !is_int($price_table_id) || $price_table_id <= 0) {
             //we must have value for price_table, redirect to listing page
             wp_redirect(esc_url_raw(remove_query_arg(['action', 'price_table'])));
         }

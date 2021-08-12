@@ -32,10 +32,10 @@ class PriceTable extends Type
     public static function createFromArray(array $price_table_data): PriceTable
     {
         if (empty($price_table_data['pricing_table_title']) || empty($price_table_data['template_id'])) {
-            throw new Exception('missing mandatory fields price_table_title or template_id');
+            throw new Exception('missing mandatory fields pricing_table_title or template');
         }
         $column_array = [];
-        foreach ($price_table_data['columns'] as $cols) {
+        foreach ($price_table_data['fields'] as $cols) {
             $column_array[] = Column::createFormArray($cols);
         }
         return new PriceTable($price_table_data['price_table_id'], $price_table_data['pricing_table_title'], $price_table_data['template_id'], $price_table_data['custom_styles'], $column_array);

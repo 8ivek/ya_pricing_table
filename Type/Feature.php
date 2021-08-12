@@ -4,15 +4,18 @@ class Feature extends Type
 {
     public bool $feature_checked;
     public string $feature_text;
+    public string $fid;
 
     /**
-     * @param $feature_text
+     * @param string $feature_text
      * @param int $feature_checked
+     * @param int|null $fid
      */
-    public function __construct($feature_text, $feature_checked = 0)
+    public function __construct(string $feature_text, int $feature_checked = 0, $fid = null)
     {
         $this->feature_text = $feature_text;
         $this->feature_checked = $feature_checked;
+        $this->fid = $fid;
     }
 
     /**
@@ -25,6 +28,6 @@ class Feature extends Type
         if (empty($feature_data_array['feature_text'])) {
             throw new Exception('missing mandatory field feature_text');
         }
-        return new Feature($feature_data_array['feature_text'], $feature_data_array['feature_checked']);
+        return new Feature($feature_data_array['feature_text'], $feature_data_array['feature_checked'], $feature_data_array['fid']);
     }
 }

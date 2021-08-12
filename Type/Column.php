@@ -11,6 +11,7 @@ class Column extends Type
     public array $features;
 
     /**
+     * @param int $column_id
      * @param string $column_title
      * @param string $description
      * @param string $column_price
@@ -18,8 +19,9 @@ class Column extends Type
      * @param string $column_button_face_text
      * @param array $features
      */
-    public function __construct(string $column_title, string $description, string $column_price, string $column_button_url, string $column_button_face_text, $features)
+    public function __construct(int $column_id, string $column_title, string $description, string $column_price, string $column_button_url, string $column_button_face_text, $features)
     {
+        $this->column_id = $column_id;
         $this->column_title = $column_title;
         $this->description = $description;
         $this->column_price = $column_price;
@@ -37,10 +39,13 @@ class Column extends Type
             throw new \Exception('missing mandatory field column title');
         }
         $feature_array = [];
-        foreach ($column_data_array['features'] as $feature) {
-            $feature_array[] = Feature::createFromArray($feature);
+        foreach ($column_data_array['feature_text'] as $key => $feature_text) {
+            $arr['feature_text'] = $feature_text;
+            $arr['feature_checked'] = $column_data_array['feature_checked'][$key] ?? 0;
+            $arr['fid'] = $column_data_array['fid'][$key] ?? null;
+            $feature_array[] = Feature::createFromArray($arr);
         }
 
-        return new Column($column_data_array['column_title'], $column_data_array['description'], $column_data_array['column_price'], $column_data_array['column_button_url'], $column_data_array['column_button_face_text'], $feature_array);
+        return new Column($column_data_array['column_id'], $column_data_array['column_title'], $column_data_array['description'], $column_data_array['column_price'], $column_data_array['column_button_url'], $column_data_array['column_button_face_text'], $feature_array);
     }
 }
