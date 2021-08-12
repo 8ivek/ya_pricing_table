@@ -181,7 +181,7 @@ class Yapt_Admin
             die('missing mandatory fields');
         }
 
-        $template_id = (int) sanitize_text_field($_POST['template']) ?? 0;
+        $template_id = (int)sanitize_text_field($_POST['template']) ?? 0;
 
         $now = new DateTime('now', new DateTimeZone('UTC'));
         $created_at = $updated_at = $now->format('Y-m-d H:i:s');
@@ -247,7 +247,7 @@ class Yapt_Admin
             die('missing mandatory fields');
         }
 
-        $template_id = (int) sanitize_text_field($_POST['template']) ?? 0;
+        $template_id = (int)sanitize_text_field($_POST['template']) ?? 0;
 
         $now = new DateTime('now', new DateTimeZone('UTC'));
         $created_at = $updated_at = $now->format('Y-m-d H:i:s');
@@ -257,7 +257,7 @@ class Yapt_Admin
 
         $highlighted = sanitize_text_field($_POST['highlighted']) ?? '';
 
-        $table_id = (int) sanitize_text_field($_POST['price_table_id']) ?? 0;
+        $table_id = (int)sanitize_text_field($_POST['price_table_id']) ?? 0;
 
         // insert into yapt_pricing_tables
         $wpdb->update($wpdb->prefix . 'yapt_pricing_tables', ['pt_title' => $pricing_table_title, 'custom_styles' => $custom_styles, 'template_id' => $template_id, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $table_id]);

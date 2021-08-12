@@ -123,7 +123,7 @@ class Yapt_Public
 
         $custom_styles = '';
         if (!empty($item_detail['custom_styles'])) {
-            $custom_styles = '<style>'.$item_detail['custom_styles'].'</style>';
+            $custom_styles = '<style>' . $item_detail['custom_styles'] . '</style>';
         }
 
         if (!is_array($item_detail) || count($item_detail) < 1) {
