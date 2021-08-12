@@ -100,7 +100,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
             <!--.yapt_wrap ends -->
 
             <div class="yapt_save_options">
-                <input type="hidden" name="action" value="yapt_admin_update"/>
+                <input type="hidden" name="action" value="yapt_admin_save"/>
                 <?php
                 wp_nonce_field("yapt_nonce");
                 submit_button();

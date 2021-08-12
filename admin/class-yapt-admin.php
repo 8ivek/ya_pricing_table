@@ -168,150 +168,79 @@ class Yapt_Admin
 
     /**
      * Save pricing table data
-     * post submission of add/update pricing table
      * @throws Exception
      */
-    public function addPricingTableData()
+    public function savePricingTableData()
     {
-        // print_r($_POST);die();
-        // echo "Add pricing table data";
-        global $wpdb;
-        $posted_fields = $_POST['fields'] ?? [];
-        if (empty($posted_fields)) {
-            die('missing mandatory fields');
-        }
-
-        $template_id = (int)sanitize_text_field($_POST['template']) ?? 0;
-
-        $now = new DateTime('now', new DateTimeZone('UTC'));
-        $created_at = $updated_at = $now->format('Y-m-d H:i:s');
-
-        $pricing_table_title = sanitize_text_field($_POST['pricing_table_title']) ?? '';
-        $custom_styles = str_replace("/* styles here */", '', sanitize_text_field($_POST['custom_styles'])) ?? '';
-
-        $highlighted = sanitize_text_field($_POST['highlighted']) ?? '';
-
-        // insert into yapt_pricing_tables
-        $wpdb->insert($wpdb->prefix . 'yapt_pricing_tables', ['pt_title' => $pricing_table_title, 'custom_styles' => $custom_styles, 'template_id' => $template_id, 'created_at' => $created_at, 'updated_at' => $updated_at]);
-
-        $table_id = $wpdb->insert_id;
-
-        foreach ($posted_fields as $keye => $column_data) {
-            $column_title = $column_data['column_title'];
-
-            $is_highlighted = '0';
-            if ($keye == $highlighted) {
-                $is_highlighted = '1';
-            }
-            $description = $column_data['description'] ?? '';
-            $column_price = $column_data['column_price'];
-            $column_button_face_text = $column_data['column_button_face_text'];
-            $column_button_url = $column_data['column_button_url'];
-
-            // insert into yapt_pricing_tables
-            $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'description' => $description, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $column_button_face_text, 'ctoa_btn_link' => $column_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at]);
-
-            $column_id = $wpdb->insert_id;
-
-            foreach ($column_data['feature_text'] as $key => $ft) {
-                $isset = 0;
-                if (isset($column_data['feature_checked'][$key])) {
-                    $isset = 1;
-                }
-                $wpdb->insert($wpdb->prefix . 'yapt_features', ['column_id' => $column_id, 'feature_text' => $ft, 'is_set' => $isset, 'created_at' => $created_at, 'updated_at' => $updated_at]);
-            }
-        }
-        echo wp_redirect(admin_url('admin.php?page=yapt_admin'));
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function updatePricingTableData()
-    {
-        print_r($_POST);
+        // print_r($_POST);
         // echo "Update pricing table data";
 
         try {
-            $pt_obj = PriceTable::createFromArray($_POST);
-            $pt_output = $pt_obj->jsonSerialize();
-            print_r($pt_output);
+            $price_table_obj = PriceTable::createFromArray($_POST);
         } catch (Exception $e) {
             die($e->getMessage());
         }
 
-        die();
         global $wpdb;
-        $posted_fields = $_POST['fields'] ?? [];
-        if (empty($posted_fields) || empty($_POST['price_table_id'])) {
+        if (!$price_table_obj instanceof PriceTable) {
             die('missing mandatory fields');
         }
 
-        $template_id = (int)sanitize_text_field($_POST['template']) ?? 0;
+        $date_obj = new DateTime('now', new DateTimeZone('UTC'));
+        $now = $date_obj->format('Y-m-d H:i:s');
 
-        $now = new DateTime('now', new DateTimeZone('UTC'));
-        $created_at = $updated_at = $now->format('Y-m-d H:i:s');
+        // print_r($price_table_obj);
 
-        $pricing_table_title = sanitize_text_field($_POST['pricing_table_title']) ?? '';
-        $custom_styles = str_replace("/* styles here */", '', sanitize_text_field($_POST['custom_styles'])) ?? '';
-
-        $highlighted = sanitize_text_field($_POST['highlighted']) ?? '';
-
-        $table_id = (int)sanitize_text_field($_POST['price_table_id']) ?? 0;
-
-        // insert into yapt_pricing_tables
-        $wpdb->update($wpdb->prefix . 'yapt_pricing_tables', ['pt_title' => $pricing_table_title, 'custom_styles' => $custom_styles, 'template_id' => $template_id, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $table_id]);
+        if ($price_table_obj->price_table_id > 0) {
+            // update into yapt_pricing_tables
+            $wpdb->update($wpdb->prefix . 'yapt_pricing_tables', ['pt_title' => $price_table_obj->pricing_table_title, 'custom_styles' => $price_table_obj->custom_styles, 'template_id' => $price_table_obj->template_id, 'created_at' => $now, 'updated_at' => $now], ['id' => $price_table_obj->price_table_id]);
+        } else {
+            // insert into yapt_pricing_tables
+            $wpdb->insert($wpdb->prefix . 'yapt_pricing_tables', ['pt_title' => $price_table_obj->pricing_table_title, 'custom_styles' => $price_table_obj->custom_styles, 'template_id' => $price_table_obj->template_id, 'created_at' => $now, 'updated_at' => $now]);
+            $price_table_obj->price_table_id = $wpdb->insert_id;
+        }
 
         $column_ids = [];
-        foreach ($posted_fields as $keye => $column_data) {
-            $column_id = $column_data['column_id'];
-            $column_title = $column_data['column_title'];
-
-            $is_highlighted = '0';
-            if ($keye == $highlighted) {
-                $is_highlighted = '1';
+        foreach ($price_table_obj->columns as $column) {
+            if(!$column instanceof Column) {
+                die('this should not happen!');
             }
 
-            $description = $column_data['description'] ?? '';
-            $column_price = $column_data['column_price'];
-            $column_button_face_text = $column_data['column_button_face_text'];
-            $column_button_url = $column_data['column_button_url'];
-
-            // insert into yapt_pricing_tables
-            if (empty($column_id)) {
-                $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'description' => $description, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $column_button_face_text, 'ctoa_btn_link' => $column_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at]);
-                $column_id = $wpdb->insert_id;
+            if (empty($column->column_id)) {
+                // insert into yapt_columns
+                $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column->column_title, 'description' => $column->description, 'highlighted' => $column->highlighted, 'table_id' => $price_table_obj->price_table_id, 'price_text' => $column->column_price, 'ctoa_btn_text' => $column->column_button_face_text, 'ctoa_btn_link' => $column->column_button_url, 'created_at' => $now, 'updated_at' => $now]);
+                $column->column_id = $wpdb->insert_id;
             } else {
-                $wpdb->update($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'description' => $description, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $column_button_face_text, 'ctoa_btn_link' => $column_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $column_id]);
+                // update yapt_columns
+                $wpdb->update($wpdb->prefix . 'yapt_columns', ['column_title' => $column->column_title, 'description' => $column->description, 'highlighted' => $column->highlighted, 'table_id' => $price_table_obj->price_table_id, 'price_text' => $column->column_price, 'ctoa_btn_text' => $column->column_button_face_text, 'ctoa_btn_link' => $column->column_button_url, 'created_at' => $now, 'updated_at' => $now], ['id' => $column->column_id]);
             }
 
             $feature_ids = [];
-            foreach ($column_data['feature_text'] as $key => $ft) {
-                $feature_id = $column_data['fid'][$key];
-                $isset = 0;
-                if (!empty($column_data['feature_checked'][$key])) {
-                    $isset = 1;
+            foreach ($column->features as $feature) {
+                if(!$feature instanceof Feature) {
+                    die('this should not happen!');
                 }
 
-                if (empty($feature_id)) {
-                    $wpdb->insert($wpdb->prefix . 'yapt_features', ['column_id' => $column_id, 'feature_text' => $ft, 'is_set' => $isset, 'created_at' => $created_at, 'updated_at' => $updated_at]);
+                if (empty($feature->fid)) {
+                    $wpdb->insert($wpdb->prefix . 'yapt_features', ['column_id' => $column->column_id, 'feature_text' => $feature->feature_text, 'is_set' => $feature->feature_checked, 'created_at' => $now, 'updated_at' => $now]);
+                    $feature->fid = $wpdb->insert_id;
                 } else {
-                    $wpdb->update($wpdb->prefix . 'yapt_features', ['column_id' => $column_id, 'feature_text' => $ft, 'is_set' => $isset, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $feature_id]);
+                    $wpdb->update($wpdb->prefix . 'yapt_features', ['column_id' => $column->column_id, 'feature_text' => $feature->feature_text, 'is_set' => $feature->feature_checked, 'updated_at' => $now], ['id' => $feature->fid]);
                 }
-                $feature_ids[] = $feature_id;
+                $feature_ids[] = $feature->fid;
             }//foreach feature_text ends
 
             if (is_array($feature_ids) && count($feature_ids) > 0) {
-                $sql_delete_features = "DELETE FROM `" . $wpdb->prefix . "yapt_features` WHERE `column_id` = '" . $column_id . "' AND `id` NOT IN (" . implode(', ', $feature_ids) . ")";
+                $sql_delete_features = "DELETE FROM `" . $wpdb->prefix . "yapt_features` WHERE `column_id` = '" . $column->column_id . "' AND `id` NOT IN (" . implode(', ', $feature_ids) . ")";
             } else if (count($feature_ids) === 0) {
-                $sql_delete_features = "DELETE FROM `" . $wpdb->prefix . "yapt_features` WHERE `column_id` = '" . $column_id . "'";
+                $sql_delete_features = "DELETE FROM `" . $wpdb->prefix . "yapt_features` WHERE `column_id` = '" . $column->column_id . "'";
             }
             $wpdb->query($sql_delete_features);
 
-            $column_ids[] = $column_id;
+            $column_ids[] = $column->column_id;
         }//foreach column ends
 
-        $sql_delete_columns = "DELETE FROM `" . $wpdb->prefix . "yapt_columns` WHERE `table_id` = '" . $table_id . "' AND `id` NOT IN (" . implode(', ', $column_ids) . ")";
+        $sql_delete_columns = "DELETE FROM `" . $wpdb->prefix . "yapt_columns` WHERE `table_id` = '" . $price_table_obj->price_table_id . "' AND `id` NOT IN (" . implode(', ', $column_ids) . ")";
         $wpdb->query($sql_delete_columns);
         echo wp_redirect(admin_url('admin.php?page=yapt_admin'));
     }

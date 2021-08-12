@@ -34,7 +34,8 @@ class PriceTable extends Type
         $pricing_table_title = sanitize_text_field($price_table_data['pricing_table_title']);
         $template_id = (int)sanitize_text_field($price_table_data['template_id']);
         $price_table_id = (int)sanitize_text_field($price_table_data['price_table_id']);
-        $custom_styles = sanitize_textarea_field($price_table_data['custom_styles']);
+        $custom_styles = str_replace("/* styles here */", '', sanitize_textarea_field($price_table_data['custom_styles']));
+        $highlighted_key = sanitize_text_field($price_table_data['highlighted']);
 
         if (empty($pricing_table_title) || empty($template_id)) {
             throw new Exception('missing mandatory fields pricing_table_title or template');
@@ -42,7 +43,15 @@ class PriceTable extends Type
 
         $column_array = [];
         if (is_array($price_table_data['fields'])) {
-            foreach ($price_table_data['fields'] as $cols) {
+            foreach ($price_table_data['fields'] as $key => $cols) {
+
+                $is_highlighted = '0';
+                if ($key == $highlighted_key) {
+                    $is_highlighted = '1';
+                }
+
+                $cols['highlighted'] = $is_highlighted;
+
                 $column_array[] = Column::createFormArray($cols);
             }
         }

@@ -4,6 +4,7 @@ class Column extends Type
 {
     public int $column_id;
     public string $column_title;
+    public string $highlighted;
     public string $description;
     public string $column_price;
     public string $column_button_url;
@@ -13,16 +14,18 @@ class Column extends Type
     /**
      * @param int $column_id
      * @param string $column_title
+     * @param string $highlighted
      * @param string $description
      * @param string $column_price
      * @param string $column_button_url
      * @param string $column_button_face_text
      * @param array $features
      */
-    public function __construct(int $column_id, string $column_title, string $description, string $column_price, string $column_button_url, string $column_button_face_text, array $features)
+    public function __construct(int $column_id, string $column_title, string $highlighted, string $description, string $column_price, string $column_button_url, string $column_button_face_text, array $features)
     {
         $this->column_id = $column_id;
         $this->column_title = $column_title;
+        $this->highlighted = $highlighted;
         $this->description = $description;
         $this->column_price = $column_price;
         $this->column_button_url = $column_button_url;
@@ -43,6 +46,7 @@ class Column extends Type
         $column_price = sanitize_text_field($column_data_array['column_price']);
         $column_button_url = sanitize_text_field($column_data_array['column_button_url']);
         $column_button_face_text = sanitize_text_field($column_data_array['column_button_face_text']);
+        $highlighted = $column_data_array['highlighted'];
 
         if (empty($column_title)) {
             throw new \Exception('missing mandatory field column title');
@@ -58,6 +62,6 @@ class Column extends Type
             }
         }
 
-        return new Column($column_id, $column_title, $description, $column_price, $column_button_url, $column_button_face_text, $feature_array);
+        return new Column($column_id, $column_title, $highlighted, $description, $column_price, $column_button_url, $column_button_face_text, $feature_array);
     }
 }
