@@ -63,7 +63,12 @@ class Yapt_Admin
         }
 
         // Include EPT post list table
-        require_once(plugin_dir_path(__FILE__) . '../includes/yapt_list.php');
+        require_once(YAPT_PLUGIN_DIR_PATH . 'includes/yapt_list.php');
+
+        require_once(YAPT_PLUGIN_DIR_PATH . 'Type/Type.php');
+        require_once(YAPT_PLUGIN_DIR_PATH . 'Type/PriceTable.php');
+        require_once(YAPT_PLUGIN_DIR_PATH . 'Type/Column.php');
+        require_once(YAPT_PLUGIN_DIR_PATH . 'Type/Feature.php');
     }
 
     /**
@@ -143,8 +148,8 @@ class Yapt_Admin
         if (!empty($_GET['action']) && $_GET['action'] === 'edit') {
             // show edit form
             $price_table_id = 0;
-            if (!empty($_GET['price_table']) && is_int($_GET['price_table'])) {
-                $price_table_id = $_GET['price_table'];
+            if (!empty($_GET['price_table'])) {
+                $price_table_id = (int)sanitize_text_field($_GET['price_table']);
             }
 
             $this->price_table->prepare_item($price_table_id);
@@ -200,11 +205,11 @@ class Yapt_Admin
             }
             $description = $column_data['description'] ?? '';
             $column_price = $column_data['column_price'];
-            $col_button_face_text = $column_data['col_button_face_text'];
-            $col_button_url = $column_data['col_button_url'];
+            $column_button_face_text = $column_data['column_button_face_text'];
+            $column_button_url = $column_data['column_button_url'];
 
             // insert into yapt_pricing_tables
-            $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'description' => $description, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $col_button_face_text, 'ctoa_btn_link' => $col_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at]);
+            $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'description' => $description, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $column_button_face_text, 'ctoa_btn_link' => $column_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at]);
 
             $column_id = $wpdb->insert_id;
 
@@ -219,13 +224,26 @@ class Yapt_Admin
         echo wp_redirect(admin_url('admin.php?page=yapt_admin'));
     }
 
+    /**
+     * @throws Exception
+     */
     public function updatePricingTableData()
     {
-        // print_r($_POST);die();
+        print_r($_POST);
         // echo "Update pricing table data";
+
+        try {
+            $pt_obj = PriceTable::createFromArray($_POST);
+            $pt_output = $pt_obj->jsonSerialize();
+            print_r($pt_output);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+
+        die();
         global $wpdb;
         $posted_fields = $_POST['fields'] ?? [];
-        if (empty($posted_fields) || empty($_POST['pt_id'])) {
+        if (empty($posted_fields) || empty($_POST['price_table_id'])) {
             die('missing mandatory fields');
         }
 
@@ -239,7 +257,7 @@ class Yapt_Admin
 
         $highlighted = sanitize_text_field($_POST['highlighted']) ?? '';
 
-        $table_id = (int) sanitize_text_field($_POST['pt_id']) ?? 0;
+        $table_id = (int) sanitize_text_field($_POST['price_table_id']) ?? 0;
 
         // insert into yapt_pricing_tables
         $wpdb->update($wpdb->prefix . 'yapt_pricing_tables', ['pt_title' => $pricing_table_title, 'custom_styles' => $custom_styles, 'template_id' => $template_id, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $table_id]);
@@ -256,15 +274,15 @@ class Yapt_Admin
 
             $description = $column_data['description'] ?? '';
             $column_price = $column_data['column_price'];
-            $col_button_face_text = $column_data['col_button_face_text'];
-            $col_button_url = $column_data['col_button_url'];
+            $column_button_face_text = $column_data['column_button_face_text'];
+            $column_button_url = $column_data['column_button_url'];
 
             // insert into yapt_pricing_tables
             if (empty($column_id)) {
-                $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'description' => $description, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $col_button_face_text, 'ctoa_btn_link' => $col_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at]);
+                $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'description' => $description, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $column_button_face_text, 'ctoa_btn_link' => $column_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at]);
                 $column_id = $wpdb->insert_id;
             } else {
-                $wpdb->update($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'description' => $description, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $col_button_face_text, 'ctoa_btn_link' => $col_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $column_id]);
+                $wpdb->update($wpdb->prefix . 'yapt_columns', ['column_title' => $column_title, 'description' => $description, 'highlighted' => $is_highlighted, 'table_id' => $table_id, 'price_text' => $column_price, 'ctoa_btn_text' => $column_button_face_text, 'ctoa_btn_link' => $column_button_url, 'created_at' => $created_at, 'updated_at' => $updated_at], ['id' => $column_id]);
             }
 
             $feature_ids = [];
