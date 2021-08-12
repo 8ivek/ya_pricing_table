@@ -19,7 +19,7 @@ class Column extends Type
      * @param string $column_button_face_text
      * @param array $features
      */
-    public function __construct(int $column_id, string $column_title, string $description, string $column_price, string $column_button_url, string $column_button_face_text, $features)
+    public function __construct(int $column_id, string $column_title, string $description, string $column_price, string $column_button_url, string $column_button_face_text, array $features)
     {
         $this->column_id = $column_id;
         $this->column_title = $column_title;
@@ -41,7 +41,6 @@ class Column extends Type
         $column_id = (int)sanitize_text_field($column_data_array['column_id']);
         $description = sanitize_text_field($column_data_array['description']);
         $column_price = sanitize_text_field($column_data_array['column_price']);
-        $column_button_url = sanitize_text_field($column_data_array['column_button_url']);
         $column_button_url = sanitize_text_field($column_data_array['column_button_url']);
         $column_button_face_text = sanitize_text_field($column_data_array['column_button_face_text']);
 
