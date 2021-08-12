@@ -202,8 +202,8 @@ class Yapt_Admin
 
         $column_ids = [];
         foreach ($price_table_obj->columns as $column) {
-            if(!$column instanceof Column) {
-                die('this should not happen!');
+            if (!$column instanceof Column) {
+                die('$column must be of type Type/Column.');
             }
 
             if (empty($column->column_id)) {
@@ -217,8 +217,8 @@ class Yapt_Admin
 
             $feature_ids = [];
             foreach ($column->features as $feature) {
-                if(!$feature instanceof Feature) {
-                    die('this should not happen!');
+                if (!$feature instanceof Feature) {
+                    die('$feature must be of type Type/Feature.');
                 }
 
                 if (empty($feature->fid)) {
