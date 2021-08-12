@@ -33,7 +33,7 @@ class PriceTable extends Type
     {
         $pricing_table_title = sanitize_text_field($price_table_data['pricing_table_title']);
         $template_id = (int)sanitize_text_field($price_table_data['template_id']);
-        $price_table_id = (int)sanitize_text_field($price_table_data['price_table_id']);
+        $price_table_id = (int)sanitize_text_field($price_table_data['price_table_id'] ?? 0);
         $custom_styles = str_replace("/* styles here */", '', sanitize_textarea_field($price_table_data['custom_styles']));
         $highlighted_key = sanitize_text_field($price_table_data['highlighted']);
 
@@ -51,6 +51,10 @@ class PriceTable extends Type
                 }
 
                 $cols['highlighted'] = $is_highlighted;
+
+                if (empty(sanitize_text_field($cols['column_title']))) {
+                    continue;
+                }
 
                 $column_array[] = Column::createFormArray($cols);
             }

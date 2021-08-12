@@ -172,7 +172,7 @@ class Yapt_Admin
      */
     public function savePricingTableData()
     {
-        // print_r($_POST);
+        // print_r($_POST); die();
         // echo "Update pricing table data";
 
         try {
@@ -189,7 +189,7 @@ class Yapt_Admin
         $date_obj = new DateTime('now', new DateTimeZone('UTC'));
         $now = $date_obj->format('Y-m-d H:i:s');
 
-        // print_r($price_table_obj);
+        // print_r($price_table_obj);die();
 
         if ($price_table_obj->price_table_id > 0) {
             // update into yapt_pricing_tables

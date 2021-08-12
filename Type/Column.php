@@ -41,7 +41,7 @@ class Column extends Type
     public static function createFormArray(array $column_data_array): Column
     {
         $column_title = sanitize_text_field($column_data_array['column_title']);
-        $column_id = (int)sanitize_text_field($column_data_array['column_id']);
+        $column_id = (int)sanitize_text_field($column_data_array['column_id'] ?? 0);
         $description = sanitize_text_field($column_data_array['description']);
         $column_price = sanitize_text_field($column_data_array['column_price']);
         $column_button_url = sanitize_text_field($column_data_array['column_button_url']);
@@ -56,8 +56,11 @@ class Column extends Type
         if (is_array($column_data_array['feature_text'])) {
             foreach ($column_data_array['feature_text'] as $key => $feature_text) {
                 $arr['feature_text'] = sanitize_text_field($feature_text);
-                $arr['feature_checked'] = isset($column_data_array['feature_checked'][$key]) && $column_data_array['feature_checked'][$key] == '1';
-                $arr['fid'] = (int)sanitize_text_field($column_data_array['fid'][$key]);
+                $arr['feature_checked'] = (isset($column_data_array['feature_checked'][$key]) && $column_data_array['feature_checked'][$key] == '1') ? '1' : '0';
+                $arr['fid'] = (int)sanitize_text_field($column_data_array['fid'][$key] ?? 0);
+                if (empty($arr['feature_text'])) {
+                    continue;
+                }
                 $feature_array[] = Feature::createFromArray($arr);
             }
         }

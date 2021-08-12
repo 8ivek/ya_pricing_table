@@ -2,7 +2,7 @@
 
 class Feature extends Type
 {
-    public bool $feature_checked;
+    public string $feature_checked;
     public string $feature_text;
     public string $fid;
 
@@ -11,7 +11,7 @@ class Feature extends Type
      * @param bool $feature_checked
      * @param int|null $fid
      */
-    public function __construct(string $feature_text, bool $feature_checked = false, int $fid = null)
+    public function __construct(string $feature_text, string $feature_checked = '0', int $fid = null)
     {
         $this->feature_text = $feature_text;
         $this->feature_checked = $feature_checked;
