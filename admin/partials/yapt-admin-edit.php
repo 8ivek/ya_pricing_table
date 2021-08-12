@@ -20,9 +20,9 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
     <div id="poststuff">
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
             <div class="yapt_add_title">
-                <input type="hidden" name="price_table_id" value="<?php echo $this->price_table->item['id']; ?>"/>
+                <input type="hidden" name="price_table_id" value="<?php echo esc_html($this->price_table->item['id']); ?>"/>
                 <input class="yapt_pricing_table_title" type="text" name="pricing_table_title"
-                       value="<?php echo $this->price_table->item['pt_title']; ?>" placeholder="Add pricing table title"
+                       value="<?php echo esc_html($this->price_table->item['pt_title']); ?>" placeholder="Add pricing table title"
                        required="required"/>
             </div>
 
@@ -94,7 +94,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
 
                 <div id="custom_styles" class="tabcontent">
                     <h3>Custom styles</h3>
-                    <textarea name="custom_styles"><?php echo $this->price_table->item['custom_styles']; ?></textarea>
+                    <textarea name="custom_styles"><?php echo esc_textarea($this->price_table->item['custom_styles']); ?></textarea>
                 </div><!-- #Styles .tabcontent ends -->
             </div>
             <!--.yapt_wrap ends -->
@@ -180,12 +180,12 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
     add_column();
     // populate column fields
     column_id_value = computed_column_id - 1;
-    jQuery("input[name='fields[" + column_id_value + "][column_id]']").val('<?php echo $col['id']?>');
-    jQuery("input[name='fields[" + column_id_value + "][column_title]']").val('<?php echo $col['column_title']?>');
-    jQuery("textarea[name='fields[" + column_id_value + "][description]']").val('<?php echo $col['description']?>');
-    jQuery("input[name='fields[" + column_id_value + "][column_price]']").val('<?php echo $col['price_text']?>');
-    jQuery("input[name='fields[" + column_id_value + "][column_button_face_text]']").val('<?php echo $col['ctoa_btn_text']?>');
-    jQuery("input[name='fields[" + column_id_value + "][column_button_url]']").val('<?php echo $col['ctoa_btn_link']?>');
+    jQuery("input[name='fields[" + column_id_value + "][column_id]']").val('<?php echo esc_html($col['id']);?>');
+    jQuery("input[name='fields[" + column_id_value + "][column_title]']").val('<?php echo esc_html($col['column_title']);?>');
+    jQuery("textarea[name='fields[" + column_id_value + "][description]']").val('<?php echo esc_html($col['description']);?>');
+    jQuery("input[name='fields[" + column_id_value + "][column_price]']").val('<?php echo esc_html($col['price_text']);?>');
+    jQuery("input[name='fields[" + column_id_value + "][column_button_face_text]']").val('<?php echo esc_html($col['ctoa_btn_text']);?>');
+    jQuery("input[name='fields[" + column_id_value + "][column_button_url]']").val('<?php echo esc_url($col['ctoa_btn_link']);?>');
     <?php
     if($col['highlighted'] == '1') {
     ?>
@@ -199,9 +199,9 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
     // populate features
     feautre_id_value = computed_feature_id - 1;
     jQuery("input[name='fields[" + column_id_value + "][fid][" + feautre_id_value + "]']").val(
-        '<?php echo $feature['id']?>');
+        '<?php echo esc_html($feature['id']);?>');
     jQuery("input[name='fields[" + column_id_value + "][feature_text][" + feautre_id_value + "]']").val(
-        '<?php echo $feature['feature_text']?>');
+        '<?php echo esc_html($feature['feature_text']);?>');
     jQuery("input[name='fields[" + column_id_value + "][feature_checked][" + feautre_id_value + "]']").prop('checked',
         <?php echo ($feature['is_set'] == '1') ? 'true' : 'false'; ?>);
     <?php
