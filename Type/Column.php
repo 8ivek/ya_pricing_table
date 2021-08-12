@@ -52,9 +52,9 @@ class Column extends Type
         $feature_array = [];
         if (is_array($column_data_array['feature_text'])) {
             foreach ($column_data_array['feature_text'] as $key => $feature_text) {
-                $arr['feature_text'] = $feature_text;
-                $arr['feature_checked'] = $column_data_array['feature_checked'][$key] ?? 0;
-                $arr['fid'] = $column_data_array['fid'][$key] ?? null;
+                $arr['feature_text'] = sanitize_text_field($feature_text);
+                $arr['feature_checked'] = isset($column_data_array['feature_checked'][$key]) && $column_data_array['feature_checked'][$key] == '1';
+                $arr['fid'] = (int)sanitize_text_field($column_data_array['fid'][$key]);
                 $feature_array[] = Feature::createFromArray($arr);
             }
         }
