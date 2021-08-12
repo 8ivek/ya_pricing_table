@@ -31,13 +31,21 @@ class PriceTable extends Type
      */
     public static function createFromArray(array $price_table_data): PriceTable
     {
-        if (empty($price_table_data['pricing_table_title']) || empty($price_table_data['template_id'])) {
+        $pricing_table_title = sanitize_text_field($price_table_data['pricing_table_title']);
+        $template_id = (int)sanitize_text_field($price_table_data['template_id']);
+        $price_table_id = (int)sanitize_text_field($price_table_data['price_table_id']);
+        $custom_styles = sanitize_textarea_field($price_table_data['custom_styles']);
+
+        if (empty($pricing_table_title) || empty($template_id)) {
             throw new Exception('missing mandatory fields pricing_table_title or template');
         }
+
         $column_array = [];
-        foreach ($price_table_data['fields'] as $cols) {
-            $column_array[] = Column::createFormArray($cols);
+        if (is_array($price_table_data['fields'])) {
+            foreach ($price_table_data['fields'] as $cols) {
+                $column_array[] = Column::createFormArray($cols);
+            }
         }
-        return new PriceTable($price_table_data['price_table_id'], $price_table_data['pricing_table_title'], $price_table_data['template_id'], $price_table_data['custom_styles'], $column_array);
+        return new PriceTable($price_table_id, $pricing_table_title, $template_id, $custom_styles, $column_array);
     }
 }

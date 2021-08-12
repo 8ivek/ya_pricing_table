@@ -25,9 +25,13 @@ class Feature extends Type
      */
     public static function createFromArray(array $feature_data_array): Feature
     {
-        if (empty($feature_data_array['feature_text'])) {
+        $feature_text = sanitize_text_field($feature_data_array['feature_text']);
+        $feature_checked = sanitize_text_field($feature_data_array['feature_checked']);
+        $fid = (int)sanitize_text_field($feature_data_array['fid']);
+
+        if (empty($feature_text)) {
             throw new Exception('missing mandatory field feature_text');
         }
-        return new Feature($feature_data_array['feature_text'], $feature_data_array['feature_checked'], $feature_data_array['fid']);
+        return new Feature($feature_text, $feature_checked, $fid);
     }
 }

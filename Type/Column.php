@@ -37,17 +37,28 @@ class Column extends Type
      */
     public static function createFormArray(array $column_data_array): Column
     {
-        if (empty($column_data_array['column_title'])) {
+        $column_title = sanitize_text_field($column_data_array['column_title']);
+        $column_id = (int)sanitize_text_field($column_data_array['column_id']);
+        $description = sanitize_text_field($column_data_array['description']);
+        $column_price = sanitize_text_field($column_data_array['column_price']);
+        $column_button_url = sanitize_text_field($column_data_array['column_button_url']);
+        $column_button_url = sanitize_text_field($column_data_array['column_button_url']);
+        $column_button_face_text = sanitize_text_field($column_data_array['column_button_face_text']);
+
+        if (empty($column_title)) {
             throw new \Exception('missing mandatory field column title');
         }
+
         $feature_array = [];
-        foreach ($column_data_array['feature_text'] as $key => $feature_text) {
-            $arr['feature_text'] = $feature_text;
-            $arr['feature_checked'] = $column_data_array['feature_checked'][$key] ?? 0;
-            $arr['fid'] = $column_data_array['fid'][$key] ?? null;
-            $feature_array[] = Feature::createFromArray($arr);
+        if (is_array($column_data_array['feature_text'])) {
+            foreach ($column_data_array['feature_text'] as $key => $feature_text) {
+                $arr['feature_text'] = $feature_text;
+                $arr['feature_checked'] = $column_data_array['feature_checked'][$key] ?? 0;
+                $arr['fid'] = $column_data_array['fid'][$key] ?? null;
+                $feature_array[] = Feature::createFromArray($arr);
+            }
         }
 
-        return new Column($column_data_array['column_id'], $column_data_array['column_title'], $column_data_array['description'], $column_data_array['column_price'], $column_data_array['column_button_url'], $column_data_array['column_button_face_text'], $feature_array);
+        return new Column($column_id, $column_title, $description, $column_price, $column_button_url, $column_button_face_text, $feature_array);
     }
 }
