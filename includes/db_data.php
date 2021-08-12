@@ -13,7 +13,6 @@ class db_data
 
         if (empty($price_table_row)) {
             return [];
-            //wp_redirect(esc_url_raw(remove_query_arg(['action', 'price_table'])));
         }
         $item = $price_table_row;
 
