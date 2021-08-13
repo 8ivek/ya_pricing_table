@@ -29,7 +29,7 @@ class Yapt_Public
      * @access   private
      * @var      string $plugin_name The ID of this plugin.
      */
-    private $plugin_name;
+    private string $plugin_name;
 
     /**
      * The version of this plugin.
@@ -38,7 +38,7 @@ class Yapt_Public
      * @access   private
      * @var      string $version The current version of this plugin.
      */
-    private $version;
+    private string $version;
 
     /**
      * Initialize the class and set its properties.
@@ -47,7 +47,7 @@ class Yapt_Public
      * @param string $version The version of this plugin.
      * @since    1.0.0
      */
-    public function __construct($plugin_name, $version)
+    public function __construct(string $plugin_name, string $version)
     {
         $this->plugin_name = $plugin_name;
         $this->version = $version;
@@ -109,7 +109,7 @@ class Yapt_Public
      * @param array $atts
      * @return string
      */
-    public function yapt_shortcode_callback(array $atts = [])
+    public function yapt_shortcode_callback(array $atts = []): string
     {
         // set up default parameters
         extract(shortcode_atts([
@@ -123,17 +123,18 @@ class Yapt_Public
 
         $custom_styles = '';
         if (!empty($item_detail['custom_styles'])) {
-            $custom_styles = '<style>'.$item_detail['custom_styles'].'</style>';
+            $custom_styles = '<style>' . $item_detail['custom_styles'] . '</style>';
         }
 
         if (!is_array($item_detail) || count($item_detail) < 1) {
             return "<p>not available</p>";
         }
 
+        wp_enqueue_style('custom-style-' . $item_detail['template_name'], YAPT_PLUGIN_URL . "templates/" . $item_detail['template_name'] . "/" . $item_detail['style'], [], '1.0.0');
+
         $pt_column_content = $this->readHtmlFile($item_detail['template_name'] ?? '', $item_detail['html'] ?? '');
 
-        $pt_html = "<link rel='stylesheet' href='" . YAPT_PLUGIN_URL . "templates/" . $item_detail['template_name'] . "/" . $item_detail['style'] . "' />";
-        $pt_html .= $custom_styles;
+        $pt_html = $custom_styles;
         $pt_html .= "<div class='yapt_pricing_table'>";
 
         $col_html = '';
@@ -151,15 +152,15 @@ class Yapt_Public
                 if ($feats['is_set'] == '1') {
                     $feature_class = 'checked';
                 }
-                $feature_list .= "<li class='" . $feature_class . "'>" . $feats['feature_text'] . "</li>";
+                $feature_list .= "<li class='" . $feature_class . "'>" . esc_html($feats['feature_text']) . "</li>";
             }
 
             $temp_col = str_replace('##is_highlighted##', $highlighted, $pt_column_content);
-            $temp_col = str_replace('##description##', $col['description'], $temp_col);
-            $temp_col = str_replace('##col_title##', $col['column_title'], $temp_col);
-            $temp_col = str_replace('##col_price##', $col['price_text'], $temp_col);
-            $temp_col = str_replace('##col_cta_btn_lnk##', $col['ctoa_btn_link'], $temp_col);
-            $temp_col = str_replace('##col_cta_btn_text##', $col['ctoa_btn_text'], $temp_col);
+            $temp_col = str_replace('##description##', esc_html($col['description']), $temp_col);
+            $temp_col = str_replace('##col_title##', esc_html($col['column_title']), $temp_col);
+            $temp_col = str_replace('##col_price##', esc_html($col['price_text']), $temp_col);
+            $temp_col = str_replace('##col_cta_btn_lnk##', esc_url($col['ctoa_btn_link']), $temp_col);
+            $temp_col = str_replace('##col_cta_btn_text##', esc_html($col['ctoa_btn_text']), $temp_col);
             $temp_col = str_replace('##col_feature_list##', $feature_list, $temp_col);
 
             // remove any ##.*?## available
@@ -175,11 +176,11 @@ class Yapt_Public
 
     /**
      * Read html file
-     * @param $folder_name
-     * @param $html_file
+     * @param string $folder_name
+     * @param string $html_file
      * @return false|string
      */
-    public function readHtmlFile($folder_name, $html_file)
+    public function readHtmlFile(string $folder_name, string $html_file)
     {
         if (empty($folder_name)) {
             $folder_name = 'default';

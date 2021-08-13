@@ -21,7 +21,7 @@
  * Author URI:        https://github.com/8ivek
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       yapt
+ * Text Domain:       ya-pricing-table
  * Domain Path:       /languages
  */
 

@@ -96,9 +96,11 @@
     padding: 12px 8px;
     text-transform: capitalize;
 }
-.table-list li.unchecked{
+
+.table-list li.unchecked {
     color: #777;
 }
+
 .table-list li:before {
     font-family: 'Font Awesome 5 Free';
     display: inline-block;
@@ -179,11 +181,13 @@
     background: #333;
     color: #fff;
 }
-.highlighted .col_cta .btn_cta{
+
+.highlighted .col_cta .btn_cta {
     color: #fff;
     background: #333;
     border: none;
 }
+
 .highlighted .col_cta .btn_cta:hover {
     background: #777;
 }

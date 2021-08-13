@@ -4,7 +4,7 @@ Donate link: http://paypal.me/8ivek
 Tags: pricing table, price, pricing, table, price table, dynamic pricing table
 Requires at least: 5.0
 Tested up to: 5.8
-Stable tag: 5.8
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
