@@ -113,7 +113,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
         let new_feature_value = "<div id='column" + column_id + "_feature" + computed_feature_id +
             "'><label class='yapt_label_con'><input type='checkbox' name='fields[" + column_id + "][feature_checked][" +
             computed_feature_id +
-            "]' value='1' /> <span class='checkmark'></span></label> <input type='text' name='fields[" + column_id +
+            "]' value='1' /> <span class='checkmark'></span></label> <input type='text' required='required' name='fields[" + column_id +
             "][feature_text][" + computed_feature_id +
             "]' placeholder='Feature text content ...' value='' /> <a title='Delete feature' class='delete_feature' href='javascript:;' onclick='delete_feature(" +
             column_id + ", " + computed_feature_id + ")'><span class='dashicons dashicons-dismiss'></span></a></div>";
@@ -138,7 +138,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
         //console.log('new column id: ' + computed_column_id);
 
         let new_column_value = "<div class='yapt_table_column' id='tbl_column" + computed_column_id +
-            "'><div class='yapt_table_row'><label>Name</label><input type='text' name='fields[" + computed_column_id +
+            "'><div class='yapt_table_row'><label>Name</label><input type='text' required='required' name='fields[" + computed_column_id +
             "][column_title]'/></div><div class='yapt_table_row'><label>Short description</label><textarea class='short_description' name='fields[" + computed_column_id +
             "][description]'></textarea></div><div class='yapt_table_row'><label>Pricing</label><input type='text' name='fields[" +
             computed_column_id +
