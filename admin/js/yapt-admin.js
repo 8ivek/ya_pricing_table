@@ -1,6 +1,21 @@
 (function ($) {
     'use strict';
 
+    $(window).load(function () {
+        $("#submit").click(function () {
+            console.log('submit click action');
+            $('input').filter('[required]').each(function () {
+                if ($(this).val() == '') {
+                    $(this).addClass('yapt_required');
+                } else {
+                    $(this).removeClass('yapt_required');
+                }
+            });
+            return false;
+        });
+        document.getElementById("defaultOpen").click();
+    });
+
     /**
      * All of the code for your admin-facing JavaScript source
      * should reside in this file.

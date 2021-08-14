@@ -433,3 +433,7 @@ Theme Tab
 .tabcontent textarea.short_description {
     min-height: 100px;
 }
+
+input[required].yapt_required {
+    border: 2px solid #ff0000;
+}

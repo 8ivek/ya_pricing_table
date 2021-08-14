@@ -210,8 +210,4 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
     <?php
     }
     ?>
-
-    jQuery(window).load(function () {
-        document.getElementById("defaultOpen").click();
-    });
 </script>
