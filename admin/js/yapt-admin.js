@@ -1,6 +1,33 @@
 (function ($) {
     'use strict';
 
+    $(window).load(function () {
+        $("#submit").click(function () {
+            let missing_required = false
+            let count = 0;
+            $('input').filter('[required]').each(function () {
+                if ($(this).val() == '') {
+                    if (count == 0) {
+                        $(this).focus();
+                    }
+                    missing_required = true;
+                    $(this).addClass('yapt_required');
+                    count++;
+                } else {
+                    $(this).removeClass('yapt_required');
+                }
+            });
+            if (missing_required) {
+                return false;
+            }
+            return true;
+        });
+
+        if ($('#defaultOpen').length) {
+            document.getElementById("defaultOpen").click();
+        }
+    });
+
     /**
      * All of the code for your admin-facing JavaScript source
      * should reside in this file.
