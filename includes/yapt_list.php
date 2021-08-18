@@ -197,9 +197,10 @@ class yapt_list extends WP_List_Table
             if (!wp_verify_nonce($nonce, 'ya_delete_price_table')) {
                 die('Go get a life script kiddies');
             } else {
-                self::delete_price_table(absint($_GET['price_table']));
-
-                // esc_url_raw() is used to prevent converting ampersand in url to "#038;"
+                $price_table_id = (int)$_GET['price_table'];
+                if ($price_table_id > 0) {
+                    self::delete_price_table($price_table_id);
+                }
                 // add_query_arg() return the current url
                 wp_redirect(esc_url_raw(remove_query_arg(['_wpnonce', 'action', 'price_table'])));
                 exit;
@@ -210,12 +211,19 @@ class yapt_list extends WP_List_Table
         if ((isset($_POST['action']) && $_POST['action'] == 'bulk-delete')
             || (isset($_POST['action2']) && $_POST['action2'] == 'bulk-delete')
         ) {
-            $delete_ids = esc_sql($_POST['bulk-delete']);
-            // loop over the array of record IDs and delete them
-            foreach ($delete_ids as $id) {
-                self::delete_price_table($id);
+            // this should not happen
+            if (!is_array($_POST['bulk-delete'])) {
+                die('bulk-delete must be an array.');
             }
-            // esc_url_raw() is used to prevent converting ampersand in url to "#038;"
+
+            // loop over the array of record IDs and delete them
+            foreach ($_POST['bulk-delete'] as $pt_id) {
+                $price_table_id = (int)$pt_id;
+                if ($price_table_id > 0) {
+                    self::delete_price_table($price_table_id);
+                }
+            }
+
             // add_query_arg() return the current url
             wp_redirect(esc_url_raw(add_query_arg([])));
             exit;
