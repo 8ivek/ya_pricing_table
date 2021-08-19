@@ -74,8 +74,8 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
                             ?>
                             <div class="yapt_template_item">
                                 <label>
-                                    <input type="radio" name="template_id" value="<?php echo $template['id'] ?>" checked="checked"/>
-                                    <img src="<?php echo YAPT_PLUGIN_URL . 'templates/' . $template['template_name'] . '/' . $template['image']; ?>"/>
+                                    <input type="radio" name="template_id" value="<?php echo esc_html($template['id']); ?>" checked="checked"/>
+                                    <img src="<?php echo YAPT_PLUGIN_URL . 'templates/' . esc_html($template['template_name']) . '/' . esc_html($template['image']); ?>"/>
                                 </label>
                             </div>
                             <?php
