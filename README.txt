@@ -30,18 +30,29 @@ Yes, YA Pricing tables are supposed to be compatible with all the available them
 = How long do I have to wait until I get reply for my support question?  =
 We will reply support message within 24 hours.
 
+= What are the steps to create a new template?  =
+The following steps are only recommended if you are good at CSS and HTML
+1. go inside "plugins\ya-pricing-table\templates" folder and copy the contents of any folder(inside template directory) and then create a new folder(inside template directory) and put them inside your new folder.
+2. update css, html and png files as per your wish.
+3. insert a new row (wp_yapt_templates):
+	i. template_name = new folder_name you created,
+	ii. html = html filename,
+	iii. style = css file name,
+	iv. image = image filename.
+That's it!
+
 == Privacy Disclosure ==
 
 This plugin does not store any personal data.
 
 == Screenshots ==
 
-1. Install plugin and activate using general wordpress plugin installation and activation process.
+1. Install the plugin and activate using the general WordPress plugin installation and activation process.
 2. Add pricing table screen
 3. Select plugin theme screen
 4. Custom style screen
 5. Pricing table listing page, where you can select shortcode and copy for using it in pages or posts
-6. Add shortcode in post or page and update/publish
+6. Add the shortcode in post or page and update/publish
 7. Price table theme 1 (yapt2021)
 8. Price table theme 2 (default)
 
