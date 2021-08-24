@@ -1,6 +1,7 @@
 .yapt_pricing_table {
     display: flex;
     justify-content: center;
+    margin: 85px 0 0;
 }
 
 .yapt_table_col-title {
@@ -31,60 +32,64 @@
 * Contenedor
 ============================*/
 
+
 .yapt_table_col {
-    border: 1px solid #ddd;
     text-align: center;
-    width: 300px;
+    width: 280px;
     -webkit-transition: all 0.25s ease;
     -o-transition: all 0.25s ease;
     transition: all 0.25s ease;
+    margin: 0 20px;
 }
 
 .yapt_table_col.highlighted {
-    -webkit-transform: scale(1.06);
-    -ms-transform: scale(1.06);
-    -o-transform: scale(1.06);
-    transform: scale(1.06);
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
 }
-
+.aanya_heading{
+    background: url('aanya-head.svg') no-repeat;
+    background-size: 100% auto;
+    height: 265px;
+    position: relative;
+    z-index: 2;
+}
+.highlighted .aanya_heading{
+    background: url('aanya-head-highlight.svg') no-repeat;
+    background-size: 100% auto;
+    height: 258px;
+}
+/* ========================
+* Title
+============================*/
 .col_title {
-    color: #777;
-    background: #fff;
-    padding: 30px 0 0;
-    font-size: 1.3em;
+    color: #111;
+    font-size: 1.7em;
     text-transform: capitalize;
 }
-
+.highlighted .col_title{
+    color: #fff;
+}
 .col_subtitle {
     color: #777;
-    background: #fff;
     padding: 12px 20px;
     font-size: 0.8em;
-    border-bottom: 1px solid #eee;
 }
-
-.yapt_table_col.highlighted .col_title {
-    background: #2db3cb;
+.highlighted .col_subtitle{
     color: #fff;
-    padding-bottom: 30px;
 }
 
-.yapt_table_col.highlighted .col_price,
-.yapt_table_col.highlighted .col_subtitle {
-    border-left: 2px solid #2db3cb;
-    border-right: 2px solid #2db3cb;
-}
-
-.yapt_table_col.highlighted .col_subtitle {
-    border-bottom: 2px solid #2db3cb;
-}
+/* ========================
+* Price
+============================*/
 
 .yapt_table_col .col_price {
-    background: #fff;
-    color: #777;
-    font-size: 2em;
+    color: #000;
+    font-size: 1.3em;
     font-weight: normal;
-    padding: 20px 0;
+    padding: 0;
+    height: 70px;
 }
 
 .yapt_table_col .col_price sup {
@@ -92,17 +97,42 @@
     position: relative;
     left: 5px;
 }
+.aanya_price{
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    border-radius: 50%;
+    margin: 0 auto;
+    line-height: 90px;
+    border: 5px solid #ddd;
+    position: relative;
+    top: -47px;
+}
+.highlighted .aanya_price{
+    top: -52px;
+    border-color: #b63ac3;
+}
+
+/* ========================
+* Features
+============================*/
 
 .col_features ul {
-    background: #FFF;
+    background: #fdfdfd;
     color: #403d3a;
     margin: 0;
-    padding: 0;
+    padding: 70px 0 40px 0;
     list-style: none;
+    border: 1px solid #ddd;
+    margin: 0 10px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
+    margin-top: -67px;
 }
 
 .table-list li {
-    font-size: 1em;
+    font-size: 0.9em;
     padding: 12px 8px;
     text-transform: capitalize;
 }
@@ -117,11 +147,12 @@
 
 .table-list li.checked:before {
     content: "\f058";
-    color: #2db3cb;
+    color: #aaa;
 }
 
 .highlighted .table-list li.checked:before {
-    font-weight: bold;
+ 
+    color: #b63ac3;
 }
 
 .table-list li.unchecked:before {
@@ -130,7 +161,8 @@
 }
 
 .highlighted .table-list li.unchecked:before {
-    font-weight: bold;
+
+    color: #b63ac3;
 }
 
 .table-list li.unchecked {
@@ -143,7 +175,7 @@
 
 .table-list li span.unlimited {
     color: #FFF;
-    background: #2db3cb;
+    background: #b63ac3;
     font-size: 0.9em;
     padding: 5px 7px;
     display: inline-block;
@@ -158,51 +190,45 @@
 }
 
 .col_cta {
-    background: #FFF;
-    border-top: 1px solid #F0F0F0;
-    padding: 20px;
     text-align: center;
     overflow: hidden;
-}
-
-.col_cta p {
-    float: left;
-    color: #37353a;
-    font-weight: 700;
-    font-size: 2.4em;
-}
-
-.col_cta p sup {
-    font-size: 0.5em;
     position: relative;
-    left: 5px;
+    z-index: 99;
+    text-align: center;
+    overflow: hidden;
+    top: -21px;
 }
 
 .col_cta .btn_cta {
     display: inline-block;
-    color: #2db3cb;
-    border: 1px solid #2db3cb;
-    padding: 10px 16px;
-    font-size: 1em;
+    background: #fff;
+    color: #b63ac3;
+    border: 1px solid #b63ac3;
+    padding: 8px 22px;
+    font-size: 0.9em;
     -webkit-transition: all 0.25s ease;
     -o-transition: all 0.25s ease;
     transition: all 0.25s ease;
     text-decoration: none;
     text-transform: capitalize;
+    border-radius: 30px;
 }
 
 .col_cta .btn_cta:hover {
-    background: #2db3cb;
+    background: rgb(182,58,195);
+    background: linear-gradient(90deg, rgba(182,58,195,1) 0%, rgba(226,31,138,1) 100%);
     color: #fff;
 }
 
 .highlighted .col_cta .btn_cta {
-    background: #2db3cb;
+    background: rgb(182,58,195);
+    background: linear-gradient(90deg, rgba(182,58,195,1) 0%, rgba(226,31,138,1) 100%);
     color: #fff;
 }
 
 .highlighted .col_cta .btn_cta:hover {
-    background: #228799;
+    background: rgb(152,42,168);
+    background: linear-gradient(90deg, rgba(152,42,168,1) 0%, rgba(196,16,123,1) 100%);
 }
 
 /** ================
@@ -213,15 +239,18 @@
     .yapt_pricing_table {
         width: 768px;
     }
-
     .yapt_table_col {
         width: 236px;
     }
-
     .table-list li {
         font-size: 1.3em;
     }
-
+    .aanya_heading{
+        height: 210px;
+    }
+    .highlighted .aanya_heading{
+        height: 210px;
+    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -232,8 +261,14 @@
     .yapt_table_col {
         display: block;
         float: none;
-        margin: 40px 0 40px 0;
-        width: 100%;
+        margin: 40px auto;
+        width: 350px;
+    }
+    .aanya_heading{
+        height: 327px;
+    }
+    .highlighted .aanya_heading{
+        height: 310px;
     }
 }
 
