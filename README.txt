@@ -30,17 +30,6 @@ Yes, YA Pricing tables are supposed to be compatible with all the available them
 = How long do I have to wait until I get reply for my support question?  =
 We will reply support message within 24 hours.
 
-= What are the steps to create a new template?  =
-The following steps are only recommended if you are good at CSS and HTML
-1. go inside "plugins\ya-pricing-table\templates" folder and copy the contents of any folder(inside template directory) and then create a new folder(inside template directory) and put them inside your new folder.
-2. update css, html and png files as per your wish.
-3. insert a new row (wp_yapt_templates):
-	i. template_name = new folder_name you created,
-	ii. html = html filename,
-	iii. style = css file name,
-	iv. image = image filename.
-That's it!
-
 == Privacy Disclosure ==
 
 This plugin does not store any personal data.
