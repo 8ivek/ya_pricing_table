@@ -36,14 +36,15 @@ This plugin does not store any personal data.
 
 == Screenshots ==
 
-1. Install the plugin and activate using the general WordPress plugin installation and activation process.
-2. Add pricing table screen
-3. Select plugin theme screen
-4. Custom style screen
-5. Pricing table listing page, where you can select shortcode and copy for using it in pages or posts
-6. Add the shortcode in post or page and update/publish
-7. Price table theme 1 (yapt2021)
-8. Price table theme 2 (default)
+1. Price table theme 1 (yapt2021)
+2. Price table theme 2 (default)
+3. Price table theme 3 (Aanya)
+4. Add/edit pricing table screen
+5. Select plugin template screen
+6. Custom style screen
+7. Pricing table listing page, where you can select the shortcode and copy to use it in pages or posts
+8. Add the shortcode in post or page and update/publish
+
 
 == Changelog ==
 

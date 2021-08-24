@@ -9,15 +9,15 @@
  * that starts the plugin.
  *
  * @link              https://github.com/8ivek/yapt
- * @since             1.0.0
+ * @since             1.1.0
  * @package           Yapt
  *
  * @wordpress-plugin
  * Plugin Name:       YA Pricing Table
  * Plugin URI:        https://github.com/8ivek/yapt
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.0
- * Author:            bcripts
+ * Version:           1.1.0
+ * Author:            bCripts
  * Author URI:        https://github.com/8ivek/ya-pricing-table
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
