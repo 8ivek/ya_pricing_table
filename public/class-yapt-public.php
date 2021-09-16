@@ -158,7 +158,9 @@ class Yapt_Public
             $temp_col = str_replace('##is_highlighted##', $highlighted, $pt_column_content);
             $temp_col = str_replace('##description##', esc_html($col['description']), $temp_col);
             $temp_col = str_replace('##col_title##', esc_html($col['column_title']), $temp_col);
-            $temp_col = str_replace('##col_price##', esc_html($col['price_text']), $temp_col);
+            $temp_col = str_replace('##col_price_currency##', esc_html($col['price_currency']), $temp_col);
+            $temp_col = str_replace('##col_price##', esc_html($col['price']), $temp_col);
+            $temp_col = str_replace('##col_price_suffix##', esc_html($col['price_suffix']), $temp_col);
             $temp_col = str_replace('##col_cta_btn_lnk##', esc_url($col['ctoa_btn_link']), $temp_col);
             $temp_col = str_replace('##col_cta_btn_text##', esc_html($col['ctoa_btn_text']), $temp_col);
             $temp_col = str_replace('##col_feature_list##', $feature_list, $temp_col);

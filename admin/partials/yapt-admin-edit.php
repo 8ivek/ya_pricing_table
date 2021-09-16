@@ -151,13 +151,13 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
             "'><div class='yapt_table_row'><label>Name</label><input type='hidden' name='fields[" + computed_column_id +
             "][column_id]' /><input type='text' required='required' name='fields[" + computed_column_id +
             "][column_title]'/></div><div class='yapt_table_row'><label>Short description</label><textarea class='short_description' name='fields[" + computed_column_id +
-            "][description]'></textarea></div><div class='yapt_table_row'><label>Pricing</label><input type='text' name='fields[" +
-            computed_column_id +
-            "][column_price]'/></div><div class='yapt_table_row'><label>Button face text</label><input type='text' name='fields[" +
-            computed_column_id +
-            "][column_button_face_text]'/></div><div class='yapt_table_row'><label>Button url</label><input type='text' name='fields[" +
-            computed_column_id +
-            "][column_button_url]'/></div><div class='yapt_table_row yapt_table_row_features_head'><span class='features_title'>Features</span><a href='javascript:;' class='add_feature' onclick='add_feature(" +
+            "][description]'></textarea></div>" +
+            "<div class='yapt_table_row'><label>Price currency</label><input type='text' name='fields[" + computed_column_id +"][column_price_currency]'/></div>" +
+            "<div class='yapt_table_row'><label>Price</label><input type='text' name='fields[" + computed_column_id +"][column_price]'/></div>" +
+            "<div class='yapt_table_row'><label>Price suffix</label><input type='text' name='fields[" + computed_column_id +"][column_price_suffix]'/></div>" +
+            "<div class='yapt_table_row'><label>Button face text</label><input type='text' name='fields[" + computed_column_id + "][column_button_face_text]'/></div>" +
+            "<div class='yapt_table_row'><label>Button url</label><input type='text' name='fields[" + computed_column_id + "][column_button_url]'/></div>" +
+            "<div class='yapt_table_row yapt_table_row_features_head'><span class='features_title'>Features</span><a href='javascript:;' class='add_feature' onclick='add_feature(" +
             computed_column_id +
             ")'><span class='dashicons dashicons-plus-alt'></span>add feature</a></div><input type='hidden' name='column" +
             computed_column_id + "_feature_count' id='column" + computed_column_id +
@@ -183,7 +183,9 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
     jQuery("input[name='fields[" + column_id_value + "][column_id]']").val('<?php echo esc_html($col['id']);?>');
     jQuery("input[name='fields[" + column_id_value + "][column_title]']").val('<?php echo esc_html($col['column_title']);?>');
     jQuery("textarea[name='fields[" + column_id_value + "][description]']").val('<?php echo esc_html($col['description']);?>');
-    jQuery("input[name='fields[" + column_id_value + "][column_price]']").val('<?php echo esc_html($col['price_text']);?>');
+    jQuery("input[name='fields[" + column_id_value + "][column_price_currency]']").val('<?php echo esc_html($col['price_currency']);?>');
+    jQuery("input[name='fields[" + column_id_value + "][column_price]']").val('<?php echo esc_html($col['price']);?>');
+    jQuery("input[name='fields[" + column_id_value + "][column_price_suffix]']").val('<?php echo esc_html($col['price_text_suffix']);?>');
     jQuery("input[name='fields[" + column_id_value + "][column_button_face_text]']").val('<?php echo esc_html($col['ctoa_btn_text']);?>');
     jQuery("input[name='fields[" + column_id_value + "][column_button_url]']").val('<?php echo esc_url($col['ctoa_btn_link']);?>');
     <?php
