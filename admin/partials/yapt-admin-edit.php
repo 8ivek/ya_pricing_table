@@ -235,4 +235,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
     <?php
     }
     ?>
+    jQuery(document).on('change', 'select[name*="[column_price_currency]"]', function() {
+        jQuery('select[name*="[column_price_currency]"]').val(this.value);
+    });
 </script>
