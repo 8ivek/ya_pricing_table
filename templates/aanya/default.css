@@ -91,13 +91,7 @@
     padding: 0;
     height: 70px;
 }
-
-.yapt_table_col .col_price sup {
-    font-size: 0.4em;
-    position: relative;
-    left: 5px;
-}
-.aanya_price{
+.aanya_price_frame{
     width: 100px;
     height: 100px;
     background: #fff;
@@ -107,12 +101,19 @@
     border: 5px solid #ddd;
     position: relative;
     top: -47px;
+    overflow: hidden;
 }
-.highlighted .aanya_price{
+.highlighted .aanya_price_frame{
     top: -52px;
     border-color: #b63ac3;
 }
-
+.yapt_table_col .col_price .yapt-price-currency{
+    font-size: 0.7em;
+    opacity: 0.7;
+}
+.yapt-price-suffix{
+    font-size: 0.7em;
+}
 /* ========================
 * Features
 ============================*/

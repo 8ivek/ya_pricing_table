@@ -22,7 +22,13 @@ class db_data
         $formatted_column = [];
         foreach ($columns as $col) {
             $features = $wpdb->get_results("SELECT * FROM  {$wpdb->prefix}yapt_features WHERE `column_id` = '" . $col['id'] . "'", ARRAY_A);
+
             $col_temp = $col;
+            $col_temp['currency_symbol'] = '$';
+            if (!empty($col['price_currency'])) {
+                $currency = $wpdb->get_row("SELECT `symbol` FROM  {$wpdb->prefix}yapt_currency WHERE `country` = '" . $col['price_currency'] . "'", ARRAY_A);
+                $col_temp['currency_symbol'] = $currency['symbol'];
+            }
             $col_temp['features'] = $features;
             $formatted_column[] = $col_temp;
         }

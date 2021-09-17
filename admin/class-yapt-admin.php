@@ -208,11 +208,11 @@ class Yapt_Admin
 
             if (empty($column->column_id)) {
                 // insert into yapt_columns
-                $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column->column_title, 'description' => $column->description, 'highlighted' => $column->highlighted, 'table_id' => $price_table_obj->price_table_id, 'price_text' => $column->column_price, 'ctoa_btn_text' => $column->column_button_face_text, 'ctoa_btn_link' => $column->column_button_url, 'created_at' => $now, 'updated_at' => $now]);
+                $wpdb->insert($wpdb->prefix . 'yapt_columns', ['column_title' => $column->column_title, 'description' => $column->description, 'highlighted' => $column->highlighted, 'table_id' => $price_table_obj->price_table_id, 'price_currency' => $column->column_price_currency, 'price' => $column->column_price, 'price_suffix' => $column->column_price_suffix, 'ctoa_btn_text' => $column->column_button_face_text, 'ctoa_btn_link' => $column->column_button_url, 'created_at' => $now, 'updated_at' => $now]);
                 $column->column_id = $wpdb->insert_id;
             } else {
                 // update yapt_columns
-                $wpdb->update($wpdb->prefix . 'yapt_columns', ['column_title' => $column->column_title, 'description' => $column->description, 'highlighted' => $column->highlighted, 'table_id' => $price_table_obj->price_table_id, 'price_text' => $column->column_price, 'ctoa_btn_text' => $column->column_button_face_text, 'ctoa_btn_link' => $column->column_button_url, 'created_at' => $now, 'updated_at' => $now], ['id' => $column->column_id]);
+                $wpdb->update($wpdb->prefix . 'yapt_columns', ['column_title' => $column->column_title, 'description' => $column->description, 'highlighted' => $column->highlighted, 'table_id' => $price_table_obj->price_table_id, 'price_currency' => $column->column_price_currency, 'price' => $column->column_price, 'price_suffix' => $column->column_price_suffix, 'ctoa_btn_text' => $column->column_button_face_text, 'ctoa_btn_link' => $column->column_button_url, 'created_at' => $now, 'updated_at' => $now], ['id' => $column->column_id]);
             }
 
             $feature_ids = [];

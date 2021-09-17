@@ -35,7 +35,7 @@ class PriceTable extends Type
         $template_id = (int)sanitize_text_field($price_table_data['template_id']);
         $price_table_id = (int)sanitize_text_field($price_table_data['price_table_id'] ?? 0);
         $custom_styles = str_replace("/* styles here */", '', sanitize_textarea_field($price_table_data['custom_styles']));
-        $highlighted_key = sanitize_text_field($price_table_data['highlighted']);
+        $highlighted_key = sanitize_text_field($price_table_data['highlighted'] ?? '');
 
         if (empty($pricing_table_title) || empty($template_id)) {
             throw new Exception('missing mandatory fields pricing_table_title or template');
