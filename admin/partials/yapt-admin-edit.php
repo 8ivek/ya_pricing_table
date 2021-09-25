@@ -125,13 +125,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
     <?php
     $currency_options = '';
     $selected_currency = 'United States of America';
-    foreach($currencies as $currency) {
-        $select = '';
-        if($selected_currency === $currency['country']) {
-            $select = "selected = 'selected'";
-        }
-        $currency_options .= "<option value='" . $currency['country'] . "' ".$select.">" . $currency['country'].' ('.$currency['code'] . ")</option>";
-    }
+    $currency_options = $this->get_currency_options($currencies, $selected_currency, $currency_options);
     ?>
 
     function add_feature(column_id) {

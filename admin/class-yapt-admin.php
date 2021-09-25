@@ -260,4 +260,22 @@ class Yapt_Admin
     {
         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/yapt-admin-add-page.php';
     }
+
+    /**
+     * @param $currencies
+     * @param string $selected_currency
+     * @param string $currency_options
+     * @return string
+     */
+    public function get_currency_options($currencies, string $selected_currency, string $currency_options): string
+    {
+        foreach ($currencies as $currency) {
+            $select = '';
+            if ($selected_currency === $currency['country']) {
+                $select = "selected = 'selected'";
+            }
+            $currency_options .= "<option value='" . $currency['country'] . "' " . $select . ">" . $currency['country'] . ' (' . $currency['code'] . ")</option>";
+        }
+        return $currency_options;
+    }
 }

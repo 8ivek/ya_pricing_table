@@ -117,13 +117,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
     <?php
         $currency_options = '';
         $selected_currency = 'United States of America';
-        foreach($currencies as $currency) {
-            $select = '';
-            if($selected_currency === $currency['country']) {
-                $select = "selected = 'selected'";
-            }
-            $currency_options .= "<option value='" . $currency['country'] . "' ".$select.">" . $currency['country'].' ('.$currency['code'] . ")</option>";
-        }
+        $currency_options = $this->get_currency_options($currencies, $selected_currency, $currency_options);
     ?>
 
     function add_feature(column_id) {
@@ -131,11 +125,8 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
         //console.log(computed_feature_id);
         //console.log('add feature clicked for table '+ column_id);
         let new_feature_value = "<div id='column" + column_id + "_feature" + computed_feature_id +
-            "'><label class='yapt_label_con'><input type='checkbox' name='fields[" + column_id + "][feature_checked][" +
-            computed_feature_id +
-            "]' value='1' /> <span class='checkmark'></span></label> <input type='text' required='required' name='fields[" + column_id +
-            "][feature_text][" + computed_feature_id +
-            "]' placeholder='Feature text content ...' value='' /> <a title='Delete feature' class='delete_feature' href='javascript:;' onclick='delete_feature(" +
+            "'><label class='yapt_label_con'><input type='checkbox' name='fields[" + column_id + "][feature_checked][]' value='1' /> <span class='checkmark'></span></label> <input type='text' required='required' name='fields[" + column_id +
+            "][feature_text][]' placeholder='Feature text content ...' value='' /> <a title='Delete feature' class='delete_feature' href='javascript:;' onclick='delete_feature(" +
             column_id + ", " + computed_feature_id + ")'><span class='dashicons dashicons-dismiss'></span></a></div>";
         jQuery("#column" + column_id + "_features").append(new_feature_value);
         computed_feature_id += 1;
