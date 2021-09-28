@@ -114,10 +114,8 @@ class Yapt_Admin
          * class.
          */
 
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/yapt-admin.js', array('jquery'), $this->version, false);
-
-        //wp_enqueue_script($this->plugin_name, "", ['jquery'], $this->version, false);
-
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/yapt-admin.js', ['jquery'], $this->version, false);
+        wp_enqueue_script('yapy-jquery-ui', plugin_dir_url(__FILE__) . 'js/jquery-ui.js', ['jquery'], '1.0.0', false);
     }
 
 
@@ -186,10 +184,10 @@ class Yapt_Admin
             die('missing mandatory fields');
         }
 
+        // print_r($price_table_obj);die();
+
         $date_obj = new DateTime('now', new DateTimeZone('UTC'));
         $now = $date_obj->format('Y-m-d H:i:s');
-
-        // print_r($price_table_obj);die();
 
         if ($price_table_obj->price_table_id > 0) {
             // update into yapt_pricing_tables
@@ -222,10 +220,10 @@ class Yapt_Admin
                 }
 
                 if (empty($feature->fid)) {
-                    $wpdb->insert($wpdb->prefix . 'yapt_features', ['column_id' => $column->column_id, 'feature_text' => $feature->feature_text, 'is_set' => $feature->feature_checked, 'created_at' => $now, 'updated_at' => $now]);
+                    $wpdb->insert($wpdb->prefix . 'yapt_features', ['column_id' => $column->column_id, 'feature_text' => $feature->feature_text, 'is_set' => $feature->feature_checked, 'sort_value' => $feature->sort_value, 'created_at' => $now, 'updated_at' => $now]);
                     $feature->fid = $wpdb->insert_id;
                 } else {
-                    $wpdb->update($wpdb->prefix . 'yapt_features', ['column_id' => $column->column_id, 'feature_text' => $feature->feature_text, 'is_set' => $feature->feature_checked, 'updated_at' => $now], ['id' => $feature->fid]);
+                    $wpdb->update($wpdb->prefix . 'yapt_features', ['column_id' => $column->column_id, 'feature_text' => $feature->feature_text, 'is_set' => $feature->feature_checked, 'sort_value' => $feature->sort_value, 'updated_at' => $now], ['id' => $feature->fid]);
                 }
                 $feature_ids[] = $feature->fid;
             }//foreach feature_text ends
@@ -259,5 +257,23 @@ class Yapt_Admin
     public function renderAddPageContent(string $activeTab = ''): void
     {
         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/yapt-admin-add-page.php';
+    }
+
+    /**
+     * @param $currencies
+     * @param string $selected_currency
+     * @param string $currency_options
+     * @return string
+     */
+    public function get_currency_options($currencies, string $selected_currency, string $currency_options): string
+    {
+        foreach ($currencies as $currency) {
+            $select = '';
+            if ($selected_currency === $currency['country']) {
+                $select = "selected = 'selected'";
+            }
+            $currency_options .= "<option value='" . $currency['country'] . "' " . $select . ">" . $currency['country'] . ' (' . $currency['code'] . ")</option>";
+        }
+        return $currency_options;
     }
 }

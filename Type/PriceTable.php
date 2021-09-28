@@ -56,6 +56,32 @@ class PriceTable extends Type
                     continue;
                 }
 
+
+                $col_feature_text = [];
+                $temp_arr = [];
+                if (!empty(sanitize_text_field($cols['feature_order']))) {
+                    $feature_orders = explode('&', sanitize_text_field($cols['feature_order']));
+                    $sort_value = 0;
+                    foreach ($feature_orders as $fo) {
+                        [$x, $feature] = explode('=', $fo);
+                        $key1 = (int)str_replace('feature', '', $feature);
+                        $temp_arr['feature_text'] = sanitize_text_field($cols['feature_text'][$key1]);
+                        $temp_arr['feature_checked'] = (isset($cols['feature_checked'][$key1]) && $cols['feature_checked'][$key1] == '1') ? '1' : '0';
+                        $temp_arr['fid'] = (int)sanitize_text_field($cols['fid'][$key1] ?? 0);
+                        $temp_arr['sort_value'] = $sort_value;
+                        $col_feature_text[] = $temp_arr;
+                        $sort_value++;
+                    }
+                } else {
+                    foreach ($cols['feature_text'] as $key1 => $value) {
+                        $temp_arr['feature_text'] = sanitize_text_field($cols['feature_text'][$key1]);
+                        $temp_arr['feature_checked'] = (isset($cols['feature_checked'][$key1]) && $cols['feature_checked'][$key1] == '1') ? '1' : '0';
+                        $temp_arr['fid'] = (int)sanitize_text_field($cols['fid'][$key1] ?? 0);
+                        $temp_arr['sort_value'] = $key1;
+                        $col_feature_text[] = $temp_arr;
+                    }
+                }
+                $cols['feature_data'] = $col_feature_text;
                 $column_array[] = Column::createFormArray($cols);
             }
         }

@@ -101,7 +101,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
                 ?>
             </div>
         </form>
-        <br class="clear">
+        <br class="clear" />
     </div>
 </div>
 
@@ -117,13 +117,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
     <?php
         $currency_options = '';
         $selected_currency = 'United States of America';
-        foreach($currencies as $currency) {
-            $select = '';
-            if($selected_currency === $currency['country']) {
-                $select = "selected = 'selected'";
-            }
-            $currency_options .= "<option value='" . $currency['country'] . "' ".$select.">" . $currency['country'].' ('.$currency['code'] . ")</option>";
-        }
+        $currency_options = $this->get_currency_options($currencies, $selected_currency, $currency_options);
     ?>
 
     function add_feature(column_id) {
@@ -131,12 +125,11 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
         //console.log(computed_feature_id);
         //console.log('add feature clicked for table '+ column_id);
         let new_feature_value = "<div id='column" + column_id + "_feature" + computed_feature_id +
-            "'><label class='yapt_label_con'><input type='checkbox' name='fields[" + column_id + "][feature_checked][" +
-            computed_feature_id +
+            "'><label class='yapt_label_con'><input type='checkbox' name='fields[" + column_id + "][feature_checked][" + computed_feature_id +
             "]' value='1' /> <span class='checkmark'></span></label> <input type='text' required='required' name='fields[" + column_id +
             "][feature_text][" + computed_feature_id +
             "]' placeholder='Feature text content ...' value='' /> <a title='Delete feature' class='delete_feature' href='javascript:;' onclick='delete_feature(" +
-            column_id + ", " + computed_feature_id + ")'><span class='dashicons dashicons-dismiss'></span></a></div>";
+            column_id + ", " + computed_feature_id + ")'><span class='dashicons dashicons-dismiss'></span></a> <span class='dashicons dashicons-menu'></span></div>";
         jQuery("#column" + column_id + "_features").append(new_feature_value);
         computed_feature_id += 1;
         jQuery("#column" + column_id + "_feature_count").val(computed_feature_id);
@@ -177,13 +170,19 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
             ")'><span class='dashicons dashicons-plus-alt'></span>add feature</a></div><input type='hidden' name='column" +
             computed_column_id +
             "_feature_count' id='column" + computed_column_id +
-            "_feature_count' value='0' /><div class='yapt_table_row yapt_table_row_features' id='column" +
+            "_feature_count' value='0' /><div class='yapt_table_row yapt_table_row_features feature_column_container' id='column" +
             computed_column_id +
-            "_features' class='feature_column_container'></div><div class='yapt_table_row clearfix'><div class='switch_featured'> <label class='switch'><input type='radio' name='highlighted' value='" + computed_column_id + "' /><span class='slider round'></span></label> Highlight</div><a title='Delete column' class='delete_column' href='javascript:;' onclick='delete_column(" +
+            "_features'></div><input type='hidden' name='fields["+computed_column_id+"][feature_order]' value='' /><div class='yapt_table_row clearfix'><div class='switch_featured'> <label class='switch'><input type='radio' name='highlighted' value='" + computed_column_id + "' /><span class='slider round'></span></label> Highlight</div><a title='Delete column' class='delete_column' href='javascript:;' onclick='delete_column(" +
             computed_column_id + ")'><span class='dashicons dashicons-trash'></span></a></div></div>";
         jQuery("#ypt_columns").append(new_column_value);
 
         add_feature(computed_column_id); // everytime we call add_column we will be adding 3 empty features to the column.
+        jQuery("#column" + computed_column_id + "_features").sortable({
+            update: function (event, ui) {
+                jQuery(this).siblings('input[name*="[feature_order]"]').val(jQuery(this).sortable('serialize').toString());
+                //console.log(jQuery(this).siblings('input[name*="[feature_order]"]').val());
+            }
+        });
         computed_column_id += 1;
         jQuery("#column_count").val(computed_column_id);
     }

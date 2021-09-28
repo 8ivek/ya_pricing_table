@@ -136,6 +136,7 @@ class Yapt_Activator
              `column_id` INT(11) NOT NULL,
              `feature_text` VARCHAR(255) NOT NULL,
              `is_set` ENUM('0', '1') NOT NULL DEFAULT '1',
+             `sort_value` VARCHAR(255) NOT NULL,
 			 `created_at` DATETIME NOT NULL,
 			 `updated_at` DATETIME NOT NULL,
 			  PRIMARY KEY id (id),
