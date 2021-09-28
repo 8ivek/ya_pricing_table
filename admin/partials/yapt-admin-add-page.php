@@ -180,7 +180,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
         jQuery("#column" + computed_column_id + "_features").sortable({
             update: function (event, ui) {
                 jQuery(this).siblings('input[name*="[feature_order]"]').val(jQuery(this).sortable('serialize').toString());
-                console.log(jQuery(this).siblings('input[name*="[feature_order]"]').val());
+                //console.log(jQuery(this).siblings('input[name*="[feature_order]"]').val());
             }
         });
         computed_column_id += 1;

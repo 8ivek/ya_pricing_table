@@ -139,7 +139,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
             "]' value='1' /> <span class='checkmark'></span></label> <input type='text' required='required' name='fields[" + column_id +
             "][feature_text][" + computed_feature_id +
             "]' placeholder='Feature text content ...' value='' /> <a title='Delete feature' class='delete_feature' href='javascript:;' onclick='delete_feature(" +
-            column_id + ", " + computed_feature_id + ")'><span class='dashicons dashicons-dismiss'></span></a></div>";
+            column_id + ", " + computed_feature_id + ")'><span class='dashicons dashicons-dismiss'></span></a>  <span class='dashicons dashicons-menu'></span></div>";
         jQuery("#column" + column_id + "_features").append(new_feature_value);
         computed_feature_id += 1;
         jQuery("#column" + column_id + "_feature_count").val(computed_feature_id);
@@ -180,7 +180,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
             computed_column_id + "_feature_count' id='column" + computed_column_id +
             "_feature_count' value='0' /><div class='yapt_table_row yapt_table_row_features feature_column_container' id='column" +
             computed_column_id +
-            "_features'></div><div class='yapt_table_row clearfix'><div class='switch_featured'> <label class='switch'><input type='radio' id='highlighted" +
+            "_features'></div><input type='hidden' name='fields["+computed_column_id+"][feature_order]' value='' /><div class='yapt_table_row clearfix'><div class='switch_featured'> <label class='switch'><input type='radio' id='highlighted" +
             computed_column_id + "' name='highlighted' value='" + computed_column_id +
             "' /><span class='slider round'></span></label> Highlight</div><a title='Delete column' class='delete_column' href='javascript:;' onclick='delete_column(" +
             computed_column_id + ")'><span class='dashicons dashicons-trash'></span></a></div></div>";
@@ -215,6 +215,14 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
     ?>
     // add features
     add_feature(column_id_value);
+
+    jQuery("#column" + column_id_value + "_features").sortable({
+        update: function (event, ui) {
+            jQuery(this).siblings('input[name*="[feature_order]"]').val(jQuery(this).sortable('serialize').toString());
+            //console.log(jQuery(this).siblings('input[name*="[feature_order]"]').val());
+        }
+    });
+
     // populate features
     feautre_id_value = computed_feature_id - 1;
     jQuery("input[name='fields[" + column_id_value + "][fid][" + feautre_id_value + "]']").val(
