@@ -56,6 +56,20 @@ class PriceTable extends Type
                     continue;
                 }
 
+                $feature_orders  = explode('&', sanitize_text_field($cols['feature_order']));
+                $features = [];
+                $col_feature_text = [];
+                if(is_array($feature_orders)) {
+                    foreach($feature_orders as $fo) {
+                        [$x, $feature] = explode('=', $fo);
+                        $key = (int) str_replace('feature', '', $feature);
+                        $temp_arr['feature_text'] = sanitize_text_field($cols['feature_text'][$key]);
+                        $temp_arr['feature_checked'] = (isset($cols['feature_checked'][$key]) && $cols['feature_checked'][$key] == '1') ? '1' : '0';
+                        $temp_arr['fid'] = (int)sanitize_text_field($cols['fid'][$key] ?? 0);
+                        $col_feature_text[] = $temp_arr;
+                    }
+                }
+                $cols['feature_data'] = $col_feature_text;
                 $column_array[] = Column::createFormArray($cols);
             }
         }

@@ -114,10 +114,8 @@ class Yapt_Admin
          * class.
          */
 
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/yapt-admin.js', array('jquery'), $this->version, false);
-
-        //wp_enqueue_script($this->plugin_name, "", ['jquery'], $this->version, false);
-
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/yapt-admin.js', ['jquery'], $this->version, false);
+        wp_enqueue_script('yapy-jquery-ui', plugin_dir_url(__FILE__) . 'js/jquery-ui.js', ['jquery'], '1.0.0', false);
     }
 
 

@@ -59,15 +59,9 @@ class Column extends Type
         }
 
         $feature_array = [];
-        if (is_array($column_data_array['feature_text'])) {
-            foreach ($column_data_array['feature_text'] as $key => $feature_text) {
-                $arr['feature_text'] = sanitize_text_field($feature_text);
-                $arr['feature_checked'] = (isset($column_data_array['feature_checked'][$key]) && $column_data_array['feature_checked'][$key] == '1') ? '1' : '0';
-                $arr['fid'] = (int)sanitize_text_field($column_data_array['fid'][$key] ?? 0);
-                if (empty($arr['feature_text'])) {
-                    continue;
-                }
-                $feature_array[] = Feature::createFromArray($arr);
+        if (is_array($column_data_array['feature_data'])) {
+            foreach($column_data_array['feature_data'] as $feature_data) {
+                $feature_array[] = Feature::createFromArray($feature_data);
             }
         }
 

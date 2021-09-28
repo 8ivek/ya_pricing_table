@@ -8,7 +8,7 @@ class Feature extends Type
 
     /**
      * @param string $feature_text
-     * @param bool $feature_checked
+     * @param string $feature_checked
      * @param int|null $fid
      */
     public function __construct(string $feature_text, string $feature_checked = '0', int $fid = null)
