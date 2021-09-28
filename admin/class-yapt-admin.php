@@ -184,10 +184,10 @@ class Yapt_Admin
             die('missing mandatory fields');
         }
 
+        // print_r($price_table_obj);die();
+
         $date_obj = new DateTime('now', new DateTimeZone('UTC'));
         $now = $date_obj->format('Y-m-d H:i:s');
-
-        // print_r($price_table_obj);die();
 
         if ($price_table_obj->price_table_id > 0) {
             // update into yapt_pricing_tables
@@ -220,10 +220,10 @@ class Yapt_Admin
                 }
 
                 if (empty($feature->fid)) {
-                    $wpdb->insert($wpdb->prefix . 'yapt_features', ['column_id' => $column->column_id, 'feature_text' => $feature->feature_text, 'is_set' => $feature->feature_checked, 'created_at' => $now, 'updated_at' => $now]);
+                    $wpdb->insert($wpdb->prefix . 'yapt_features', ['column_id' => $column->column_id, 'feature_text' => $feature->feature_text, 'is_set' => $feature->feature_checked, 'sort_value' => $feature->sort_value, 'created_at' => $now, 'updated_at' => $now]);
                     $feature->fid = $wpdb->insert_id;
                 } else {
-                    $wpdb->update($wpdb->prefix . 'yapt_features', ['column_id' => $column->column_id, 'feature_text' => $feature->feature_text, 'is_set' => $feature->feature_checked, 'updated_at' => $now], ['id' => $feature->fid]);
+                    $wpdb->update($wpdb->prefix . 'yapt_features', ['column_id' => $column->column_id, 'feature_text' => $feature->feature_text, 'is_set' => $feature->feature_checked, 'sort_value' => $feature->sort_value, 'updated_at' => $now], ['id' => $feature->fid]);
                 }
                 $feature_ids[] = $feature->fid;
             }//foreach feature_text ends

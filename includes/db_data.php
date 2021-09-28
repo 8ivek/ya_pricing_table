@@ -21,7 +21,7 @@ class db_data
 
         $formatted_column = [];
         foreach ($columns as $col) {
-            $features = $wpdb->get_results("SELECT * FROM  {$wpdb->prefix}yapt_features WHERE `column_id` = '" . $col['id'] . "'", ARRAY_A);
+            $features = $wpdb->get_results("SELECT * FROM  {$wpdb->prefix}yapt_features WHERE `column_id` = '" . $col['id'] . "' ORDER BY `sort_value` ASC", ARRAY_A);
 
             $col_temp = $col;
             $col_temp['currency_symbol'] = '$';
