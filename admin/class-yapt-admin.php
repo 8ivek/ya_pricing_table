@@ -134,7 +134,7 @@ class Yapt_Admin
             'dashicons-smiley',                         // Icon
             85                                          // Position: The position in the menu order this item should appear.
         );
-        add_submenu_page('yapt_admin', 'Add new pricing table', 'Add New', 'manage_options', 'yapt_admin_add_page', [$this, 'renderAddPageContent']);
+        add_submenu_page('yapt_admin', 'Add new pricing table', __('Add New', 'yapt'), 'manage_options', 'yapt_admin_add_page', [$this, 'renderAddPageContent']);
 
         add_action("load-$hook", [$this, 'screen_option']);
     }
