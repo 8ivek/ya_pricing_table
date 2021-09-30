@@ -226,7 +226,12 @@ Style the tab
 }
 
 .add_feature .dashicons {
-    padding-right: 3px;
+    padding-right: 5px;
+	transition: all 0.3s;
+}
+.add_feature:hover .dashicons{
+	padding-right: 3px;
+	transform: scale(1.3);
 }
 
 .delete_feature {
@@ -450,13 +455,6 @@ input[required].yapt_required {
 	display: flex;
 	align-items: center;
 }
-.yapt_table_row_features .yapt_label_con,
-.yapt_table_row_features input[type="text"],
-.yapt_table_row_features .delete_feature,
-.yapt_table_row_features .dashicons-menu{
-	
-}
-
 
 .yapt_table_row_features .dashicons-menu{
 	cursor: move; /* fallback if grab cursor is unsupported */
