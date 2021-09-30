@@ -18,7 +18,7 @@ $results_templates = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_templ
 $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", ARRAY_A);
 ?>
 <div class="wrap">
-    <h1 class="wp-heading-inline"><?php _e('Edit pricing table');?></h1>
+    <h1 class="wp-heading-inline"><?php _e('Edit pricing table', 'ya-pricing-table');?></h1>
     <div id="poststuff">
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
             <div class="yapt_add_title">
@@ -33,15 +33,15 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
                 <div class="tab">
                     <button class="tablinks" onclick="yapt_admin_tab(event, 'Add_table')" id="defaultOpen">
                         <span class="dashicons dashicons-editor-table"></span>
-                        <?php _e("Add Pricing Table");?>
+                        <?php _e("Add Pricing Table", 'ya-pricing-table');?>
                     </button>
                     <button class="tablinks" onclick="yapt_admin_tab(event, 'Theme')">
                         <span class="dashicons dashicons-format-image"></span>
-                        <?php _e("Select theme");?>
+                        <?php _e("Select theme", 'ya-pricing-table');?>
                     </button>
                     <button class="tablinks" onclick="yapt_admin_tab(event, 'custom_styles')">
                         <span class="dashicons dashicons-admin-customizer"></span>
-                        <?php _e("Styles");?>
+                        <?php _e("Styles", 'ya-pricing-table');?>
                     </button>
                 </div>
 
@@ -50,14 +50,14 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
                     <table width="100%">
                         <tr>
                             <td>
-                                <h3><?php _e("Click on 'add column' to add a new price table") ?></h3>
+                                <h3><?php _e("Click on 'add column' to add a new price table", 'ya-pricing-table') ?></h3>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <a class="yapt_add_column" href="javascript:;" onclick="add_column()">
                                     <span class="dashicons dashicons-plus"></span>
-                                    add column
+                                    <?php _e('add column', 'ya-pricing-table');?>
                                 </a>
                                 <input type="hidden" name="column_count" id="column_count" value="0"/>
                             </td>
@@ -72,7 +72,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
                 </div>
 
                 <div id="Theme" class="tabcontent theme">
-                    <h3><?php _e("Select theme");?></h3>
+                    <h3><?php _e("Select theme", 'ya-pricing-table');?></h3>
                     <div class="yapt_template_list">
                         <?php
                         foreach ($results_templates as $template) {
@@ -95,7 +95,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
                 </div><!-- #Theme .tabcontent ends -->
 
                 <div id="custom_styles" class="tabcontent">
-                    <h3><?php _e("Custom styles");?></h3>
+                    <h3><?php _e("Custom styles", 'ya-pricing-table');?></h3>
                     <textarea name="custom_styles"><?php echo esc_textarea($this->price_table->item['custom_styles']); ?></textarea>
                 </div><!-- #Styles .tabcontent ends -->
             </div>
@@ -116,7 +116,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
 <script type="text/javascript">
     let computed_feature_id;
     let computed_column_id;
-    let price_suffixs = ['Per hour', 'Per day', 'Per month', 'Per year', 'Per night'];
+    let price_suffixs = ['<?php _e('Per hour', 'ya-pricing-table');?>', '<?php _e('Per day', 'ya-pricing-table');?>', '<?php _e('Per month', 'ya-pricing-table');?>', '<?php _e('Per year', 'ya-pricing-table');?>', '<?php _e('Per night', 'ya-pricing-table');?>'];
     let option = '';
     price_suffixs.forEach(function(price_suffix) {
         option += "<option value='" + price_suffix + "'>" + price_suffix + "</option>";
@@ -138,7 +138,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
             computed_feature_id +
             "]' value='1' /> <span class='checkmark'></span></label> <input type='text' required='required' name='fields[" + column_id +
             "][feature_text][" + computed_feature_id +
-            "]' placeholder='Feature text content ...' value='' /> <a title='Delete feature' class='delete_feature' href='javascript:;' onclick='delete_feature(" +
+            "]' placeholder='<?php _e('Feature text content', 'ya-pricing-table');?> ...' value='' /> <a title='Delete feature' class='delete_feature' href='javascript:;' onclick='delete_feature(" +
             column_id + ", " + computed_feature_id + ")'><span class='dashicons dashicons-dismiss'></span></a>  </div>";
         jQuery("#column" + column_id + "_features").append(new_feature_value);
         computed_feature_id += 1;
@@ -165,24 +165,24 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
         let currency_select = "<select name='fields[" + computed_column_id + "][column_price_currency]'><?php echo $currency_options;?></select>";
 
         let new_column_value = "<div class='yapt_table_column' id='tbl_column" + computed_column_id +
-            "'><div class='yapt_table_row'><label><?php _e('Name');?></label><input type='hidden' name='fields[" + computed_column_id +
+            "'><div class='yapt_table_row'><label><?php _e('Name', 'ya-pricing-table');?></label><input type='hidden' name='fields[" + computed_column_id +
             "][column_id]' /><input type='text' required='required' name='fields[" + computed_column_id +
-            "][column_title]'/></div><div class='yapt_table_row'><label><?php _e('Short description');?></label><textarea class='short_description' name='fields[" + computed_column_id +
+            "][column_title]'/></div><div class='yapt_table_row'><label><?php _e('Short description', 'ya-pricing-table');?></label><textarea class='short_description' name='fields[" + computed_column_id +
             "][description]'></textarea></div>" +
-            "<div class='yapt_table_row'><label><?php _e('Currency');?></label>"+currency_select+"</div>" +
-            "<div class='yapt_table_row'><label><?php _e('Price');?></label><input type='text' name='fields[" + computed_column_id +"][column_price]'/></div>" +
-            "<div class='yapt_table_row'><label><?php _e('Price suffix');?></label>" + price_suffix + "</div>" +
-            "<div class='yapt_table_row'><label><?php _e('Button face text');?></label><input type='text' name='fields[" + computed_column_id + "][column_button_face_text]'/></div>" +
-            "<div class='yapt_table_row'><label><?php _e('Button url');?></label><input type='text' name='fields[" + computed_column_id + "][column_button_url]'/></div>" +
-            "<div class='yapt_table_row yapt_table_row_features_head'><span class='features_title'><?php _e('Features');?></span><a href='javascript:;' class='add_feature' onclick='add_feature(" +
+            "<div class='yapt_table_row'><label><?php _e('Currency', 'ya-pricing-table');?></label>"+currency_select+"</div>" +
+            "<div class='yapt_table_row'><label><?php _e('Price', 'ya-pricing-table');?></label><input type='text' name='fields[" + computed_column_id +"][column_price]'/></div>" +
+            "<div class='yapt_table_row'><label><?php _e('Price suffix', 'ya-pricing-table');?></label>" + price_suffix + "</div>" +
+            "<div class='yapt_table_row'><label><?php _e('Button face text', 'ya-pricing-table');?></label><input type='text' name='fields[" + computed_column_id + "][column_button_face_text]'/></div>" +
+            "<div class='yapt_table_row'><label><?php _e('Button url', 'ya-pricing-table');?></label><input type='text' name='fields[" + computed_column_id + "][column_button_url]'/></div>" +
+            "<div class='yapt_table_row yapt_table_row_features_head'><span class='features_title'><?php _e('Features', 'ya-pricing-table');?></span><a href='javascript:;' class='add_feature' onclick='add_feature(" +
             computed_column_id +
-            ")'><span class='dashicons dashicons-plus-alt'></span><?php _e('add feature');?></a></div><input type='hidden' name='column" +
+            ")'><span class='dashicons dashicons-plus-alt'></span><?php _e('add feature', 'ya-pricing-table');?></a></div><input type='hidden' name='column" +
             computed_column_id + "_feature_count' id='column" + computed_column_id +
             "_feature_count' value='0' /><div class='yapt_table_row yapt_table_row_features feature_column_container' id='column" +
             computed_column_id +
             "_features'></div><input type='hidden' name='fields["+computed_column_id+"][feature_order]' value='' /><div class='yapt_table_row clearfix'><div class='switch_featured'> <label class='switch'><input type='radio' id='highlighted" +
             computed_column_id + "' name='highlighted' value='" + computed_column_id +
-            "' /><span class='slider round'></span></label> <?php _e('Highlight');?></div><a title='Delete column' class='delete_column' href='javascript:;' onclick='delete_column(" +
+            "' /><span class='slider round'></span></label> <?php _e('Highlight', 'ya-pricing-table');?></div><a title='Delete column' class='delete_column' href='javascript:;' onclick='delete_column(" +
             computed_column_id + ")'><span class='dashicons dashicons-trash'></span></a></div></div>";
         jQuery("#ypt_columns").append(new_column_value);
         computed_column_id += 1;

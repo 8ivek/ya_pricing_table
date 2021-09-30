@@ -1,0 +1,165 @@
+# ya-pricing-table-fr_FR.po
+# Copyright (C) 2021 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Bivek <bivek_j@yahoo.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-30 18:15+0545\n"
+"PO-Revision-Date: 2021-09-30 19:26+0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Eazy Po 0.9.5.3\n"
+
+#: admin/partials/yapt-admin-add-page.php:21
+msgid "Add pricing table"
+msgstr "Ajouter un tableau de prix"
+
+#: admin/partials/yapt-admin-add-page.php:33
+#: admin/partials/yapt-admin-edit.php:36
+msgid "Add Pricing Table"
+msgstr "Ajouter un tableau de prix"
+
+#: admin/partials/yapt-admin-add-page.php:37
+#: admin/partials/yapt-admin-add-page.php:72
+#: admin/partials/yapt-admin-edit.php:40 admin/partials/yapt-admin-edit.php:75
+msgid "Select theme"
+msgstr "Sélectionne un thème"
+
+#: admin/partials/yapt-admin-add-page.php:41
+#: admin/partials/yapt-admin-edit.php:44
+msgid "Styles"
+msgstr "Modes"
+
+#: admin/partials/yapt-admin-add-page.php:50
+#: admin/partials/yapt-admin-edit.php:53
+msgid "Click on 'add column' to add a new price table"
+msgstr "Cliquez sur 'ajouter une colonne' pour ajouter un nouveau tableau de prix"
+
+#: admin/partials/yapt-admin-add-page.php:90
+#: admin/partials/yapt-admin-edit.php:98
+msgid "Custom styles"
+msgstr "Styles personnalisés"
+
+#: admin/partials/yapt-admin-add-page.php:158
+#: admin/partials/yapt-admin-edit.php:168
+msgid "Name"
+msgstr "Nom"
+
+#: admin/partials/yapt-admin-add-page.php:159
+#: admin/partials/yapt-admin-edit.php:170
+msgid "Short description"
+msgstr "Brève description"
+
+#: admin/partials/yapt-admin-add-page.php:161
+#: admin/partials/yapt-admin-edit.php:172
+msgid "Currency"
+msgstr "Monnaie"
+
+#: admin/partials/yapt-admin-add-page.php:162
+#: admin/partials/yapt-admin-edit.php:173
+msgid "Price"
+msgstr "Prix"
+
+#: admin/partials/yapt-admin-add-page.php:163
+#: admin/partials/yapt-admin-edit.php:174
+msgid "Price suffix"
+msgstr "Suffixe de prix"
+
+#: admin/partials/yapt-admin-add-page.php:164
+#: admin/partials/yapt-admin-edit.php:175
+msgid "Button face text"
+msgstr "Texte du visage du bouton"
+
+#: admin/partials/yapt-admin-add-page.php:166
+#: admin/partials/yapt-admin-edit.php:176
+msgid "Button url"
+msgstr "URL du bouton"
+
+#: admin/partials/yapt-admin-add-page.php:168
+#: admin/partials/yapt-admin-edit.php:177
+msgid "Features"
+msgstr "Caractéristiques"
+
+#: admin/partials/yapt-admin-add-page.php:170
+#: admin/partials/yapt-admin-edit.php:179
+msgid "add feature"
+msgstr "ajouter une fonctionnalité"
+
+#: admin/partials/yapt-admin-add-page.php:175
+#: admin/partials/yapt-admin-edit.php:185
+msgid "Highlight"
+msgstr "Surligner"
+
+#: admin/partials/yapt-admin-display.php:18
+msgid "Add New"
+msgstr "Ajouter un nouveau"
+
+#: admin/partials/yapt-admin-edit.php:21
+msgid "Edit pricing table"
+msgstr "Modifier le tableau des prix"
+
+#: includes/yapt_list.php:15
+msgid "Pricing Table"
+msgstr "Tableau des prix"
+
+#: includes/yapt_list.php:16
+msgid "Pricing Tables"
+msgstr "Tableaux de prix"
+
+#: includes/yapt_list.php:69
+msgid "No price tables available."
+msgstr "Pas de tableaux de prix disponibles."
+
+#: includes/yapt_list.php:128
+msgid "Price table title"
+msgstr "Titre du tableau des prix"
+
+#: includes/yapt_list.php:129
+msgid "Shortcode"
+msgstr "Petit code"
+
+#: includes/yapt_list.php:132
+msgid "Updated date"
+msgstr "Date de mise à jour"
+
+#: admin/partials/yapt-admin-add-page.php:57
+#: admin/partials/yapt-admin-edit.php:60
+msgid "add column"
+msgstr "ajouter une colonne"
+
+#: admin/partials/yapt-admin-add-page.php:131
+#: admin/partials/yapt-admin-edit.php:141
+msgid "Feature text content"
+msgstr "Contenu textuel de l'objet"
+
+#: admin/partials/yapt-admin-add-page.php:111
+#: admin/partials/yapt-admin-edit.php:119
+msgid "Per hour"
+msgstr "Par heure"
+
+#: admin/partials/yapt-admin-add-page.php:111
+#: admin/partials/yapt-admin-edit.php:119
+msgid "Per day"
+msgstr "Par jour"
+
+#: admin/partials/yapt-admin-add-page.php:111
+#: admin/partials/yapt-admin-edit.php:119
+msgid "Per month"
+msgstr "Par mois"
+
+#: admin/partials/yapt-admin-add-page.php:111
+#: admin/partials/yapt-admin-edit.php:119
+msgid "Per year"
+msgstr "Par an"
+
+#: admin/partials/yapt-admin-add-page.php:111
+#: admin/partials/yapt-admin-edit.php:119
+msgid "Per night"
+msgstr "Par nuit"

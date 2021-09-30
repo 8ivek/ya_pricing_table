@@ -35,3 +35,4 @@ $wpdb->query("DROP TABLE IF EXISTS `" . $wpdb->prefix . "yapt_features`");
 $wpdb->query("DROP TABLE IF EXISTS `" . $wpdb->prefix . "yapt_columns`");
 $wpdb->query("DROP TABLE IF EXISTS `" . $wpdb->prefix . "yapt_pricing_tables`");
 $wpdb->query("DROP TABLE IF EXISTS `" . $wpdb->prefix . "yapt_templates`");
+$wpdb->query("DROP TABLE IF EXISTS `" . $wpdb->prefix . "yapt_currency`");
