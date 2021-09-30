@@ -5,7 +5,7 @@ Tags: pricing table, price, pricing, table, price table, dynamic pricing table
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 7.4
-Stable tag: 2.0.0
+Stable tag: 3.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,8 @@ Simple WordPress plugin to create pricing tables in post or pages easily with no
 * Preset Templates
 * Featured Column – draw people to your most popular products by highlighting a featured column.
 * Shortcode support for use with classic editor and page builders.
+* Price table features are sortable
+* Supports french language
 
 == Installation ==
 
@@ -62,6 +64,10 @@ This plugin does not store any personal data.
 
 == Changelog ==
 
+= 3.0.0 =
+* Sorting of "price table features" was added
+* French language translation (fr_FR) was added
+
 = 2.0.0 =
 * Price is further extended to currency (supporting all countries), price and price suffix.
 
@@ -72,6 +78,10 @@ This plugin does not store any personal data.
 * First version of YA Pricing Tables
 
 == Upgrade Notice ==
+
+= 3.0.0 =
+Sorting of "price table features" was added
+French language support was added
 
 = 2.0.0 =
 Price is further extended to currency (supporting all countries), price and price suffix.
