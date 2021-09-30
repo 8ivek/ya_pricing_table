@@ -108,7 +108,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
 <script type="text/javascript">
     let computed_feature_id;
     let computed_column_id;
-    let price_suffixs = ['Per hour', 'Per day', 'Per month', 'Per year', 'Per night'];
+    let price_suffixs = ['<?php _e('Per hour', 'ya-pricing-table');?>', '<?php _e('Per day', 'ya-pricing-table');?>', '<?php _e('Per month', 'ya-pricing-table');?>', '<?php _e('Per year', 'ya-pricing-table');?>', '<?php _e('Per night', 'ya-pricing-table');?>'];
     let option = '';
     price_suffixs.forEach(function(price_suffix) {
         option += "<option value='" + price_suffix + "'>" + price_suffix + "</option>";

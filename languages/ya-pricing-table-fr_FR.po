@@ -138,3 +138,28 @@ msgstr "ajouter une colonne"
 #: admin/partials/yapt-admin-edit.php:141
 msgid "Feature text content"
 msgstr "Contenu textuel de l'objet"
+
+#: admin/partials/yapt-admin-add-page.php:111
+#: admin/partials/yapt-admin-edit.php:119
+msgid "Per hour"
+msgstr "Par heure"
+
+#: admin/partials/yapt-admin-add-page.php:111
+#: admin/partials/yapt-admin-edit.php:119
+msgid "Per day"
+msgstr "Par jour"
+
+#: admin/partials/yapt-admin-add-page.php:111
+#: admin/partials/yapt-admin-edit.php:119
+msgid "Per month"
+msgstr "Par mois"
+
+#: admin/partials/yapt-admin-add-page.php:111
+#: admin/partials/yapt-admin-edit.php:119
+msgid "Per year"
+msgstr "Par an"
+
+#: admin/partials/yapt-admin-add-page.php:111
+#: admin/partials/yapt-admin-edit.php:119
+msgid "Per night"
+msgstr "Par nuit"
