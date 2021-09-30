@@ -7,7 +7,7 @@ img {
 }
 
 div.feature_column_container div {
-    margin: 5px;
+    margin: 0 5px;
 }
 
 table#ypt_columns tbody {
@@ -183,7 +183,7 @@ Style the tab
 
 .yapt_table_row_features.yapt_table_row label {
     display: inline-block;
-    height: 30px;
+    height: 25px;
     margin: 0 0 3px;
 }
 
@@ -444,4 +444,30 @@ Theme Tab
 
 input[required].yapt_required {
     border: 2px solid #ff0000;
+}
+
+.dgrid{
+	display: flex;
+	align-items: center;
+}
+.yapt_table_row_features .yapt_label_con,
+.yapt_table_row_features input[type="text"],
+.yapt_table_row_features .delete_feature,
+.yapt_table_row_features .dashicons-menu{
+	
+}
+
+
+.yapt_table_row_features .dashicons-menu{
+	cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+	position: relative;
+	left: -5px;
+}
+.yapt_table_row_features .dashicons-menu:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
 }
