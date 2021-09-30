@@ -125,11 +125,11 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
         //console.log(computed_feature_id);
         //console.log('add feature clicked for table '+ column_id);
         let new_feature_value = "<div id='column" + column_id + "_feature" + computed_feature_id +
-            "'><label class='yapt_label_con'><input type='checkbox' name='fields[" + column_id + "][feature_checked][" + computed_feature_id +
+            "' class='dgrid'><span class='dashicons dashicons-menu'></span><label class='yapt_label_con'><input type='checkbox' name='fields[" + column_id + "][feature_checked][" + computed_feature_id +
             "]' value='1' /> <span class='checkmark'></span></label> <input type='text' required='required' name='fields[" + column_id +
             "][feature_text][" + computed_feature_id +
             "]' placeholder='Feature text content ...' value='' /> <a title='Delete feature' class='delete_feature' href='javascript:;' onclick='delete_feature(" +
-            column_id + ", " + computed_feature_id + ")'><span class='dashicons dashicons-dismiss'></span></a> <span class='dashicons dashicons-menu'></span></div>";
+            column_id + ", " + computed_feature_id + ")'><span class='dashicons dashicons-dismiss'></span></a> </div>";
         jQuery("#column" + column_id + "_features").append(new_feature_value);
         computed_feature_id += 1;
         jQuery("#column" + column_id + "_feature_count").val(computed_feature_id);
@@ -178,6 +178,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
 
         add_feature(computed_column_id); // everytime we call add_column we will be adding 3 empty features to the column.
         jQuery("#column" + computed_column_id + "_features").sortable({
+            handle: ".dashicons-menu",
             update: function (event, ui) {
                 jQuery(this).siblings('input[name*="[feature_order]"]').val(jQuery(this).sortable('serialize').toString());
                 //console.log(jQuery(this).siblings('input[name*="[feature_order]"]').val());
