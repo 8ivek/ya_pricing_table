@@ -178,6 +178,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
 
         add_feature(computed_column_id); // everytime we call add_column we will be adding 3 empty features to the column.
         jQuery("#column" + computed_column_id + "_features").sortable({
+            handle: ".dashicons-menu",
             update: function (event, ui) {
                 jQuery(this).siblings('input[name*="[feature_order]"]').val(jQuery(this).sortable('serialize').toString());
                 //console.log(jQuery(this).siblings('input[name*="[feature_order]"]').val());
