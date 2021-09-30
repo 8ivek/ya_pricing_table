@@ -1,4 +1,4 @@
-# yapt-fr_FR.po
+# ya-pricing-table-fr_FR.po
 # Copyright (C) 2021 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Bivek <bivek_j@yahoo.com>, 2021.

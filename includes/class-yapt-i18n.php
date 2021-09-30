@@ -36,7 +36,7 @@ class Yapt_i18n
     {
 
         load_plugin_textdomain(
-            'yapt',
+            'ya-pricing-table',
             false,
             dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
         );
