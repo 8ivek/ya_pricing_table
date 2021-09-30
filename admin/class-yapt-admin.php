@@ -272,7 +272,7 @@ class Yapt_Admin
             if ($selected_currency === $currency['country']) {
                 $select = "selected = 'selected'";
             }
-            $currency_options .= "<option value='" . $currency['country'] . "' " . $select . ">" . $currency['country'] . ' (' . $currency['code'] . ")</option>";
+            $currency_options .= "<option value='" . esc_html($currency['country']) . "' " . $select . ">" . esc_html($currency['country']) . ' (' . esc_html($currency['code']) . ")</option>";
         }
         return $currency_options;
     }

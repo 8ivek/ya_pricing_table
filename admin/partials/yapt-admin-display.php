@@ -15,7 +15,7 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="wrap">
-    <h2>YA price tables <a href="admin.php?page=yapt_admin_add_page" class="page-title-action">Add New</a></h2>
+    <h2>YA price tables <a href="admin.php?page=yapt_admin_add_page" class="page-title-action"><?php _e('Add New'); ?></a></h2>
     <div id="poststuff">
         <div id="post-body" class="metabox-holder">
             <div id="post-body-content">
