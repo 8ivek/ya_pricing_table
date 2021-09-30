@@ -128,7 +128,7 @@ $currencies = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}yapt_currency", A
             "' class='dgrid'><span class='dashicons dashicons-menu'></span><label class='yapt_label_con'><input type='checkbox' name='fields[" + column_id + "][feature_checked][" + computed_feature_id +
             "]' value='1' /> <span class='checkmark'></span></label> <input type='text' required='required' name='fields[" + column_id +
             "][feature_text][" + computed_feature_id +
-            "]' placeholder='Feature text content ...' value='' /> <a title='Delete feature' class='delete_feature' href='javascript:;' onclick='delete_feature(" +
+            "]' placeholder='<?php _e('Feature text content', 'ya-pricing-table');?> ...' value='' /> <a title='Delete feature' class='delete_feature' href='javascript:;' onclick='delete_feature(" +
             column_id + ", " + computed_feature_id + ")'><span class='dashicons dashicons-dismiss'></span></a> </div>";
         jQuery("#column" + column_id + "_features").append(new_feature_value);
         computed_feature_id += 1;

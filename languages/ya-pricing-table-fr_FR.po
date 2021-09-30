@@ -133,3 +133,8 @@ msgstr "Date de mise à jour"
 #: admin/partials/yapt-admin-edit.php:60
 msgid "add column"
 msgstr "ajouter une colonne"
+
+#: admin/partials/yapt-admin-add-page.php:131
+#: admin/partials/yapt-admin-edit.php:141
+msgid "Feature text content"
+msgstr "Contenu textuel de l'objet"
