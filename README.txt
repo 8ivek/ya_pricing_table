@@ -13,7 +13,7 @@ Easily create and publish beautiful pricing tables with no programming knowledge
 
 == Description ==
 
-Simple WordPress plugin to create pricing tables in post or pages easily with no programming knowledge. Easily create and publish beautiful pricing tables with no programming knowledge using Yet Another Pricing Table Plugin by bCripts. Alter content, select a desired template, and publish on the website.
+A simple WordPress plugin to create pricing tables in posts or pages easily with no programming knowledge. Easily create and publish beautiful pricing tables with no programming knowledge using Yet Another Pricing Table Plugin by bCripts. Alter content, select a desired template, and publish it on your website.
 
 = Features =
 
@@ -32,19 +32,19 @@ Simple WordPress plugin to create pricing tables in post or pages easily with no
 
 == Installation ==
 
-1. Upload `yapt.zip` from 'Add Plugins' area in 'Add new' plugin menu from wordpress admin area or upload `yapt` folder to `/wp-content/plugins/` directory.
+1. Upload `yapt.zip` from 'Add Plugins' area in 'Add new' plugin menu from the WordPress admin area, or upload `yapt` folder to the `/wp-content/plugins/` directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Start creating pricing tables from "YA Pricing Table" -> "Add New"
 1. Copy shortcode
-1. Use it in page or post you are looking to display the pricing table.
+1. Use it on pages or posts you are looking to display the pricing table.
 
 == Frequently Asked Questions ==
 
 = Can we use YA Pricing Tables with all the available themes? =
-Yes, YA Pricing tables are supposed to be compatible with all the available themes, if you find any incompatibility issues please throw us a support message.
+Yes, YA Pricing tables are supposed to be compatible with all the available themes. If you find any incompatibility issues, please send us a support message.
 
-= How long do I have to wait until I get reply for my support question?  =
-We will reply support message within 24 hours.
+= How long do I have to wait until I get a reply to my support question? =
+We will reply to support messages within 24 hours.
 
 == Privacy Disclosure ==
 
@@ -58,21 +58,21 @@ This plugin does not store any personal data.
 4. Add/edit pricing table screen
 5. Select plugin template screen
 6. Custom style screen
-7. Pricing table listing page, where you can select the shortcode and copy to use it in pages or posts
+7. Pricing table listing page, where you can select the shortcode and copy it to use in pages or posts
 8. Add the shortcode in post or page and update/publish
 
 
 == Changelog ==
 
 = 3.0.0 =
-* Sorting of "price table features" was added
-* French language translation (fr_FR) was added
+* Sorting of "price table features" was added.
+* French language translation (fr_FR) was added.
 
 = 2.0.0 =
-* Price is further extended to currency (supporting all countries), price and price suffix.
+* Price is further extended to currency (supporting all countries), price, and price suffix.
 
 = 1.1.0 =
-* Added new template named Aanya
+* Added a new template named Aanya
 
 = 1.0.0 =
 * First version of YA Pricing Tables
@@ -80,8 +80,8 @@ This plugin does not store any personal data.
 == Upgrade Notice ==
 
 = 3.0.0 =
-Sorting of "price table features" was added
-French language support was added
+Sorting of "price table features" was added.
+French-language support was added
 
 = 2.0.0 =
-Price is further extended to currency (supporting all countries), price and price suffix.
+Price is further extended to currency (supporting all countries), price, and price suffix.

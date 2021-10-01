@@ -2,7 +2,7 @@
 
 ## Description
 
-Simple WordPress plugin to create pricing tables in post or pages easily with no programming knowledge. Easily create and publish beautiful pricing tables with no programming knowledge using Yet Another Pricing Table Plugin by bCripts. Alter content, select a desired template, and publish on the website.
+A simple WordPress plugin to create pricing tables in posts or pages easily with no programming knowledge. Easily create and publish beautiful pricing tables with no programming knowledge using Yet Another Pricing Table Plugin by bCripts. Alter content, select a desired template, and publish it on your website.
 
 ## Features
 
@@ -19,5 +19,5 @@ Simple WordPress plugin to create pricing tables in post or pages easily with no
 * Price table features are sortable
 * Supports french language
 
-Hosted in wordpress.org
+Hosted on WordPress.org
 > https://wordpress.org/plugins/ya-pricing-table/
