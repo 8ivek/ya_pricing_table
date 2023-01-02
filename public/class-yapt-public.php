@@ -201,7 +201,7 @@ class Yapt_Public
                 break;
             case 'per year':
             default:
-                $code = '/yr';
+                $code = '';
         }
         return $code;
     }
