@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              https://github.com/8ivek/yapt
- * @since             3.0.0
+ * @since             3.1.0
  * @package           Yapt
  *
  * @wordpress-plugin
  * Plugin Name:       YA Pricing Table
  * Plugin URI:        https://github.com/8ivek/yapt
  * Description:       Easily create and publish beautiful pricing tables with no programming knowledge.
- * Version:           3.0.0
+ * Version:           3.1.0
  * Author:            bCripts
  * Author URI:        https://github.com/8ivek/ya-pricing-table
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('YAPT_VERSION', '3.0.0');
+define('YAPT_VERSION', '3.1.0');
 
 $url = plugin_dir_url(__FILE__);
 define('YAPT_PLUGIN_URL', $url);
