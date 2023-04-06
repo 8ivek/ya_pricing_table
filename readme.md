@@ -17,7 +17,7 @@ A simple WordPress plugin to create pricing tables in posts or pages easily with
 * Featured Column – draw people to your most popular products by highlighting a featured column.
 * Shortcode support for use with classic editor and page builders.
 * Price table features are sortable
-* Supports french language
+* Supports French language
 
 Hosted on WordPress.org
 > https://wordpress.org/plugins/ya-pricing-table/
