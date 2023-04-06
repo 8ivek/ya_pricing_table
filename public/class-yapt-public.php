@@ -200,8 +200,10 @@ class Yapt_Public
                 $code = '/nt';
                 break;
             case 'per year':
-            default:
                 $code = '/yr';
+                break;
+            default:
+                $code = '';
         }
         return $code;
     }
